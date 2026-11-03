@@ -33,7 +33,7 @@ def collect(root: Path, run: str, dataset: str) -> dict[str, list[int]]:
     return merged
 
 
-def bootstrap_delta(base: np.ndarray, edit: np.ndarray, seed: int, draws: int = 20_000) -> tuple[float, float]:
+def bootstrap_delta(base: np.ndarray, edit: np.ndarray, seed: int, draws: int = 20_000) -> tuple[tuple[float, float], tuple[float, float]]:
     if base.shape != edit.shape:
         raise ValueError(f"paired item mismatch {base.shape} != {edit.shape}")
     rng = np.random.default_rng(seed)
@@ -44,15 +44,8 @@ def bootstrap_delta(base: np.ndarray, edit: np.ndarray, seed: int, draws: int = 
         idx = rng.integers(0, len(base), size=(n, len(base)))
         diffs[start : start + n] = (edit[idx] - base[idx]).mean(axis=1)
     lo, hi = np.quantile(diffs, [0.025, 0.975])
-    return float(lo), float(hi)
-
-
-def wilson(successes: float, total: int, z: float = 1.959963984540054) -> tuple[float, float]:
-    p = successes / total
-    den = 1 + z * z / total
-    center = (p + z * z / (2 * total)) / den
-    half = z * np.sqrt((p * (1 - p) + z * z / (4 * total)) / total) / den
-    return float(center - half), float(center + half)
+    adj_lo, adj_hi = np.quantile(diffs, [0.05 / 6, 1 - 0.05 / 6])
+    return (float(lo), float(hi)), (float(adj_lo), float(adj_hi))
 
 
 def main() -> None:
@@ -76,24 +69,23 @@ def main() -> None:
         base = vectors["unedited"]
         base_acc = float(np.mean(np.concatenate([np.asarray(values["unedited"][q], dtype=float) for q in ids])))
         total_samples = sum(len(values["unedited"][q]) for q in ids)
-        wilson_lo, wilson_hi = wilson(base_acc, total_samples)
         out.append({
             "task": short, "description": label, "run": "unedited", "items": len(ids),
             "samples": total_samples, "accuracy": base_acc, "delta_vs_base": 0.0,
             "paired_item_bootstrap_95_low": 0.0, "paired_item_bootstrap_95_high": 0.0,
-            "wilson_sample_95_low": wilson_lo, "wilson_sample_95_high": wilson_hi,
+            "p50_three_task_bonferroni_95_low": "", "p50_three_task_bonferroni_95_high": "",
         })
         for j, run in enumerate(RUNS[1:], start=1):
             edit_acc = float(np.mean(np.concatenate([np.asarray(values[run][q], dtype=float) for q in ids])))
             delta = float(np.mean(vectors[run] - base))
-            low, high = bootstrap_delta(base, vectors[run], 20261103 + 100 * j + len(ids), args.draws)
-            lo, hi = wilson(edit_acc, total_samples)
+            (low, high), (adj_low, adj_high) = bootstrap_delta(base, vectors[run], 20261103 + 100 * j + len(ids), args.draws)
             out.append({
                 "task": short, "description": label, "run": run, "items": len(ids),
                 "samples": sum(len(values[run][q]) for q in ids), "accuracy": edit_acc,
                 "delta_vs_base": delta, "paired_item_bootstrap_95_low": low,
-                "paired_item_bootstrap_95_high": high, "wilson_sample_95_low": lo,
-                "wilson_sample_95_high": hi,
+                "paired_item_bootstrap_95_high": high,
+                "p50_three_task_bonferroni_95_low": adj_low if run == "p50c" else "",
+                "p50_three_task_bonferroni_95_high": adj_high if run == "p50c" else "",
             })
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("w", newline="") as f:
