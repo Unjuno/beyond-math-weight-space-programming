@@ -1,0 +1,15 @@
+scope,metric,condition,n,mean,comparison,delta,paired_bootstrap_95_low,paired_bootstrap_95_high,cap_rate,eos_rate,repeat_rate,mean_tokens
+all,all_checks_pass,base_thinking,24,0.20833333333333334,,,,,0.75,0.25,1.0,1894.0416666666667
+all,all_checks_pass,edited_thinking,24,0.20833333333333334,,,,,0.5,0.5,1.0,1684.0833333333333
+grounded_writing,all_checks_pass,base_thinking,8,0.125,,,,,0.875,0.125,1.0,1986.75
+grounded_writing,all_checks_pass,edited_thinking,8,0.125,,,,,0.625,0.375,1.0,1966.25
+instruction_constraints,all_checks_pass,base_thinking,8,0.25,,,,,0.75,0.25,1.0,1792.625
+instruction_constraints,all_checks_pass,edited_thinking,8,0.25,,,,,0.75,0.25,1.0,1754.375
+structured_extraction,all_checks_pass,base_thinking,8,0.25,,,,,0.625,0.375,1.0,1902.75
+structured_extraction,all_checks_pass,edited_thinking,8,0.25,,,,,0.125,0.875,1.0,1331.625
+all,all_checks_pass,edited_thinking,24,0.20833333333333334,edited_thinking - base_thinking,0.0,-0.16666666666666666,0.16666666666666666,,,,
+all,cap_hit,edited_thinking,24,0.5,edited_thinking - base_thinking,-0.25,-0.4583333333333333,-0.041666666666666664,,,,
+all,ended_with_eos,edited_thinking,24,0.5,edited_thinking - base_thinking,0.25,0.041666666666666664,0.4583333333333333,,,,
+all,final_answer_reached,edited_thinking,24,0.5416666666666666,edited_thinking - base_thinking,0.2916666666666667,0.08333333333333333,0.5,,,,
+all,repeat_4gram,edited_thinking,24,1.0,edited_thinking - base_thinking,0.0,0.0,0.0,,,,
+all,generated_tokens,edited_thinking,24,1684.0833333333333,edited_thinking - base_thinking,-209.95833333333334,-378.0,-57.041666666666664,,,,

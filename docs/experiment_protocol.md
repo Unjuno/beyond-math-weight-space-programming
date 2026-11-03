@@ -19,7 +19,7 @@ Author scores are accuracy means over samples. GPQA base final value is 22.7 (14
 ## Evaluation arms
 
 - **Artifact re-score:** independently recompute paired per-problem differences from released author records; inspect IDs, denominators, sample counts and grader outputs.
-- **Fresh checkpoint evaluation:** same base and p50c edit, prompt IDs, chat template, tokenizer, inference backend, precision, decoding settings, seeds and token cap. Save raw outputs and token IDs.
+- **Fresh checkpoint evaluation:** same base and p50c edit, prompt IDs, chat template, tokenizer, inference backend, precision, decoding settings, seeds and token cap. Save raw outputs and token IDs. This sprint's paired 24-item local probes are exploratory: thinking disabled with a 512-token cap, and thinking enabled with a 2,048-token cap. Neither reproduces the author's thinking-enabled 32,768-token benchmark protocol.
 - **New non-math tasks:** preregistered held-out instruction-following, coding, extraction/summarization and factual QA prompts. Do not use these prompts in editing or prompt selection. Score with deterministic checks where possible and blinded human scoring for semantic quality.
 - **Loop controls:** report answer accuracy, successful completion, cap-hit, repeated n-gram/sequence rate, and output length separately. A shorter answer is not automatically a better answer.
 
@@ -32,5 +32,5 @@ For every interaction, store append-only JSONL fields: timestamp, run/turn id, L
 - Call a task gain only when same-item paired evaluation favors the edit and uncertainty is reported.
 - Call a broad non-math gain only after at least two distinct task families improve, with no material regressions on the preregistered companion checks.
 - If loop/truncation improves but semantic answer quality does not, report a completion/reliability effect, not capability gain.
-- Any shortened generation limit, changed prompt/template/backend or reduced sample count is a separate exploratory run, never a direct reproduction of the paper's score.
+- Any shortened generation limit, changed prompt/template/backend or reduced sample count is a separate exploratory run, never a direct reproduction of the paper's score. Thinking-on runs that do not emit a completed `</think>` boundary are scored as having no final answer; reasoning prose is never scored as a user-visible answer.
 - A fresh Astra run is a separate goal from checkpoint evaluation; do not substitute Luna's interpretation or another model's advice for Astra's actual interaction trace.

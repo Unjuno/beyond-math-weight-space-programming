@@ -21,7 +21,7 @@ Status: **author-artifact re-score**, not a fresh model inference run. The input
 - IFEval checks explicit constraints. It does not certify truth, usefulness, quality, coding correctness, safety, or ordinary conversation quality.
 - MMLU-Pro is a fixed 1,000-question subset of 12,032, with one sample per question. The paired interval describes this set, not every subject or future question.
 - The intervals quantify prompt-level sampling variation in the released evaluation records. They do not include editor-search variability, benchmark-selection effects, software/backend differences, or unlogged trials.
-- The assessment is not an independent generation rerun. Our separate 24-item local probe is reported in `local_probe_results.md` after it completes.
+- The assessment is not an independent generation rerun. Separate 24-item local exploratory probes are reported in `local_probe_results.md`.
 
 ## Reproduce the re-score
 

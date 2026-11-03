@@ -14,6 +14,12 @@ The headline math gain may largely reflect ending a known reasoning loop. The pa
 
 See [`docs/feasibility.md`](docs/feasibility.md), [`docs/experiment_protocol.md`](docs/experiment_protocol.md), and [`research_log.md`](research_log.md).
 
+Our small local paired probes and their limits are in [`docs/local_probe_results.md`](docs/local_probe_results.md). They do not reproduce the author's benchmark protocol.
+
+In a 24-item thinking-on probe (2,048-token cap), final-answer arrival increased from 6/24 to 13/24, but passing task checks remained 5/24 in both arms. In the separate thinking-disabled probe (512-token cap), checks passed 11/24 base versus 10/24 edited. These small custom probes indicate an output-completion shift in the thinking-on condition, without a measured increase in task success.
+
+A separate post-hoc two-prompt check at the author's 32,768-token cap passed under both checkpoints and did not approach the cap; it is too small to establish a loop-rescue effect.
+
 ## Published conditions and results
 
 The author's p50c run changed the BF16 values of 130,188 of 131,072 targeted weights in MLP output columns at layers 15 and 19. Reported 50-pass scores: IFEval 62.3%, GPQA Diamond 36.6%, MMLU-Pro 45.5%. Corresponding base scores: 21.0%, 22.7%, 40.3%. These are author-produced results, available for independent audit in the linked raw logs; they are not this repository's independent rerun.

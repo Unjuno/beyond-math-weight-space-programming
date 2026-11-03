@@ -1,0 +1,11 @@
+scope,metric,condition,n,mean,comparison,delta,paired_bootstrap_95_low,paired_bootstrap_95_high,cap_rate,eos_rate,repeat_rate,mean_tokens
+all,all_checks_pass,base_thinking,2,1.0,,,,,0.0,1.0,1.0,746.5
+all,all_checks_pass,edited_thinking,2,1.0,,,,,0.0,1.0,1.0,527.0
+instruction_constraints,all_checks_pass,base_thinking,2,1.0,,,,,0.0,1.0,1.0,746.5
+instruction_constraints,all_checks_pass,edited_thinking,2,1.0,,,,,0.0,1.0,1.0,527.0
+all,all_checks_pass,edited_thinking,2,1.0,edited_thinking - base_thinking,0.0,0.0,0.0,,,,
+all,cap_hit,edited_thinking,2,0.0,edited_thinking - base_thinking,0.0,0.0,0.0,,,,
+all,ended_with_eos,edited_thinking,2,1.0,edited_thinking - base_thinking,0.0,0.0,0.0,,,,
+all,final_answer_reached,edited_thinking,2,1.0,edited_thinking - base_thinking,0.0,0.0,0.0,,,,
+all,repeat_4gram,edited_thinking,2,1.0,edited_thinking - base_thinking,0.0,0.0,0.0,,,,
+all,generated_tokens,edited_thinking,2,527.0,edited_thinking - base_thinking,-219.5,-390.0,-49.0,,,,

@@ -19,8 +19,9 @@ class PresencePenalty(LogitsProcessor):
                 scores[row, ids] -= self.penalty
         return scores
 
-def score(text, rules):
-    clean=text.replace('<|im_end|>','').replace('<|endoftext|>','').strip()
+def score(text, rules, thinking=False):
+    clean=final_answer(text, thinking=thinking)
+    clean=clean.replace('<|im_end|>','').replace('<|endoftext|>','').strip()
     lines=[x.strip() for x in clean.splitlines() if x.strip()]
     result={}
     for i,r in enumerate(rules):
@@ -49,6 +50,15 @@ def repeated_4gram(ids):
     grams=Counter(tuple(ids[i:i+4]) for i in range(max(0,len(ids)-3)))
     return any(n>=3 for n in grams.values())
 
+def final_answer(text, thinking=False):
+    # Qwen's template starts an explicit reasoning channel in thinking mode.
+    # If generation hits the cap before </think>, there is no completed answer.
+    if thinking:
+        return text.rsplit('</think>',1)[1].strip() if '</think>' in text else ''
+    if '<think>' in text:
+        return text.rsplit('</think>',1)[1].strip() if '</think>' in text else ''
+    return text.strip()
+
 def weight_hash(weight):
     bits=weight.detach().cpu().contiguous().view(torch.uint8).numpy()
     return hashlib.sha256(bits.tobytes()).hexdigest()
@@ -61,8 +71,14 @@ def main():
     ap.add_argument('--out',type=Path,default=Path('results/raw/nonmath_probe.jsonl'))
     ap.add_argument('--max-new-tokens',type=int,default=2048)
     ap.add_argument('--limit',type=int,default=0)
+    ap.add_argument('--prompt-ids',type=str,default='')
+    ap.add_argument('--mode',choices=['thinking','no_thinking','both'],default='both')
     args=ap.parse_args()
     tasks=[json.loads(x) for x in args.prompts.read_text().splitlines() if x.strip()]
+    if args.prompt_ids:
+        selected=set(args.prompt_ids.split(','))
+        tasks=[task for task in tasks if task['id'] in selected]
+        if {task['id'] for task in tasks}!=selected: raise ValueError(f'unknown prompt IDs: {selected-{task["id"] for task in tasks}}')
     if args.limit: tasks=tasks[:args.limit]
     done=set()
     if args.out.exists():
@@ -84,7 +100,8 @@ def main():
                 weight.data.copy_(target)
                 got=weight_hash(weight)
                 if got!=expected: raise RuntimeError(f'edited tensor hash mismatch layer {layer}: {got}')
-        for thinking in (True,False):
+        modes={'thinking':[True],'no_thinking':[False],'both':[True,False]}[args.mode]
+        for thinking in modes:
             for index,task in enumerate(tasks):
                 condition=('edited' if edited else 'base')+('_thinking' if thinking else '_no_thinking')
                 if (task['id'],condition) in done: continue
@@ -95,11 +112,12 @@ def main():
                 with torch.inference_mode():
                     out=model.generate(input_ids=input_ids,max_new_tokens=args.max_new_tokens,do_sample=True,temperature=.6,top_p=.95,top_k=20,logits_processor=LogitsProcessorList([PresencePenalty(plen,1.5)]),eos_token_id=[tok.eos_token_id,tok.convert_tokens_to_ids('<|im_end|>')],pad_token_id=tok.pad_token_id or tok.eos_token_id)
                 generated=out[0,plen:].detach().cpu().tolist(); text=tok.decode(generated,skip_special_tokens=False)
-                checks=score(text,task['checks'])
-                rec={'id':task['id'],'family':task['family'],'condition':condition,'seed':seed,'thinking':thinking,'input_token_ids':input_ids[0].detach().cpu().tolist(),'generated_token_ids':generated,'output':text,'generated_tokens':len(generated),'cap_hit':len(generated)>=args.max_new_tokens,'ended_with_eos':bool(generated and generated[-1] in {tok.eos_token_id,tok.convert_tokens_to_ids('<|im_end|>')}),'repeat_4gram':repeated_4gram(generated),'checks':checks,'all_checks_pass':bool(checks) and all(checks.values()),'seconds':time.time()-t0}
+                answer=final_answer(text,thinking=thinking)
+                checks=score(text,task['checks'],thinking=thinking)
+                rec={'id':task['id'],'family':task['family'],'condition':condition,'seed':seed,'thinking':thinking,'input_token_ids':input_ids[0].detach().cpu().tolist(),'generated_token_ids':generated,'output':text,'final_answer':answer,'generated_tokens':len(generated),'cap_hit':len(generated)>=args.max_new_tokens,'final_answer_reached':bool(answer),'ended_with_eos':bool(generated and generated[-1] in {tok.eos_token_id,tok.convert_tokens_to_ids('<|im_end|>')}),'repeat_4gram':repeated_4gram(generated),'checks':checks,'all_checks_pass':bool(checks) and all(checks.values()),'seconds':time.time()-t0}
                 with args.out.open('a') as f: f.write(json.dumps(rec,ensure_ascii=False)+'\n')
                 done.add((task['id'],condition))
                 print(f"{rec['condition']} {task['id']} tokens={len(generated)} pass={rec['all_checks_pass']} sec={rec['seconds']:.1f}",flush=True)
-    print(f'completed {4*len(tasks)} generations in {time.time()-start:.1f}s; wrote {args.out}')
+    print(f'completed probe modes={args.mode} tasks={len(tasks)} in {time.time()-start:.1f}s; wrote {args.out}')
 
 if __name__=='__main__': main()
