@@ -1,0 +1,132 @@
+{
+  "study": "Beyond Math: Weight-Space Programming reproduction",
+  "generated_at_local": "2026-11-03 Asia/Tokyo",
+  "evidence_type": "checkpoint evaluation and independent re-score of released author records; not a fresh Astra editing search",
+  "source_revisions": {
+    "author_logs": {
+      "repository": "https://github.com/RikiyaT/lm_understand-logs",
+      "commit": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
+    },
+    "base_model": {
+      "repository": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17"
+    },
+    "edited_model": {
+      "repository": "RikiyaT/Qwen3.5-0.8B-weight-space-programming",
+      "revision": "d1671a178705bcab7644806d23c535517f35723b"
+    }
+  },
+  "checkpoint_audit": {
+    "tensor_keys": 488,
+    "changed_tensors": 2,
+    "changed_bf16_values": 130188,
+    "targeted_values": 131072,
+    "edited_tensor_hashes": {
+      "model.language_model.layers.15.mlp.down_proj.weight": "82e2d733ea64feaeb4af93a1e065641d3df98b494a8b7576ef2f52e90fe2ee53",
+      "model.language_model.layers.19.mlp.down_proj.weight": "8ef3c61bc36af113ad58e89dbb0a4a14dcba5a45cb750c15ab515c82ddd12eb2"
+    }
+  },
+  "inference": {
+    "hardware": "Apple M1 Max, 64 GB unified memory",
+    "backend": "MPS",
+    "precision": "bfloat16",
+    "python": "3.11.15",
+    "torch": "2.14.1",
+    "transformers": "5.20.2",
+    "numpy": "2.4.6",
+    "decoding": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "sampling": "do_sample=true"
+    },
+    "seed": "4242 + prompt index, matched between checkpoints",
+    "tokenizer_and_template": "base checkpoint tokenizer; apply_chat_template with enable_thinking condition"
+  },
+  "runs": [
+    {
+      "name": "thinking_on_short_cap",
+      "prompts": 24,
+      "conditions": [
+        "base_thinking",
+        "edited_thinking"
+      ],
+      "max_new_tokens": 2048,
+      "raw": "results/raw/nonmath_probe.jsonl"
+    },
+    {
+      "name": "thinking_off_short_cap",
+      "prompts": 24,
+      "conditions": [
+        "base_no_thinking",
+        "edited_no_thinking"
+      ],
+      "max_new_tokens": 512,
+      "raw": "results/raw/no_thinking_probe.jsonl"
+    },
+    {
+      "name": "posthoc_long_cap_spotcheck",
+      "prompts": [
+        "inst03",
+        "inst05"
+      ],
+      "conditions": [
+        "base_thinking",
+        "edited_thinking"
+      ],
+      "max_new_tokens": 32768,
+      "selection": "random.Random(20261103).sample after viewing primary results",
+      "raw": "results/raw/long_cap_probe.jsonl"
+    }
+  ],
+  "primary_success_rule": "parsed final answer + EOS + no cap hit + all deterministic item checks pass",
+  "published_local_artifact_policy": "raw outputs and checkpoint files stay local/ignored; hashes are included here to identify them on the experiment machine",
+  "hashes_sha256": {
+    "configs/nonmath_probe.jsonl": "a08eb60e45d53fb70aa102c380dda55e8f1414904553ba084c8ba285369bef68",
+    "scripts/run_nonmath_probe.py": "73d4b9d049f67f41bcd3d28009b86329f96ebefc38a422d821140d05de9039b4",
+    "scripts/summarize_nonmath_probe.py": "7ea7b5d82b4c5cdd54cb9c774afd0018c84efbc2077d739e404fbf7f3b1913bc",
+    "scripts/analyze_author_results.py": "c409dbc62a7940b8d2a633afc821d839b5f4b5d56306945f75c224434858b0e1",
+    "results/raw/nonmath_probe.jsonl": "b957b52fb77a59ac20b54d9c3486c37e7dd41520660946152c774b48f2f28647",
+    "results/raw/no_thinking_probe.jsonl": "5e970c3dfd15088691d98c08749feb4a410b3b96ca42e576d1e526727e0b6b83",
+    "results/raw/long_cap_probe.jsonl": "797b3ee162c6a5cac44e928d9f7e74d359646e6512ff032e34e34bb6142d54ac",
+    "results/thinking_probe_summary.csv": "6d254bc741af9001235c5cf8235831e099ddce3bd3e247c864fe9301d54fe2f4",
+    "results/no_thinking_probe_summary.csv": "e85ce7b9c263b6ee4dbc999b4f559c5a9346f104152b1332c9880b1733e230ad",
+    "results/long_cap_probe_summary.csv": "3edb42c0cc70280871e2dcb24d03cd72f87198fd6a8bd5c641553f5ad09f1416",
+    "results/author_nonmath_paired.csv": "5bdb3a23b17ba03325b6f219f2294cdd9f43f49ca36a8dd9ee6ed55436ba19c9",
+    "model-cache/Qwen3.5-0.8B/model.safetensors-00001-of-00001.safetensors": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+    "model-cache/Qwen3.5-0.8B-edited/model.safetensors-00001-of-00001.safetensors": "fd1e42acdd118ac1b300d37500fd2885e75f5a09de3a33010d802bf7f737b553",
+    "model-cache/p50c-patch/model.language_model.layers.15.mlp.down_proj.weight.npy": "ec2a000f74d6b1f14c983747d79285c82cba29b97cda6bc8dd76c68dc0ef0483",
+    "model-cache/p50c-patch/model.language_model.layers.19.mlp.down_proj.weight.npy": "ea580672ab639ba06e4d55a201ab9b9c144bc340d633159d1fdb2615b0bbcea5",
+    "scripts/verify_probe_pairs.py": "50ccb3d098957e278628fc442b724307fa35cd1085a31362dbaf3ee386ee64dc",
+    "scripts/reproduce_summaries.sh": "1d1c918a7da1ebd48a23a945a7a7577565ba7717ef6628c4ba29953dbdffe15a",
+    "scripts/prepare_models.py": "d4c787d85dc52c0bf4bcaed96168a6b69c0ebfb9ffefece09233eea8583bb3b6",
+    "requirements-mps.txt": "e52065223927743989c7392c7a4d130a5b3085b5217f6d780450e5dba1623d04",
+    "docs/local_probe_results.md": "1b696300ad66e35d52ee00a4c876b71ef796d1a7372ab092680cbfb4f3167ce0",
+    "docs/experiment_protocol.md": "aaeb2e9b4fec26101b8c19fb7d63819178a6615890432864395d0b922a681726"
+  },
+  "published_author_rescore_summary": {
+    "ifeval_p50_delta_pp": 41.31,
+    "ifeval_paired_bootstrap_95_ci_pp": [
+      37.34,
+      45.19
+    ],
+    "gpqa_p50_delta_pp": 13.89,
+    "gpqa_paired_bootstrap_95_ci_pp": [
+      9.34,
+      18.43
+    ],
+    "mmlupro_fixed_1k_p50_delta_pp": 5.2,
+    "mmlupro_paired_bootstrap_95_ci_pp": [
+      2.3,
+      8.1
+    ]
+  },
+  "limitations": [
+    "Raw generations are not hosted in this public repository.",
+    "The environment package pins reflect the run environment; a clean install was not tested.",
+    "The local prompts are custom and deterministic; no human semantic scoring or repeated seeds.",
+    "Coding, broad factual calibration, safety/refusal, and general non-math competence were not measured.",
+    "The 32,768-token check is post-hoc and only two items."
+  ]
+}

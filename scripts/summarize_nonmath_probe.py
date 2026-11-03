@@ -24,7 +24,7 @@ def main():
         answer=final_answer(row['output'],thinking=row['thinking'])
         checks=score(row['output'],task_map[row['id']]['checks'],thinking=row['thinking'])
         row['final_answer_reached']=bool(answer)
-        row['all_checks_pass']=bool(answer) and bool(checks) and all(checks.values())
+        row['all_checks_pass']=bool(answer) and bool(row['ended_with_eos']) and not bool(row['cap_hit']) and bool(checks) and all(checks.values())
         row['checks']=checks
     by={(x['id'],x['condition']):x for x in rows}
     if len(by)!=len(rows): raise ValueError('duplicate (task, condition) rows')

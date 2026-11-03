@@ -114,7 +114,10 @@ def main():
                 generated=out[0,plen:].detach().cpu().tolist(); text=tok.decode(generated,skip_special_tokens=False)
                 answer=final_answer(text,thinking=thinking)
                 checks=score(text,task['checks'],thinking=thinking)
-                rec={'id':task['id'],'family':task['family'],'condition':condition,'seed':seed,'thinking':thinking,'input_token_ids':input_ids[0].detach().cpu().tolist(),'generated_token_ids':generated,'output':text,'final_answer':answer,'generated_tokens':len(generated),'cap_hit':len(generated)>=args.max_new_tokens,'final_answer_reached':bool(answer),'ended_with_eos':bool(generated and generated[-1] in {tok.eos_token_id,tok.convert_tokens_to_ids('<|im_end|>')}),'repeat_4gram':repeated_4gram(generated),'checks':checks,'all_checks_pass':bool(checks) and all(checks.values()),'seconds':time.time()-t0}
+                cap_hit=len(generated)>=args.max_new_tokens
+                ended_with_eos=bool(generated and generated[-1] in {tok.eos_token_id,tok.convert_tokens_to_ids('<|im_end|>')})
+                checks_pass=bool(answer) and ended_with_eos and not cap_hit and bool(checks) and all(checks.values())
+                rec={'id':task['id'],'family':task['family'],'condition':condition,'seed':seed,'thinking':thinking,'input_token_ids':input_ids[0].detach().cpu().tolist(),'generated_token_ids':generated,'output':text,'final_answer':answer,'generated_tokens':len(generated),'cap_hit':cap_hit,'final_answer_reached':bool(answer),'ended_with_eos':ended_with_eos,'repeat_4gram':repeated_4gram(generated),'checks':checks,'all_checks_pass':checks_pass,'seconds':time.time()-t0}
                 with args.out.open('a') as f: f.write(json.dumps(rec,ensure_ascii=False)+'\n')
                 done.add((task['id'],condition))
                 print(f"{rec['condition']} {task['id']} tokens={len(generated)} pass={rec['all_checks_pass']} sec={rec['seconds']:.1f}",flush=True)

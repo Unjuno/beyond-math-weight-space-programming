@@ -4,19 +4,21 @@ Can direct weight editing improve **non-mathematical tasks** in Qwen3.5-0.8B, an
 
 ## Why this study
 
-The headline math gain may largely reflect ending a known reasoning loop. The paper also reports non-math results: IFEval 21.0→62.3, GPQA Diamond 22.7→36.6, and MMLU-Pro (fixed 1,000 questions) 40.3→45.5 after the 50-pass edit. These results suggest cross-task effects, but do not show a general improvement across arbitrary tasks. We will inspect paired per-problem records and separately evaluate tasks that test instruction following, factual knowledge, coding, and ordinary task completion.
+The headline math gain may largely reflect ending a known reasoning loop. The paper also reports non-math results: IFEval 21.0→62.3, GPQA Diamond 22.7→36.6, and MMLU-Pro (fixed 1,000 questions) 40.3→45.5 after the 50-pass edit. We re-scored its released per-problem records and ran small paired probes on released checkpoints. The evidence and limitations below distinguish those sources.
 
 ## What we can and cannot establish
 
-- **Can:** audit the released Astra prompts, responses, code, forward-pass summaries, exact final tensor edit and authors' per-problem benchmark records; rebuild the edited BF16 tensors from the pinned base revision; independently score public checkpoints on new non-math prompts; compare task accuracy, instruction adherence, answer completion, loops and truncation separately.
+- **Completed here:** audit the released Astra prompts, responses, code, forward-pass summaries, final tensor edit and author per-problem records; independently re-score paired records; compare the public base and edited checkpoints on 24 local prompts covering instruction constraints, structured extraction and grounded writing; measure answer boundary, EOS, cap and deterministic-check success separately.
+- **Can be done with the released artifacts:** rebuild/check the edited BF16 tensors from the pinned base revision and rerun the local probe with matching hardware/software. This is checkpoint evaluation, not a fresh editing search.
+- **Not tested here:** coding, broad factual calibration, safety/refusal, paraphrase robustness, human-rated semantic quality, and general non-math work. The narrow extraction and grounded-writing checks do not establish those abilities.
 - **Cannot infer from artifact audit alone:** that Astra's stated rationale is its full internal reasoning; that an edit adds general capability rather than exposing existing capability by stopping loops; that performance transfers to models outside Qwen3.5-0.8B; that quality or safety is preserved on unmeasured tasks.
 - **Cannot claim procedure reproduction** unless the original Astra model and the original harness constraints are available and we rerun the edit search. The original 50-pass exploration took 20.3 hours; a four-hour sprint can audit artifacts and run focused checkpoint evaluations, not promise an identical fresh search.
 
 See [`docs/feasibility.md`](docs/feasibility.md), [`docs/experiment_protocol.md`](docs/experiment_protocol.md), and [`research_log.md`](research_log.md).
 
-Our small local paired probes and their limits are in [`docs/local_probe_results.md`](docs/local_probe_results.md). They do not reproduce the author's benchmark protocol.
+Our small local paired probes and their limits are in [`docs/local_probe_results.md`](docs/local_probe_results.md). They do not reproduce the author's benchmark protocol. Reproduction commands, pinned dependencies/checkpoints and hashes are in [`docs/local_setup.md`](docs/local_setup.md) and [`results/experiment_manifest.json`](results/experiment_manifest.json). Run `REPRO_PYTHON=.venv/bin/python scripts/reproduce_summaries.sh /path/to/pinned/lm_understand-logs` to verify all local pairs and regenerate all summary tables.
 
-In a 24-item thinking-on probe (2,048-token cap), final-answer arrival increased from 6/24 to 13/24, but passing task checks remained 5/24 in both arms. In the separate thinking-disabled probe (512-token cap), checks passed 11/24 base versus 10/24 edited. These small custom probes indicate an output-completion shift in the thinking-on condition, without a measured increase in task success.
+In a 24-item thinking-on probe (2,048-token cap), final-answer arrival increased from 6/24 to 13/24, but completed tasks (final answer, EOS, no cap hit, and every deterministic check passing) remained 5/24 in both arms. In the separate thinking-disabled probe (512-token cap), checks passed 11/24 base versus 10/24 edited. These small custom probes indicate an output-termination shift in the thinking-on condition, without a measured increase in task success.
 
 A separate post-hoc two-prompt check at the author's 32,768-token cap passed under both checkpoints and did not approach the cap; it is too small to establish a loop-rescue effect.
 
