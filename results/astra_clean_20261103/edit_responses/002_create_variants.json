@@ -1,0 +1,118 @@
+{
+  "request": "<USER_HOME>/Documents/ChatGPT/\u518d\u73fe\u5b9f\u9a13/results/astra_clean_20261103/edit_requests/002_create_variants.json",
+  "time": 1793679460.612237,
+  "status": "success",
+  "edited": [],
+  "result": {
+    "target_columns": [
+      1261,
+      1405,
+      1824,
+      1784
+    ],
+    "control_columns": [
+      7,
+      24,
+      0,
+      92
+    ],
+    "control_selection": "Fixed greedy closest log-norm/log-loop-mean-absolute-activation; loop/reference ratio required within [1/1.1,1.1]; no outcome-based replacement.",
+    "control_matches": [
+      {
+        "target": 1261,
+        "control": 7,
+        "target_norm": 0.29782477021217346,
+        "control_norm": 0.2050701379776001,
+        "norm_relative_deviation": -0.31144028808783764,
+        "target_loop_mean_abs": 1.1536834239959717,
+        "control_loop_mean_abs": 0.4998604953289032,
+        "activity_relative_deviation": -0.5667264650491775,
+        "control_loop_reference_ratio": 1.0262653003308884
+      },
+      {
+        "target": 1405,
+        "control": 24,
+        "target_norm": 0.26493072509765625,
+        "control_norm": 0.2115717977285385,
+        "norm_relative_deviation": -0.20140709368250542,
+        "target_loop_mean_abs": 0.7896658778190613,
+        "control_loop_mean_abs": 0.3428083062171936,
+        "activity_relative_deviation": -0.5658818294593421,
+        "control_loop_reference_ratio": 0.9647624301227448
+      },
+      {
+        "target": 1824,
+        "control": 0,
+        "target_norm": 0.2819017767906189,
+        "control_norm": 0.2677215039730072,
+        "norm_relative_deviation": -0.05030217609498788,
+        "target_loop_mean_abs": 0.675585150718689,
+        "control_loop_mean_abs": 0.28557607531547546,
+        "activity_relative_deviation": -0.577290775246201,
+        "control_loop_reference_ratio": 1.0898906986356494
+      },
+      {
+        "target": 1784,
+        "control": 92,
+        "target_norm": 0.25572893023490906,
+        "control_norm": 0.18729828298091888,
+        "norm_relative_deviation": -0.26759055845238444,
+        "target_loop_mean_abs": 0.6279778480529785,
+        "control_loop_mean_abs": 0.3055357336997986,
+        "activity_relative_deviation": -0.5134609689703219,
+        "control_loop_reference_ratio": 0.9114984584572979
+      }
+    ],
+    "variants": [
+      {
+        "variant": "alpha025",
+        "alpha": 0.25,
+        "columns": [
+          1261,
+          1405,
+          1824,
+          1784
+        ],
+        "relative_weight_norm_change": 0.008385208435356617,
+        "changed_elements": 4096
+      },
+      {
+        "variant": "alpha050",
+        "alpha": 0.5,
+        "columns": [
+          1261,
+          1405,
+          1824,
+          1784
+        ],
+        "relative_weight_norm_change": 0.016770416870713234,
+        "changed_elements": 4096
+      },
+      {
+        "variant": "alpha100",
+        "alpha": 1.0,
+        "columns": [
+          1261,
+          1405,
+          1824,
+          1784
+        ],
+        "relative_weight_norm_change": 0.03354083374142647,
+        "changed_elements": 4096
+      },
+      {
+        "variant": "control100",
+        "alpha": 1.0,
+        "columns": [
+          7,
+          24,
+          0,
+          92
+        ],
+        "relative_weight_norm_change": 0.026775293052196503,
+        "changed_elements": 4096
+      }
+    ],
+    "active_edits_after_export": []
+  }
+}

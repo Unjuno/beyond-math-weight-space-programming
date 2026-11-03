@@ -1,0 +1,24 @@
+{
+  "type": "generate",
+  "model": "both",
+  "problems": [
+    "gsm8k_train_3785"
+  ],
+  "n": 1,
+  "max_tokens": 8192,
+  "mlp_layers": [],
+  "edit_dir": "<USER_HOME>/Documents/ChatGPT/\u518d\u73fe\u5b9f\u9a13/results/astra_clean_20261103/variants/alpha100",
+  "hypothesis": "If the four layer18 columns contribute to the observed self-check recurrence beyond its wording, full attenuation should permit correct mathematical completion or suppress recurrence on the same diagnostic TRAIN item. A replaced loop, premature unconditional thinking closure, or no accuracy/completion gain refutes the useful-repair hypothesis.",
+  "analysis_plan": {
+    "role": "Selection diagnostic, not independent confirmation",
+    "paper_protocol_deviation": "Explicit practice cap8192 instead of full evaluation cap32768; all thinking/sampling settings unchanged.",
+    "compare": [
+      "paired_boxed_accuracy",
+      "EOS/cap",
+      "thinking_close_position",
+      "repetition_including_alternative_phrases",
+      "actual_valid_math_progress"
+    ],
+    "base_prefix_audit": "Compare new original token IDs to the first8192 saved pass1 IDs; report equality scope without assuming it."
+  }
+}

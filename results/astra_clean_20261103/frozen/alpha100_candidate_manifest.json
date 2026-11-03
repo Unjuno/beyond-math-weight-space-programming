@@ -1,0 +1,20 @@
+{
+  "frozen_at": 1793682668.151925,
+  "candidate": "alpha100",
+  "status": "frozen_unvalidated_candidate",
+  "base_checkpoint_sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+  "variant_relative_path": "results/astra_clean_20261103/variants/alpha100/model.language_model.layers.18.mlp.down_proj.weight.npy",
+  "variant_sha256": "5042c800d051f92fc0d22a26a7694ccb7bc40a982c4fd46a703226f3398b9134",
+  "selection_basis": [
+    "single GSM8K TRAIN loop/reference teacher-forced contrast",
+    "TRAIN-only four-strength dose screen",
+    "alpha100 showed sparse phrase-token suppression and strongest loop-relative likelihood reduction"
+  ],
+  "selection_ceiling": "Candidate selection only; no generated-output causal validation, no untouched TRAIN confirmation, no non-math evaluation, no claim of published p50c reproduction.",
+  "invariants": [
+    "Do not modify or retune this checkpoint using any non-math task/output",
+    "Evaluate with a separate hash-pinned run manifest",
+    "Reject candidate if task/accuracy regressions outweigh measured benefit"
+  ],
+  "exposure_boundary": "Some non-math bundle facts/rubric were accidentally exposed to the editor after this candidate and pass7 request were recorded. No later candidate modification reported; the sealed tasks remain conservatively not editor-blind."
+}

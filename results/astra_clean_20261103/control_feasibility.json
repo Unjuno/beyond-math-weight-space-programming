@@ -1,0 +1,24 @@
+{
+  "time": 1793679586.352105,
+  "algorithm": "All layer18 non-target columns with loop/reference mean-absolute-activation ratio <=1.1; deterministic cardinality upper bound; if not ruled out, scipy MILP cardinality=4, aggregate Frobenius norm within10%, aggregate loop mean absolute activation within15%, minimize saved per-column log-distance objective with index tie order. No forward outcomes used.",
+  "pool_size": 1987,
+  "target_columns": [
+    1261,
+    1405,
+    1824,
+    1784
+  ],
+  "target_frobenius_norm": 0.5511386217364037,
+  "target_sum_loop_activity": 3.2469123005867004,
+  "maximum_possible_sum_loop_activity_any_four": 2.1877633035182953,
+  "required_minimum_sum_loop_activity": 2.7598754554986953,
+  "top4_activity_columns": [
+    63,
+    12,
+    7,
+    30
+  ],
+  "full_pool_ranking": "control_full_pool_ranking.npz",
+  "feasible": false,
+  "proof": "Even the four largest eligible loop activities sum below 85% of target activity, so no 4-column group can meet the activity constraint regardless of weight norms."
+}

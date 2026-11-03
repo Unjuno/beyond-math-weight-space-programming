@@ -26,7 +26,7 @@ Status: **author-artifact re-score**, not a fresh model inference run. The input
 ## Reproduce the re-score
 
 ```sh
-/Users/taka/Documents/ChatGPT/evil-qwen-repro/.venv/bin/python scripts/analyze_author_results.py \
+python scripts/analyze_author_results.py \
   --author-repo /path/to/lm_understand-logs
 ```
 

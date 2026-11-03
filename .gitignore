@@ -5,6 +5,12 @@ data/raw/
 data/processed/
 results/raw/
 results/checkpoints/
+results/astra_clean_20261103/**/*.npz
+results/astra_clean_20261103/**/*.npy
+results/astra_clean_20261103/pass_*/original.jsonl
+results/astra_clean_20261103/pass_*/edited.jsonl
+results/astra_clean_20261103/worker*.log
+results/astra_clean_20261103/edit_kernel.log
 *.safetensors
 *.gguf
 *.pt
@@ -14,3 +20,4 @@ results/checkpoints/
 .venv/
 __pycache__/
 .DS_Store
+results/astra_clean_20261103_private/

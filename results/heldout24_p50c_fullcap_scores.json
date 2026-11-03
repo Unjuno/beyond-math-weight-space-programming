@@ -1,0 +1,654 @@
+{
+  "protocol": "transfer_eval_prereg.md",
+  "task_file_sha256": "0b20349d946ebbc6fcfec4bb686414ed7e63441ac2493e8eb88a587946f27a95",
+  "raw_file_sha256": "f3e90fc45c62e335311f296a61f1b5a8fa79120e541a8d9689bc541259310676",
+  "manifest_sha256": "bc65291f40a98af117167578cc68617e0ad31010a858e0e994bd873ca280ce79",
+  "structured_scores": [
+    {
+      "task_id": "x01",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 1398,
+      "task_success": false
+    },
+    {
+      "task_id": "x01",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 397,
+      "task_success": false
+    },
+    {
+      "task_id": "x02",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 1454,
+      "task_success": true
+    },
+    {
+      "task_id": "x02",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3538,
+      "task_success": true
+    },
+    {
+      "task_id": "x03",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 2391,
+      "task_success": false
+    },
+    {
+      "task_id": "x03",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3028,
+      "task_success": false
+    },
+    {
+      "task_id": "x04",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 2565,
+      "task_success": true
+    },
+    {
+      "task_id": "x04",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": false,
+      "typed_exact_match": false,
+      "eos_before_cap": false,
+      "cap_hit": true,
+      "generated_tokens": 32768,
+      "task_success": false
+    },
+    {
+      "task_id": "x05",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 2313,
+      "task_success": true
+    },
+    {
+      "task_id": "x05",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": false,
+      "typed_exact_match": false,
+      "eos_before_cap": false,
+      "cap_hit": true,
+      "generated_tokens": 32768,
+      "task_success": false
+    },
+    {
+      "task_id": "x06",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 1651,
+      "task_success": true
+    },
+    {
+      "task_id": "x06",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": false,
+      "typed_exact_match": false,
+      "eos_before_cap": false,
+      "cap_hit": true,
+      "generated_tokens": 32768,
+      "task_success": false
+    },
+    {
+      "task_id": "x07",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 1369,
+      "task_success": false
+    },
+    {
+      "task_id": "x07",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 1576,
+      "task_success": false
+    },
+    {
+      "task_id": "x08",
+      "family": "extraction",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3360,
+      "task_success": false
+    },
+    {
+      "task_id": "x08",
+      "family": "extraction",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 2626,
+      "task_success": false
+    },
+    {
+      "task_id": "d01",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 2647,
+      "task_success": true
+    },
+    {
+      "task_id": "d01",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3358,
+      "task_success": true
+    },
+    {
+      "task_id": "d02",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": false,
+      "typed_exact_match": false,
+      "eos_before_cap": false,
+      "cap_hit": true,
+      "generated_tokens": 32768,
+      "task_success": false
+    },
+    {
+      "task_id": "d02",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3241,
+      "task_success": false
+    },
+    {
+      "task_id": "d03",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 1537,
+      "task_success": true
+    },
+    {
+      "task_id": "d03",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 1481,
+      "task_success": true
+    },
+    {
+      "task_id": "d04",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": false,
+      "typed_exact_match": false,
+      "eos_before_cap": false,
+      "cap_hit": true,
+      "generated_tokens": 32768,
+      "task_success": false
+    },
+    {
+      "task_id": "d04",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 4014,
+      "task_success": false
+    },
+    {
+      "task_id": "d05",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": false,
+      "typed_exact_match": false,
+      "eos_before_cap": false,
+      "cap_hit": true,
+      "generated_tokens": 32768,
+      "task_success": false
+    },
+    {
+      "task_id": "d05",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3299,
+      "task_success": false
+    },
+    {
+      "task_id": "d06",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": true,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3674,
+      "task_success": true
+    },
+    {
+      "task_id": "d06",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 2762,
+      "task_success": false
+    },
+    {
+      "task_id": "d07",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 3338,
+      "task_success": false
+    },
+    {
+      "task_id": "d07",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 4784,
+      "task_success": false
+    },
+    {
+      "task_id": "d08",
+      "family": "operational_decision",
+      "condition": "edited",
+      "json_valid": true,
+      "typed_exact_match": false,
+      "eos_before_cap": true,
+      "cap_hit": false,
+      "generated_tokens": 2195,
+      "task_success": false
+    },
+    {
+      "task_id": "d08",
+      "family": "operational_decision",
+      "condition": "base",
+      "json_valid": false,
+      "typed_exact_match": false,
+      "eos_before_cap": false,
+      "cap_hit": true,
+      "generated_tokens": 32768,
+      "task_success": false
+    }
+  ],
+  "writing_scores_frozen_sha256": "e966b7411753a585bb9131b9610fc138075a40d1f8840dc2a227084197035762",
+  "condition_map_revealed_after_score_freeze": true,
+  "blind_arm_map_revealed_after_score_freeze": {
+    "w01": {
+      "B": "base",
+      "A": "edited"
+    },
+    "w02": {
+      "B": "base",
+      "A": "edited"
+    },
+    "w03": {
+      "B": "base",
+      "A": "edited"
+    },
+    "w04": {
+      "A": "base",
+      "B": "edited"
+    },
+    "w05": {
+      "B": "base",
+      "A": "edited"
+    },
+    "w06": {
+      "A": "base",
+      "B": "edited"
+    },
+    "w07": {
+      "A": "base",
+      "B": "edited"
+    },
+    "w08": {
+      "B": "base",
+      "A": "edited"
+    }
+  },
+  "writing_scores": [
+    {
+      "task_id": "w01",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": true,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": true,
+      "task_success": true,
+      "evidence": "Includes location, 08:20 unavailability, technician at 11:30, and unknown completion; two clear sentences."
+    },
+    {
+      "task_id": "w01",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": false
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "No answer was produced."
+    },
+    {
+      "task_id": "w02",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": true,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": true,
+      "task_success": true,
+      "evidence": "Two polite sentences request an updated dispatch date for O-927 and state label-created/no-collection-scan portal facts; no accusation or invented date."
+    },
+    {
+      "task_id": "w02",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": false
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "No answer was produced."
+    },
+    {
+      "task_id": "w03",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": true,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": true,
+      "task_success": true,
+      "evidence": "One clear notice states west stairwell inspection closure on 12 October, east remains open, and lift access unchanged."
+    },
+    {
+      "task_id": "w03",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": false
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "No answer was produced."
+    },
+    {
+      "task_id": "w04",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "All three facts are present and no review is called complete, but the requested three labeled lines are rendered as one unseparated inline string."
+    },
+    {
+      "task_id": "w04",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": false
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "Output omits 17:10 and tomorrow morning and has no three-line labeled structure; it is fragmentary."
+    },
+    {
+      "task_id": "w05",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": true,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": true,
+      "task_success": true,
+      "evidence": "Two clear customer-facing sentences preserve 14:30 on 9 December, north reception, and unchanged duration without inventing clinician or early-arrival request."
+    },
+    {
+      "task_id": "w05",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": false
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "No answer was produced."
+    },
+    {
+      "task_id": "w06",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": false,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": false
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "No answer was produced."
+    },
+    {
+      "task_id": "w06",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": true,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": true,
+      "task_success": true,
+      "evidence": "Two neutral sentences report 214 rows, nine blank department fields, owner review, and no correction deadline."
+    },
+    {
+      "task_id": "w07",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "Asks whether step-free access will be available and notes pending details, but uses three sentences instead of exactly one."
+    },
+    {
+      "task_id": "w07",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": true,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "One polite sentence asks about step-free entry for EVT-88 on March 3 without overclaiming, but omits that current access details are pending."
+    },
+    {
+      "task_id": "w08",
+      "family": "grounded_writing",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "factual_coverage": true,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": true,
+        "coherent_and_usable": true
+      },
+      "all_rubric_factors_true": true,
+      "task_success": true,
+      "evidence": "Exactly two clear public-facing sentences state east closure from 18:00 on 21 July for resurfacing, west remains open, and reopening is unconfirmed."
+    },
+    {
+      "task_id": "w08",
+      "family": "grounded_writing",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "factual_coverage": false,
+        "no_unsupported_or_inaccurate_claim": true,
+        "task_and_format_fulfilled": false,
+        "coherent_and_usable": false
+      },
+      "all_rubric_factors_true": false,
+      "task_success": false,
+      "evidence": "No answer was produced."
+    }
+  ]
+}

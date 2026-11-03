@@ -1,0 +1,60 @@
+{
+  "time": 1793684015.924268,
+  "phase": "pass7_paired_generation_audit",
+  "request_sha256": "92fb8c44eaeb163115ed4173079d416b70f325f08a2a8ccbb9c8caa5f771106d",
+  "arms": {
+    "original": {
+      "raw_line_sha256": "907d9d087741cf29446f9e5811ab20fefcdd210f1934db208c039aa9fd27a3a6",
+      "id": "gsm8k_train_3785",
+      "seed": 2905019738,
+      "input_token_ids_sha256": "f53f4ed99f8c31364ba6821896343df9c56f899f1666573033981405efd108b3",
+      "generated_token_ids_sha256": "0783b4aee660fc87e046d87a66db265c3d8d860215f146b3fe65173963b94455",
+      "prediction": null,
+      "gold": "95",
+      "answer_correct": false,
+      "generated_tokens": 32768,
+      "cutoff": true,
+      "repeat_8gram_fraction": 0.8539116632581423,
+      "think_close_count": 0,
+      "eos_count": 0,
+      "endoftext_count": 0,
+      "boxed_95_count": 0,
+      "boxed_95_first_token": null,
+      "wait_check_phrase_count": 366,
+      "potential_issue_phrase_count": 0,
+      "answer_repeat_phrase_count": 1
+    },
+    "edited": {
+      "raw_line_sha256": "9707cbc2cee2d5bbc5f8544aa83e46a89a48119c8ea350df3ced198653de4d01",
+      "id": "gsm8k_train_3785",
+      "seed": 2905019738,
+      "input_token_ids_sha256": "f53f4ed99f8c31364ba6821896343df9c56f899f1666573033981405efd108b3",
+      "generated_token_ids_sha256": "487348187175e4ba21872bdfa8aa3c5640aa9a122e28ba135900cf1d72cdce06",
+      "prediction": "95",
+      "gold": "95",
+      "answer_correct": true,
+      "generated_tokens": 32768,
+      "cutoff": true,
+      "repeat_8gram_fraction": 0.8667623088428315,
+      "think_close_count": 0,
+      "eos_count": 0,
+      "endoftext_count": 0,
+      "boxed_95_count": 1,
+      "boxed_95_first_token": 6181,
+      "wait_check_phrase_count": 0,
+      "potential_issue_phrase_count": 188,
+      "answer_repeat_phrase_count": 184
+    }
+  },
+  "paired_invariants": {
+    "same_id": true,
+    "same_seed": true,
+    "same_input_token_ids": true
+  },
+  "primary_strict_completion": {
+    "original": false,
+    "edited": false,
+    "criterion": "answer correct AND EOS before cap AND no cap hit AND thinking closed"
+  },
+  "interpretation": "Alpha100 produced an early correct boxed answer but did not terminate. It replaced the original self-check cycle with repeated potential-issue/answer cycles. 8-gram repeat fraction increased. This is a local answer-arrival effect in one TRAIN seed, not strict task completion or a loop repair."
+}

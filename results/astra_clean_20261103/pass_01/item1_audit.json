@@ -1,0 +1,41 @@
+{
+  "id": "gsm8k_train_3785",
+  "raw_line_sha256": "e29dd2a9de5e7c1ee588435fbe0d963e761fa4c6fc6e6a1d45c0c8a16db62128",
+  "tokens": 32768,
+  "seconds": 2599.1681883335114,
+  "correct": false,
+  "prediction": "",
+  "gold": "95",
+  "cutoff": true,
+  "failure": "cutoff",
+  "repeat_8gram_fraction": 0.8539116632581423,
+  "author_extracted": null,
+  "eos_248046_positions": [],
+  "endoftext_248044_positions": [],
+  "think_close_count": 0,
+  "tail_8gram_repeat_fraction": 0.9666829985301323,
+  "repeated_lines": [
+    {
+      "count": 367,
+      "excerpt": "*   $175+x \\ge 270$."
+    },
+    {
+      "count": 366,
+      "excerpt": "*   Wait, let me check if I made a mistake in the calculation."
+    },
+    {
+      "count": 14,
+      "excerpt": "*   \"Kat gets a 95% on her first math test and an 80% on her second math test.\""
+    },
+    {
+      "count": 12,
+      "excerpt": "*   So 95 is the minimum."
+    },
+    {
+      "count": 11,
+      "excerpt": "*   So she needs 95."
+    }
+  ],
+  "head_excerpt": "Here's a thinking process that leads to the solution:\n\n1.  **Analyze the Request:**\n    *   Current grades: First test = 95%, Second test = 80%.\n    *   Target average: At least 90%.\n    *   Goal: Find the minimum possible score for the third final math test.\n    *   Output format: Step-by-step reas",
+  "tail_excerpt": "70$.\n    *   $x \\ge 95$.\n    *   Okay.\n\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80 = 175$.\n    *   $175+x \\ge 270$.\n    *   $x \\ge 95$.\n    *   Okay.\n\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80 = 175$.\n    *   $175+x \\ge 2"
+}

@@ -1,0 +1,52 @@
+{
+  "updated_at": 1793684361.779545,
+  "forward_worker_pid": 54946,
+  "forward_worker_exec_session": 18116,
+  "cpu_edit_kernel_pid": 52327,
+  "cpu_edit_kernel_exec_session": 9944,
+  "active_request": null,
+  "active_pass": null,
+  "active_protocol": "both original/alpha100, gsm8k_train_3785, fixed seed, thinking on, full32768 cap, MLP layer18 capture; parent says keep unchanged",
+  "consumed_completed_passes": 7,
+  "earlier_failed_attempts": 1,
+  "partial_pass1_counts": true,
+  "current_candidate": "variants/alpha100",
+  "candidate_sha256": "5042c800d051f92fc0d22a26a7694ccb7bc40a982c4fd46a703226f3398b9134",
+  "candidate_columns": [
+    1261,
+    1405,
+    1824,
+    1784
+  ],
+  "candidate_tensor": "model.language_model.layers.18.mlp.down_proj.weight",
+  "candidate_formally_frozen_for_transfer": false,
+  "active_edited_directory": "empty; immutable variants are used via explicit edit_dir",
+  "not_done": [
+    "Independent untouched TRAIN paired confirmation",
+    "Formal candidate freeze/retention decision",
+    "New post-freeze non-math suite and independent evaluation"
+  ],
+  "restrictions": [
+    "Do not queue duplicate pass7 or change cap/request.",
+    "No new generation/weight changes until parent reviews pass7 and directs continuation.",
+    "Do not inspect/decrypt any task suite/key or published result/weight values.",
+    "Do not call collaboration.list_agents: it exposed a sibling final answer and contaminated old transfer blindness.",
+    "Old non-math bundle treated as not editor-blind; parent plans new post-freeze tasks.",
+    "Authorized public route review exposed only released tensor identifiers/hashes; candidate alpha100 predates it; do not use metadata for retuning."
+  ],
+  "key_artifacts": [
+    "notes.md",
+    "rationale.jsonl",
+    "pass_ledger.jsonl",
+    "dose_response_tf.json",
+    "dose_token_distribution.json",
+    "variant_hashes_v1.json",
+    "control_feasibility.json",
+    "public_route_review.json",
+    "luna_notes.jsonl"
+  ],
+  "deadline_target_utc": "2026-11-03T06:59:15Z",
+  "deadline_policy": "Parent says continue objective if needed and report four-hour miss honestly, not claim unverified completion.",
+  "latest_result": "Pass7 selected TRAIN boxed score0->1; strict completion0->0; both32768 cap, no EOS/endoftext/think-close; original phrase removed but alternate loop remains.",
+  "candidate_status": "Unvalidated candidate, not retained as math improvement; formal freeze and independent TRAIN confirmation pending parent decision"
+}

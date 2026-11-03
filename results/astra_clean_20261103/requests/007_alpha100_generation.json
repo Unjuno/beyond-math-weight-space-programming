@@ -1,0 +1,13 @@
+{
+  "type": "generate",
+  "model": "both",
+  "edit_dir": "<USER_HOME>/Documents/ChatGPT/\u518d\u73fe\u5b9f\u9a13/results/astra_clean_20261103/variants/alpha100",
+  "problems": [
+    "gsm8k_train_3785"
+  ],
+  "n": 1,
+  "max_tokens": 32768,
+  "mlp_layers": [
+    18
+  ]
+}

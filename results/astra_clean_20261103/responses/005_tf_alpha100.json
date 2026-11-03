@@ -1,0 +1,29 @@
+{
+  "pass": 5,
+  "request_file": "<USER_HOME>/Documents/ChatGPT/\u518d\u73fe\u5b9f\u9a13/results/astra_clean_20261103/requests/005_tf_alpha100.json",
+  "status": "success",
+  "start": 1793679640.9497888,
+  "edit_sha256": {
+    "model.language_model.layers.18.mlp.down_proj.weight": "5042c800d051f92fc0d22a26a7694ccb7bc40a982c4fd46a703226f3398b9134"
+  },
+  "summary": {
+    "texts": 2,
+    "tokens": 988,
+    "metrics": [
+      {
+        "index": 0,
+        "label": "observed_self_check_loop",
+        "tokens": 519,
+        "mean_logprob": -0.6265765428543091
+      },
+      {
+        "index": 1,
+        "label": "exact_train_reference",
+        "tokens": 469,
+        "mean_logprob": -0.773626983165741
+      }
+    ]
+  },
+  "seconds": 2.0134379863739014,
+  "output_dir": "<USER_HOME>/Documents/ChatGPT/\u518d\u73fe\u5b9f\u9a13/results/astra_clean_20261103/pass_05"
+}

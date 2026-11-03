@@ -1,0 +1,17 @@
+{
+  "time": 1793682526.487509,
+  "phase": "pass7_original_repeat_audit",
+  "id": "gsm8k_train_3785",
+  "seed_equal": true,
+  "input_token_ids_equal": true,
+  "generated_token_ids_equal": true,
+  "first_token_difference": null,
+  "text_equal": true,
+  "new_seconds": 2628.870012998581,
+  "new_tokens": 32768,
+  "new_correct": false,
+  "new_cutoff": true,
+  "eos_count": 0,
+  "endoftext_count": 0,
+  "raw_line_sha256": "422f84b2b056e9b5101c5d0ee0d351ed354eed5c207d6669dcf95eb4bb0949b9"
+}

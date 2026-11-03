@@ -1,0 +1,98 @@
+{
+  "pass": 1,
+  "status": "partial_consumed",
+  "consumes_pass": true,
+  "request_file": "results/astra_clean_20261103/requests/001_diagnostic.json",
+  "start": 1793675892.461706,
+  "interruption_recorded_at": 1793678692.614262,
+  "interruption_recorded_at_utc": "2026-11-03T04:04:52.614262+00:00",
+  "signal_timestamp": "Parent confirmed SIGTERM and PID disappearance; exact signal timestamp not supplied. This is durable recording time.",
+  "last_telemetry_file_mtime": 1793678606.9541612,
+  "requested_items": 4,
+  "completed_items": 1,
+  "interrupted_items": 3,
+  "completed_ids": [
+    "gsm8k_train_3785"
+  ],
+  "interrupted_ids": [
+    "gsm8k_train_1146",
+    "math_train_number_theory_777",
+    "math_train_counting_and_probability_25"
+  ],
+  "output_dir": "results/astra_clean_20261103/pass_01",
+  "completed_item_seconds": 2599.1681883335114,
+  "completed_accuracy": 0.0,
+  "completed_cutoff": 1,
+  "completed_eos": 0,
+  "reason": "Explicit parent-approved adaptive interruption after one complete, directly observed in-thinking repetition failure. Preserve evidence and spend next calls on causal localization/confirmation. No full four-item result is claimed.",
+  "incomplete_item_telemetry_only": [
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 256,
+      "seconds": 9.860270023345947
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 512,
+      "seconds": 19.166492223739624
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 768,
+      "seconds": 28.438749313354492
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 1024,
+      "seconds": 37.81731200218201
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 1280,
+      "seconds": 47.001047134399414
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 1536,
+      "seconds": 56.21362924575806
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 1792,
+      "seconds": 65.43936610221863
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 2048,
+      "seconds": 74.86960101127625
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 2304,
+      "seconds": 84.32785820960999
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 2560,
+      "seconds": 93.7749981880188
+    },
+    {
+      "progress_id": "gsm8k_train_1146",
+      "model": "original",
+      "tokens": 2816,
+      "seconds": 103.289635181427
+    }
+  ],
+  "harness_sha256": "300e8fae9629bb4a83bb55f60cd2128fcaaaeb0ec12d875fd932440907cf37c8",
+  "raw_first_line_sha256": "e29dd2a9de5e7c1ee588435fbe0d963e761fa4c6fc6e6a1d45c0c8a16db62128"
+}

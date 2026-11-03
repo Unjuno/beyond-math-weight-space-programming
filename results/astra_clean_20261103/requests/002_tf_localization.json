@@ -1,0 +1,66 @@
+{
+  "type": "teacher_forced",
+  "model": "original",
+  "texts": [
+    {
+      "label": "observed_self_check_loop",
+      "text": "<|im_start|>user\nKat gets a 95% on her first math test and an 80% on her second math test. If she wants an average grade of at least 90% in her math class, what does she need to get on her third final math test?\nPlease reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nHere's a thinking process that leads to the solution:\n\n1.  **Analyze the Request:**\n    *   Current grades: First test = 95%, Second test = 80%.\n    *   Target average: At least 90%.\n    *   Goal: Find the minimum possible score for the third final math test.\n    *   Output format: Step-by-step reasoning and final answer in `\\boxed{}`.\n\n2.  **Define Variables:**\n    *   Let $x$ be the score on the third test.\n    *   Total points needed (based on current scores) = $95 + 80 = 175$.\n\n3.  **Formulate the Equation:**\n    *   The formula for the average is $\\frac{\\text{Sum of scores}}{\\text{Number of tests}}$.\n    *   Average = $\\frac{\\text{Total Score}}{\\text{Number of Tests}}$.\n    *   We need the average $\\ge 90\\%$.\n    *   Number of tests = 3.\n    *   Equation: $\\frac{x + 95 + 80}{3} \\ge 90$.\n\n4.  **Solve the Inequality:**\n    *   Multiply both sides by 3:\n        $$x + 175 \\ge 270$$\n    *   Subtract 175 from both sides:\n        $$x \\ge 95$$\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80+x = 270$.\n    *   $x = 95$.\n    *   Okay.\n\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80 = 175$.\n    *   $175+x \\ge 270$.\n    *   $x \\ge 95$.\n    *   Okay.\n\n"
+    },
+    {
+      "label": "exact_train_reference",
+      "text": "<|im_start|>user\nKat gets a 95% on her first math test and an 80% on her second math test. If she wants an average grade of at least 90% in her math class, what does she need to get on her third final math test?\nPlease reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nHere's a thinking process that leads to the solution:\n\n1.  **Analyze the Request:**\n    *   Current grades: First test = 95%, Second test = 80%.\n    *   Target average: At least 90%.\n    *   Goal: Find the minimum possible score for the third final math test.\n    *   Output format: Step-by-step reasoning and final answer in `\\boxed{}`.\n\n2.  **Define Variables:**\n    *   Let $x$ be the score on the third test.\n    *   Total points needed (based on current scores) = $95 + 80 = 175$.\n\n3.  **Formulate the Equation:**\n    *   The formula for the average is $\\frac{\\text{Sum of scores}}{\\text{Number of tests}}$.\n    *   Average = $\\frac{\\text{Total Score}}{\\text{Number of Tests}}$.\n    *   We need the average $\\ge 90\\%$.\n    *   Number of tests = 3.\n    *   Equation: $\\frac{x + 95 + 80}{3} \\ge 90$.\n\n4.  **Solve the Inequality:**\n    *   Multiply both sides by 3:\n        $$x + 175 \\ge 270$$\n    *   Subtract 175 from both sides:\n        $$x \\ge 95$$\nLet x = the percent needed on her third math test\n(95 + 80 + x)/3 = 90\n(95 + 80 + x) = 270\nx = 270 - 95 - 80\nx = <<95=95>>95"
+    }
+  ],
+  "mlp_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "hypothesis": "After an identical observed prefix has correctly derived x>=95, a subset of MLP neurons may selectively support the observed repeated self-check motif rather than continued reference arithmetic. This descriptive contrast nominates candidates only; intervention/dose and generation confirmation are still required.",
+  "analysis_plan": {
+    "common_prefix_tokens": 399,
+    "matched_continuation_tokens": 70,
+    "logprob_indices": [
+      398,
+      468
+    ],
+    "mlp_input_positions": [
+      399,
+      469
+    ],
+    "context_limitation": "Local motif probe: exact early solved prefix is joined to exact later failure loop or exact TRAIN reference. This is not replay of the full 7921-token pre-loop history. No EOS or think-close text is added.",
+    "failure_source_id": "gsm8k_train_3785",
+    "raw_failure_line_sha256": "e29dd2a9de5e7c1ee588435fbe0d963e761fa4c6fc6e6a1d45c0c8a16db62128",
+    "failure_prefix_char_end": 955,
+    "failure_suffix_char_range": [
+      22513,
+      22788
+    ],
+    "reference_source": "gsm8k_train.jsonl",
+    "token_lengths": [
+      519,
+      469
+    ]
+  }
+}

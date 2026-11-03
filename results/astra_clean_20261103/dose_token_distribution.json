@@ -1,0 +1,54 @@
+{
+  "variant": "alpha100",
+  "loop_delta_quantiles": {
+    "min": -2.3801426887512207,
+    "p10": -0.13660670220851898,
+    "p25": -0.004919151309877634,
+    "median": 7.337336501223035e-05,
+    "p75": 0.0052137188613414764,
+    "p90": 0.08701709508895875,
+    "max": 1.160447359085083
+  },
+  "loop_tokens_reduced_by_more_than_0_01": 16,
+  "loop_tokens_increased_by_more_than_0_01": 15,
+  "phrase_tokens_reduced_by_more_than_0_01": 12,
+  "phrase_tokens": 28,
+  "most_reduced_positions": [
+    {
+      "token_index": 404,
+      "delta_logprob": -2.3801426887512207,
+      "in_self_check_phrase": true,
+      "context_excerpt": "oth sides:\n        $$x \\ge 95$$\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80+"
+    },
+    {
+      "token_index": 456,
+      "delta_logprob": -1.9232513904571533,
+      "in_self_check_phrase": true,
+      "context_excerpt": "   *   $x = 95$.\n    *   Okay.\n\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80 "
+    },
+    {
+      "token_index": 409,
+      "delta_logprob": -0.966041088104248,
+      "in_self_check_phrase": true,
+      "context_excerpt": " $$x \\ge 95$$\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80+x = 270$.\n    *   $"
+    },
+    {
+      "token_index": 461,
+      "delta_logprob": -0.7521498203277588,
+      "in_self_check_phrase": true,
+      "context_excerpt": "   *   Okay.\n\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80 = 175$.\n    *   $17"
+    },
+    {
+      "token_index": 411,
+      "delta_logprob": -0.35524290800094604,
+      "in_self_check_phrase": true,
+      "context_excerpt": "e 95$$\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80+x = 270$.\n    *   $x = 95$.\n "
+    },
+    {
+      "token_index": 407,
+      "delta_logprob": -0.2465682029724121,
+      "in_self_check_phrase": true,
+      "context_excerpt": "      $$x \\ge 95$$\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80+x = 270$.\n  "
+    }
+  ]
+}

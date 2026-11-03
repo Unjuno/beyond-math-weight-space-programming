@@ -1,0 +1,75 @@
+{
+  "time": 1793679710.025717,
+  "base": {
+    "loop_continuation_mean_logprob": -0.991091251373291,
+    "reference_continuation_mean_logprob": -1.7783219814300537,
+    "shared_prefix_mean_logprob": -0.30009907484054565
+  },
+  "windows": {
+    "continuation_logprob_indices": [
+      398,
+      468
+    ],
+    "prefix_logprob_indices": [
+      80,
+      398
+    ],
+    "self_check_phrase_token_count": 28,
+    "arithmetic_token_count": 20
+  },
+  "results": [
+    {
+      "pass": 3,
+      "variant": "alpha025",
+      "seconds": 2.084588050842285,
+      "loop_continuation_delta": 0.004439948126673698,
+      "reference_continuation_delta": 0.0019755405373871326,
+      "reference_minus_loop_delta": -0.0024644075892865658,
+      "shared_prefix_delta": 0.0008282913477160037,
+      "shared_prefix_mean_absolute_delta": 0.00577542744576931,
+      "self_check_phrase_delta": -0.015594842843711376,
+      "loop_arithmetic_delta": 0.016379401087760925,
+      "shared_prefix_logprob_difference_between_texts": 4.76837158203125e-07
+    },
+    {
+      "pass": 4,
+      "variant": "alpha050",
+      "seconds": 2.023406744003296,
+      "loop_continuation_delta": -0.0018409066833555698,
+      "reference_continuation_delta": -0.0026184290181845427,
+      "reference_minus_loop_delta": -0.0007775223348289728,
+      "shared_prefix_delta": -0.0002536905521992594,
+      "shared_prefix_mean_absolute_delta": 0.005396510940045118,
+      "self_check_phrase_delta": -0.03099796548485756,
+      "loop_arithmetic_delta": 0.00641369353979826,
+      "shared_prefix_logprob_difference_between_texts": 3.5623088479042053e-07
+    },
+    {
+      "pass": 5,
+      "variant": "alpha100",
+      "seconds": 2.0134379863739014,
+      "loop_continuation_delta": -0.04478546604514122,
+      "reference_continuation_delta": -0.007742650341242552,
+      "reference_minus_loop_delta": 0.03704281523823738,
+      "shared_prefix_delta": 0.0007841692422516644,
+      "shared_prefix_mean_absolute_delta": 0.007954027503728867,
+      "self_check_phrase_delta": -0.1488608419895172,
+      "loop_arithmetic_delta": 0.007623165845870972,
+      "shared_prefix_logprob_difference_between_texts": 3.574823495000601e-07
+    },
+    {
+      "pass": 6,
+      "variant": "control100",
+      "seconds": 2.0141451358795166,
+      "loop_continuation_delta": -0.006813721731305122,
+      "reference_continuation_delta": 0.00014528621977660805,
+      "reference_minus_loop_delta": 0.006959008052945137,
+      "shared_prefix_delta": -0.0020621272269636393,
+      "shared_prefix_mean_absolute_delta": 0.011595550924539566,
+      "self_check_phrase_delta": -0.007302821613848209,
+      "loop_arithmetic_delta": -0.002728090388700366,
+      "shared_prefix_logprob_difference_between_texts": 3.575696609914303e-07
+    }
+  ],
+  "interpretation_limit": "Single training problem, forced local motif; no accuracy or general loop-circuit claim. Approximate control has unavoidable lower activation/norm; null control cannot prove specificity."
+}

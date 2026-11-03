@@ -1,0 +1,49 @@
+{
+  "time": 1793681013.152065,
+  "phase": "authorized_read_only_public_route_review",
+  "repository": "https://github.com/Unjuno/beyond-math-weight-space-programming",
+  "commit": "58254e148f3d05a109a791c159eb35111fe657fc",
+  "read_scope": [
+    "scripts/run_nonmath_probe.py: PresencePenalty, score, final_answer, weight_hash, main",
+    "scripts/verify_probe_pairs.py",
+    "scripts/summarize_nonmath_probe.py"
+  ],
+  "excluded": "No task suite, encrypted bundle, key, raw evaluation output, published edit tensor values, or published scores opened. No model forward/job/code mutation performed for this review.",
+  "metadata_boundary": "The authorized runner-code review exposed hard-coded released-edit tensor identifiers and runtime hashes, but no tensor values or outcome. Alpha100 choice, patch hashes, and pass7 request predate this review; do not use route metadata to retune the fresh candidate.",
+  "findings": [
+    {
+      "file": "scripts/run_nonmath_probe.py",
+      "line": 66,
+      "finding": "Loader and expected tensor hashes are specific to released p50c; a generic frozen patch manifest is needed for alpha100. Defaults mode=both and cap2048 must not silently replace primary thinking/full32768 evaluation."
+    },
+    {
+      "file": "scripts/run_nonmath_probe.py",
+      "line": 66,
+      "finding": "Fixed per-index seeds require immutable task ordering; resume uses only id/condition and can mix settings unless output paths/manifests are unique and checked. Iterate JSONL lines rather than Unicode splitlines."
+    },
+    {
+      "file": "scripts/run_nonmath_probe.py",
+      "line": 22,
+      "finding": "Legacy regex/keyword checks are useful diagnostics but insufficient for factual/coherent task success; use task-aligned exact typed JSON where appropriate and blinded final-answer rubric for prose."
+    },
+    {
+      "file": "scripts/verify_probe_pairs.py",
+      "line": 35,
+      "finding": "Entrypoint assumes old expected counts/caps; configure the new evaluation explicitly while retaining paired ID/seed/input-token invariants."
+    },
+    {
+      "file": "scripts/summarize_nonmath_probe.py",
+      "line": 18,
+      "finding": "Re-scoring task source is hard-coded to the old suite; new post-freeze suite/scorer must be explicitly bound by hash. Task-paired bootstrap can be reused, with small-set/generalization limitations."
+    }
+  ],
+  "recommended_order": [
+    "Keep pass7 unchanged; assess actual generated behavior.",
+    "Choose and freeze arm manifests before newly authored non-math tasks. Complete or explicitly limit independent TRAIN confirmation for fresh-method claims.",
+    "Author a new post-freeze task set; old transfer bundle is conservatively not editor-blind. Keep payloads/key out of editor context.",
+    "Run only the primary thinking/full-cap paired route first, unique output and hashes, preferably interleaved base/edited pairs for interruption-safe paired progress.",
+    "Verify complete pairs, score actual task success with blinded final outputs, report task-paired differences/uncertainty and all incomplete/capped cases."
+  ],
+  "claim_separation": "Broader parent goal includes independent evaluation of publicly released p50c as well as fresh alpha100. Evaluate either/both as explicitly distinct arms; public-release transfer evidence does not establish success of the new editing method, and fresh local motif evidence does not establish transfer.",
+  "runtime_caveat": "48 full-cap generations may take many hours if long tails resemble the math diagnostic; 60 min is a reservation, not a guaranteed ETA. Pin attention backend rather than assuming old/new runner parity."
+}

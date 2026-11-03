@@ -1,0 +1,146 @@
+[
+  {
+    "task_id": "w01",
+    "anonymous_label": "A",
+    "factual_coverage": true,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": true,
+    "coherent_and_usable": true,
+    "evidence": "All supplied facts, two sentences, usable internal update."
+  },
+  {
+    "task_id": "w01",
+    "anonymous_label": "B",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": false,
+    "evidence": "Empty final answer; no claims to contradict the source, but no task completion."
+  },
+  {
+    "task_id": "w02",
+    "anonymous_label": "A",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": false,
+    "evidence": "Please inquire about delegates an inquiry rather than directly asking the supplier to provide the revised date; borderline task-act judgment."
+  },
+  {
+    "task_id": "w02",
+    "anonymous_label": "B",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": false,
+    "evidence": "Empty final answer."
+  },
+  {
+    "task_id": "w03",
+    "anonymous_label": "A",
+    "factual_coverage": true,
+    "no_unsupported_or_inaccurate_claim": false,
+    "task_and_format_fulfilled": true,
+    "coherent_and_usable": true,
+    "evidence": "Required closure/access facts present; assigns closure to Staff although source specifies no actor. Narrow unsupported-actor issue."
+  },
+  {
+    "task_id": "w03",
+    "anonymous_label": "B",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": false,
+    "evidence": "Empty final answer."
+  },
+  {
+    "task_id": "w04",
+    "anonymous_label": "A",
+    "factual_coverage": true,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": true,
+    "coherent_and_usable": true,
+    "evidence": "All facts and three labels; uppercase/brackets are not prohibited."
+  },
+  {
+    "task_id": "w04",
+    "anonymous_label": "B",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": true,
+    "evidence": "Omits 17:10 and tomorrow morning; labels are not clearly the required three labeled lines, though shorthand is understandable."
+  },
+  {
+    "task_id": "w05",
+    "anonymous_label": "A",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": true,
+    "coherent_and_usable": true,
+    "evidence": "Omits December. Check-in confirmed at reception can reasonably identify confirmed location rather than assert completed check-in."
+  },
+  {
+    "task_id": "w05",
+    "anonymous_label": "B",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": false,
+    "evidence": "Empty final answer."
+  },
+  {
+    "task_id": "w06",
+    "anonymous_label": "A",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": false,
+    "evidence": "Empty final answer."
+  },
+  {
+    "task_id": "w06",
+    "anonymous_label": "B",
+    "factual_coverage": true,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": true,
+    "coherent_and_usable": true,
+    "evidence": "Required data-quality facts present, two neutral sentences."
+  },
+  {
+    "task_id": "w07",
+    "anonymous_label": "A",
+    "factual_coverage": true,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": true,
+    "evidence": "All facts and inquiry present, but three sentences rather than one."
+  },
+  {
+    "task_id": "w07",
+    "anonymous_label": "B",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": true,
+    "coherent_and_usable": true,
+    "evidence": "Omits explicit access-details-pending fact; otherwise valid polite one-sentence inquiry."
+  },
+  {
+    "task_id": "w08",
+    "anonymous_label": "A",
+    "factual_coverage": true,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": true,
+    "coherent_and_usable": true,
+    "evidence": "All facts in two sentences; reopening uncertainty reasonably refers to the closed entrance in context."
+  },
+  {
+    "task_id": "w08",
+    "anonymous_label": "B",
+    "factual_coverage": false,
+    "no_unsupported_or_inaccurate_claim": true,
+    "task_and_format_fulfilled": false,
+    "coherent_and_usable": false,
+    "evidence": "Empty final answer."
+  }
+]

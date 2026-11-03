@@ -1,0 +1,40 @@
+{
+  "pass": 7,
+  "request_file": "<USER_HOME>/Documents/ChatGPT/\u518d\u73fe\u5b9f\u9a13/results/astra_clean_20261103/requests/007_alpha100_generation.json",
+  "status": "success",
+  "start": 1793679852.440476,
+  "edit_sha256": {
+    "model.language_model.layers.18.mlp.down_proj.weight": "5042c800d051f92fc0d22a26a7694ccb7bc40a982c4fd46a703226f3398b9134"
+  },
+  "summary": {
+    "original": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0,
+      "mean_tokens": 32768.0,
+      "cutoff": 1,
+      "failure_counts": {
+        "cutoff": 1
+      }
+    },
+    "edited": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0,
+      "mean_tokens": 32768.0,
+      "cutoff": 1,
+      "failure_counts": {
+        "correct": 1
+      }
+    }
+  },
+  "paired": {
+    "delta": 1.0,
+    "se": null,
+    "wrong_to_right": 1,
+    "right_to_wrong": 0,
+    "n_items": 1
+  },
+  "seconds": 4106.332698106766,
+  "output_dir": "<USER_HOME>/Documents/ChatGPT/\u518d\u73fe\u5b9f\u9a13/results/astra_clean_20261103/pass_07"
+}

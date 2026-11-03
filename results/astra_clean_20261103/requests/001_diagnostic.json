@@ -1,0 +1,39 @@
+{
+  "type": "generate",
+  "model": "original",
+  "problems": [
+    "gsm8k_train_3785",
+    "gsm8k_train_1146",
+    "math_train_number_theory_777",
+    "math_train_counting_and_probability_25"
+  ],
+  "n": 1,
+  "max_tokens": 32768,
+  "mlp_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "hypothesis": "An unbiased first diagnostic will reveal whether wrong answers, missing answers, or long repetitive thinking dominates these four TRAIN items; no edit selected."
+}

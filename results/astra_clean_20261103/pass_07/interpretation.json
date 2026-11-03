@@ -1,0 +1,93 @@
+{
+  "time": 1793684276.078269,
+  "phase": "pass7_interpretation",
+  "pass_seconds": 4106.332698106766,
+  "paired": {
+    "delta": 1.0,
+    "se": null,
+    "wrong_to_right": 1,
+    "right_to_wrong": 0,
+    "n_items": 1
+  },
+  "audits": [
+    {
+      "variant": "original",
+      "raw_line_sha256": "422f84b2b056e9b5101c5d0ee0d351ed354eed5c207d6669dcf95eb4bb0949b9",
+      "id": "gsm8k_train_3785",
+      "tokens": 32768,
+      "seconds": 2628.870012998581,
+      "prediction": null,
+      "gold": "95",
+      "correct": false,
+      "cutoff": true,
+      "repeat_8gram_fraction": 0.8539116632581423,
+      "eos_count": 0,
+      "endoftext_count": 0,
+      "think_close_count": 0,
+      "old_self_check_phrase_count": 366,
+      "new_issue_phrase_count": 0,
+      "answer_is_95_phrase_count": 1,
+      "tail_8gram_repeat_fraction": 0.9666829985301323,
+      "most_repeated_lines": [
+        {
+          "count": 367,
+          "excerpt": "*   $175+x \\ge 270$."
+        },
+        {
+          "count": 366,
+          "excerpt": "*   Wait, let me check if I made a mistake in the calculation."
+        },
+        {
+          "count": 14,
+          "excerpt": "*   \"Kat gets a 95% on her first math test and an 80% on her second math test.\""
+        },
+        {
+          "count": 12,
+          "excerpt": "*   So 95 is the minimum."
+        }
+      ],
+      "tail_excerpt": "70$.\n    *   $x \\ge 95$.\n    *   Okay.\n\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80 = 175$.\n    *   $175+x \\ge 270$.\n    *   $x \\ge 95$.\n    *   Okay.\n\n    *   Wait, let me check if I made a mistake in the calculation.\n    *   $95+80 = 175$.\n    *   $175+x \\ge 2"
+    },
+    {
+      "variant": "edited",
+      "raw_line_sha256": "a45d25a43772a0f6a0caa03f6d518b68fe5796694d23b23a705aa68c4db937f9",
+      "id": "gsm8k_train_3785",
+      "tokens": 32768,
+      "seconds": 1477.3234040737152,
+      "prediction": "95",
+      "gold": "95",
+      "correct": true,
+      "cutoff": true,
+      "repeat_8gram_fraction": 0.8667623088428315,
+      "eos_count": 0,
+      "endoftext_count": 0,
+      "think_close_count": 0,
+      "old_self_check_phrase_count": 0,
+      "new_issue_phrase_count": 188,
+      "answer_is_95_phrase_count": 184,
+      "tail_8gram_repeat_fraction": 0.9284664380205782,
+      "most_repeated_lines": [
+        {
+          "count": 188,
+          "excerpt": "Wait, I see a potential issue."
+        },
+        {
+          "count": 185,
+          "excerpt": "What if the question implies she needs to get *at least* 90% *from the *third* test*?"
+        },
+        {
+          "count": 185,
+          "excerpt": "Wait, I think I'm confident."
+        },
+        {
+          "count": 179,
+          "excerpt": "Average = $\\frac{95 + 80 + x}{3}$."
+        }
+      ],
+      "tail_excerpt": " x}{3}$.\n    $95 + 80 + x \\ge 3(90)$.\n    $175 + x \\ge 270$.\n    $x \\ge 95$.\n    So she needs to get 95.\n    \n    Wait, I see a potential issue.\n    What if the question implies she needs to get *at least* 90% *from the *third* test*?\n    No.\n    \n    Wait, I think I'm confident.\n    The answer is 9"
+    }
+  ],
+  "interpretation": "One selected TRAIN problem shows boxed-answer score 0->1, but strict completed-final success 0->0. The edited model remains in unclosed thinking, hits the same cap, and repeats an alternate motif. Target intervention has demonstrated local lexical/format influence, not useful loop repair.",
+  "acceptance": "Not validated or retained as a math-improving edit. Freeze only as an unvalidated candidate; no independent TRAIN or non-math gain demonstrated.",
+  "recommended_confirmation": "Predeclare eight unseen TRAIN pairs, balanced4+4 GSM8K/MATH from existing confirmation partition without inspecting prompts, fixed alpha100 and full32768 protocol. Primary official boxed accuracy; separate strict final/EOS/repetition outcomes; one pair per counted call for interruption-safe evidence. Aggregate all8 before retention, label small pilot, no claim if incomplete/underpowered."
+}
