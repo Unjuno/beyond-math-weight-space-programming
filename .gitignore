@@ -1,0 +1,16 @@
+# Local model weights, datasets and generated outputs never go to GitHub.
+model-cache/
+models/
+data/raw/
+data/processed/
+results/raw/
+results/checkpoints/
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.bin
+*.log
+.venv/
+__pycache__/
+.DS_Store
