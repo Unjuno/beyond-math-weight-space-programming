@@ -2,26 +2,26 @@
 
 ## Scope and relation to the paper
 
-The paper reports non-math scores for IFEval, GPQA Diamond, and a fixed 1,000-question MMLU-Pro subset. We previously re-scored released per-item records, which audits those records but does not regenerate the benchmark generations. This report covers a separate exploratory suite of 24 hand-authored tasks (8 structured extractions, 8 operational decisions, 8 grounded-writing tasks). It does not rerun those benchmarks or repeat the 50-pass edit search. The evaluated p50c checkpoint was fixed before this evaluation and was not tuned on the suite. Some facts/rubric criteria from the task set were exposed to a separate alpha100 editor after that candidate was frozen, so this is not editor-blind evidence.
+Takehi et al.'s November 2026 research blog reports non-math scores for IFEval, GPQA Diamond, and a fixed 1,000-question MMLU-Pro subset. We previously re-scored released per-item records, which audits those records but does not regenerate the benchmark generations. This report covers a separate exploratory suite of 24 hand-authored tasks (8 structured extractions, 8 operational decisions, 8 grounded-writing tasks). It does not rerun those benchmarks or repeat the 50-pass edit search. The evaluated p50c checkpoint was fixed before this evaluation and was not tuned on the suite. Some facts/rubric criteria from the task set were exposed to a separate alpha100 editor after that candidate was frozen, so this is not editor-blind evidence.
 
 ## Protocol
 
 - One paired generation per task and arm; same pinned Qwen3.5-0.8B checkpoint, prompt, seed, and input token IDs within each pair; randomized arm order.
 - Public p50c tensors at MLP down-projection layers 15 and 19. Provenance and artifact hashes are in `results/heldout24_p50c_fullcap_manifest.json`.
-- Thinking enabled, BF16 on Apple MPS with Transformers `AutoModelForImageTextToText`; temperature 0.6, top-p 0.95, top-k 20, presence penalty 1.5, and 32,768-token cap. The paper used vLLM; the exact Experiment 8 persistent harness/backend is unreleased, so this is an approximate checkpoint evaluation.
+- Thinking enabled, BF16 on Apple MPS with Transformers `AutoModelForImageTextToText`; temperature 0.6, top-p 0.95, top-k 20, presence penalty 1.5, and 32,768-token cap. The author report describes vLLM for evaluation; our checkpoint evaluation uses a different MPS/Transformers backend. Evaluation code is available in the upstream release, while the complete editing-agent orchestration and forward-pass server are not fully available. These are separate limitations: this run is an approximate checkpoint evaluation, and the fresh edit search was not reproduced.
 - Primary strict success requires EOS before cap and exact recursive JSON key/type/value match for structured tasks, or EOS before cap and all four writing rubric factors. Two model graders (Luna and Astra) independently rated anonymous writing answers; they are not human raters. Scores are retained separately.
 - Paired bootstrap resamples task IDs (50,000 draws, fixed seed). With one sample per hand-authored task, intervals describe this suite only.
 
 ## Frozen exact-score results
 
-| Task family | Luna base / edit | Astra writing-rater sensitivity base / edit | Luna delta, 95% CI | Astra delta, 95% CI |
+| Task family | Luna frozen pre-audit first pass, base / edit | Astra writing-rater sensitivity, base / edit | Luna delta, 95% CI | Astra delta, 95% CI |
 |---|---:|---:|---:|---:|
 | Structured extraction (8) | 1/8 → 4/8 | 1/8 → 4/8 | +37.5 pp [+12.5, +75.0] | +37.5 pp [+12.5, +75.0] |
 | Operational decisions (8) | 3/8 → 2/8 | 3/8 → 2/8 | −12.5 pp [−37.5, 0.0] | −12.5 pp [−37.5, 0.0] |
 | Grounded writing (8) | 0/8 → 6/8 | 1/8 → 3/8 | +75.0 pp [+37.5, +100.0] | +25.0 pp [−25.0, +75.0] |
 | **All tasks (24)** | **4/24 → 12/24** | **5/24 → 9/24** | **+33.3 pp [+12.5, +54.2]** | **+16.7 pp [−4.2, +37.5]** |
 
-EOS-before-cap completion was 11/24 base versus 24/24 edited. Exact typed JSON matches were 4/16 versus 6/16. Among structured answers that reached EOS, exact matches were 4/9 versus 6/16 (44.4% vs 37.5%); this completion-selected comparison is descriptive, not a causal accuracy estimand. EOS, parseability, answer length, and task correctness must not be conflated. The four writing factors agreed on 57/64 judgments; the overall writing-sensitive estimate is reviewer-dependent.
+The Luna values above are the frozen **pre-audit first-pass scores**, not corrected gold-standard labels. Astra's second review identified two concrete Luna reading errors: w04-A has three actual lines (not one), and w05-A omits “December.” Other writing differences concern interpretation and coherence. Preserve both blind ratings; the frozen first pass remains useful for showing scorer sensitivity but is not error-free. EOS-before-cap completion was 11/24 base versus 24/24 edited. Exact typed JSON matches were 4/16 versus 6/16. Among structured answers that reached EOS, exact matches were 4/9 versus 6/16 (44.4% vs 37.5%); this completion-selected comparison is descriptive, not a causal accuracy estimand. EOS, parseability, answer length, and task correctness must not be conflated. The four writing factors agreed on 57/64 judgments; the overall writing-sensitive estimate is reviewer-dependent.
 
 ## Semantic audit and task-specification sensitivity
 

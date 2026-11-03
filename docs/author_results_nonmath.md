@@ -1,6 +1,6 @@
-# Published non-math results: independent re-score
+# Author-reported non-math results: independent re-score
 
-Status: **author-artifact re-score**, not a fresh model inference run. The inputs are the public per-problem JSON files from `RikiyaT/lm_understand-logs` at commit `4d09ba6d6a7e891dd8063974dfe81b3d78e3494f`. `scripts/analyze_author_results.py` merges the disjoint shards and computes score differences on the same questions. Each question is a bootstrap cluster; multiple samples for one question are averaged before resampling. Pointwise 95% intervals are shown, plus Bonferroni-adjusted 95% intervals across the three p50c non-math primary outcomes.
+Status: **author-artifact re-score**, not a fresh model inference run. The source is Takehi et al.'s research blog report and the associated public release, not a peer-reviewed paper. Inputs are the published per-problem JSON score records available in `RikiyaT/lm_understand-logs` at commit `4d09ba6d6a7e891dd8063974dfe81b3d78e3494f`. `scripts/analyze_author_results.py` merges the disjoint shards and computes score differences on the same questions. Each question is a bootstrap cluster; multiple samples for one question are averaged before resampling. Pointwise 95% intervals are shown, plus Bonferroni-adjusted 95% intervals across the three p50c non-math primary outcomes.
 
 | Non-math task | Base | 10 passes | 25 passes | 50 passes | Paired item bootstrap, p50c minus base (95% CI) | Items / samples per condition |
 |---|---:|---:|---:|---:|---:|---:|
@@ -30,4 +30,4 @@ python scripts/analyze_author_results.py \
   --author-repo /path/to/lm_understand-logs
 ```
 
-Raw author benchmark prompts/outputs remain in the public upstream repository and are not copied here.
+The pinned author release contains published per-problem score records and the generations that were released, but not every original benchmark prompt or generation. The [GPQA dataset card](https://huggingface.co/datasets/Idavidrein/gpqa) asks users not to reveal question examples in online text or images; this project therefore does not redistribute GPQA question text or full GPQA generations. Use the pinned upstream release to inspect only the artifacts it makes available.

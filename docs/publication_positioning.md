@@ -2,11 +2,12 @@
 
 ## Recommended description
 
-An exploratory, paired fixed-checkpoint evaluation of a released Qwen3.5-0.8B weight edit on 24 hand-authored non-math tasks, accompanied by a re-score of the author's released benchmark records. The local study observes substantially more EOS-before-cap completions and lower repeated 8-gram fractions under the edited checkpoint. Task correctness is mixed and sensitive to the writing grader and three imperfect structured-task specifications.
+An exploratory, paired fixed-checkpoint evaluation of a released Qwen3.5-0.8B weight edit on 24 hand-authored non-math tasks, accompanied by a re-score of the benchmark records from Takehi et al.'s 2026 research blog report. The local study observes substantially more EOS-before-cap completions and lower repeated 8-gram fractions under the edited checkpoint. Task correctness is mixed and sensitive to the writing grader and three imperfect structured-task specifications.
 
 ## Claims supported by the current evidence
 
 - We reproduced the author's reported aggregate benchmark scores from released per-item records; this verifies those records and scoring, not the original generations.
+- The reported benchmark values are IFEval 21.0%→62.3%, GPQA Diamond 22.7%→36.6%, and fixed-slice MMLU-Pro 40.3%→45.5%. Our local verification re-scores author records; it is not fresh inference on those benchmarks.
 - On this specific paired 24-item suite, EOS-before-cap rose from 11/24 to 24/24, while strict exact structured matches rose from 4/16 to 6/16.
 - A blind semantic sensitivity audit found structured success of 5/16 vs 9/16 with gold-relative schema strictness, or 6/16 vs 9/16 when that schema condition is relaxed; intervals are wide and include zero.
 - The suite surfaced concrete completion-proxy failures and task-specification defects, which are useful evaluation findings in their own right.
@@ -20,7 +21,11 @@ An exploratory, paired fixed-checkpoint evaluation of a released Qwen3.5-0.8B we
 
 ## Limitations that belong beside any headline
 
-Only one sample per hand-authored task; two model graders rather than human raters; grader-sensitive writing outcomes; three task/gold specification ambiguities; some suite facts/rubric were exposed to a separate candidate editor after its freeze; fixed public p50c was not retuned on this suite; Apple MPS/Transformers backend differs from the paper's vLLM path; raw reasoning traces are not public. Exact strict scores are retained unchanged and semantic checks are explicitly post-hoc sensitivities.
+Only one sample per hand-authored task; two model graders rather than human raters; grader-sensitive writing outcomes; two known reading errors in Luna's frozen first-pass scores (w04-A line count, w05-A missing December); three task/gold specification ambiguities; some suite facts/rubric were exposed to a separate candidate editor after its freeze; fixed public p50c was not retuned on this suite; Apple MPS/Transformers backend differs from the author's vLLM evaluation path; raw full-length generations are not public. Exact strict scores are retained unchanged and semantic checks are explicitly post-hoc sensitivities.
+
+## Separate approximate editing attempt
+
+The repository also preserves an unfinished, approximate local editing attempt on training data, which is not the released p50c search. Its frozen alpha100 candidate produced the correct boxed answer earlier on one paired training example, but both base and edited generations hit the 32,768-token cap without EOS; the edited run's repeated 8-gram fraction was higher (0.8668 vs 0.8539). No held-out confirmation followed. This result is inconclusive and must not be presented as a successful reproduction or as evidence for the released p50c non-math comparison. See the [paired audit](../results/astra_clean_20261103/pass_07/paired_generation_audit.json) and [interpretation](../results/astra_clean_20261103/pass_07/interpretation.json).
 
 ## Short headline
 
