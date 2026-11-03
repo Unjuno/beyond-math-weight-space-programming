@@ -1,0 +1,66 @@
+{
+  "definition": "repeat8 is excess repeated 8-gram occurrences / all 8-gram positions; tail uses last 2048 generated tokens; repeat4 diagnostic flags any 4-gram occurring at least three times.",
+  "arms": {
+    "base": {
+      "n": 24,
+      "eos_before_cap": 11,
+      "cap_hits": 13,
+      "any_repeat4gram_three_or_more": 24,
+      "repeat8_all": {
+        "n": 24,
+        "mean": 0.5754766191562327,
+        "median": 0.9036201581148317
+      },
+      "repeat8_cap_only": {
+        "n": 13,
+        "mean": 0.9209895443221654,
+        "median": 0.92149201794817
+      },
+      "repeat8_eos_only": {
+        "n": 11,
+        "mean": 0.1671431621419486,
+        "median": 0.15688671556642217
+      },
+      "tail2048_repeat8_all": {
+        "n": 24,
+        "mean": 0.6051784696366613,
+        "median": 0.9218520333170015
+      }
+    },
+    "edited": {
+      "n": 24,
+      "eos_before_cap": 24,
+      "cap_hits": 0,
+      "any_repeat4gram_three_or_more": 24,
+      "repeat8_all": {
+        "n": 24,
+        "mean": 0.12890331245717312,
+        "median": 0.1043360292324868
+      },
+      "repeat8_cap_only": {
+        "n": 0,
+        "mean": null,
+        "median": null
+      },
+      "repeat8_eos_only": {
+        "n": 24,
+        "mean": 0.12890331245717312,
+        "median": 0.1043360292324868
+      },
+      "tail2048_repeat8_all": {
+        "n": 24,
+        "mean": 0.12862552901626081,
+        "median": 0.09775276056894841
+      }
+    }
+  },
+  "paired_repeat8_delta_edited_minus_base": {
+    "mean": -0.4465733066990596,
+    "bootstrap_95_interval": [
+      -0.592277581831481,
+      -0.29990813958544876
+    ],
+    "draws": 50000,
+    "seed": 392
+  }
+}

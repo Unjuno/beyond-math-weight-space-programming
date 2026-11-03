@@ -1,0 +1,290 @@
+[
+  {
+    "task_id": "d01",
+    "anonymous_label": "A",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "Correctly waits for organizer approval and states that availability does not override approval; structure and types are valid."
+  },
+  {
+    "task_id": "d01",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "Correctly waits for organizer approval and states that availability does not override approval; structure and types are valid."
+  },
+  {
+    "task_id": "d02",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "RESTORED_UNDER is incomplete and does not supply the prescribed restored-under-investigation status; this is not a complete harmless paraphrase. Unknown cause and next-update time are correct. The JSON has the required keys/string types; enum/value compliance is assessed in semantic content, not this structural flag."
+  },
+  {
+    "task_id": "d02",
+    "anonymous_label": "B",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "empty/cap",
+    "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+  },
+  {
+    "task_id": "d03",
+    "anonymous_label": "A",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "Correctly selects A with boolean false for room change and the confirmed-time/no-room-change reason; required keys and types are valid."
+  },
+  {
+    "task_id": "d03",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "Correctly selects A with boolean false for room change and the confirmed-time/no-room-change reason; required keys and types are valid."
+  },
+  {
+    "task_id": "d04",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": false,
+    "json_schema_valid": true,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "Marks the parcel LOST without carrier confirmation despite in-transit tracking, and gives an incomplete evidence code. The follow-up is appropriate but does not repair the reversed disposition. Required keys/string types are valid; enum/value failures are semantic."
+  },
+  {
+    "task_id": "d04",
+    "anonymous_label": "B",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "empty/cap",
+    "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+  },
+  {
+    "task_id": "d05",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "empty/cap",
+    "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+  },
+  {
+    "task_id": "d05",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "harmless_surface_difference",
+    "evidence": "Correctly selects in-person collection and no stated exception. The requirement string states photo ID and the source-supported no-mailing constraint; underscores, AND and mailled spelling do not alter the meaning. Required keys/string types are valid."
+  },
+  {
+    "task_id": "d06",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": false,
+    "json_schema_valid": true,
+    "failure_category": "unsupported_claim",
+    "evidence": "Asserts No data loss as a confirmed fact although submissions have not been checked; also labels the documented outage as unsupported and omits the required uncertainty response. JSON keys/string types are valid, but source meaning and prescribed decisions are not."
+  },
+  {
+    "task_id": "d06",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "Correctly selects outage plus uncertainty, the verified outage fact, and no unsupported assertion; required keys and types are valid."
+  },
+  {
+    "task_id": "d07",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": false,
+    "json_schema_valid": true,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "Lists the closed second floor among open areas, contradicts its own closed-area entry, and omits the cafe. Gold keys/types are satisfied. Schema interpretation is qualified because the prompt says arrays required while gold gives two string fields."
+  },
+  {
+    "task_id": "d07",
+    "anonymous_label": "B",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": false,
+    "json_schema_valid": false,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "Omits the open cafe and copies all reopening options into the estimate, including unsupported 17:00/TOMORROW alternatives, instead of selecting no estimate. Closed area and reopening estimate are arrays rather than gold strings. The prompt itself ambiguously says arrays required, so the type failure is gold-relative."
+  },
+  {
+    "task_id": "d08",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "empty/cap",
+    "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+  },
+  {
+    "task_id": "d08",
+    "anonymous_label": "B",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "Hold/correction and blocked approval are correct, but verified_amount is the invoice amount 860 rather than the gold approved-PO amount 680. The number 860 is source-supported, not invented. This content failure is gold-relative: verified_amount is not explicitly defined in the prompt, so interpreting it as the verified invoice amount is plausible. Required keys/types are valid."
+  },
+  {
+    "task_id": "x01",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "Omits the explicit no-cause-confirmed component of current status; ongoing investigation alone does not entail that no cause has been confirmed. Other facts and required keys/types are preserved."
+  },
+  {
+    "task_id": "x01",
+    "anonymous_label": "B",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "Omits the explicit no-cause-confirmed component of current status; ongoing investigation alone does not entail that no cause has been confirmed. Other facts and required keys/types are preserved."
+  },
+  {
+    "task_id": "x02",
+    "anonymous_label": "A",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "All requested facts, including the pending approval state and effective date, match the source; required keys and types are present."
+  },
+  {
+    "task_id": "x02",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "All requested facts, including the pending approval state and effective date, match the source; required keys and types are present."
+  },
+  {
+    "task_id": "x03",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "material_fact_or_decision",
+    "evidence": "Dispatch window omits 6 June. Spacing around the time-range dash is harmless, but the missing dispatch date is material; keys and types remain valid."
+  },
+  {
+    "task_id": "x03",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "harmless_surface_difference",
+    "evidence": "Item redundantly includes the correct quantity 42, while the separate integer quantity, unit, destination and full dated dispatch window are correct. The repetition does not change the meaning."
+  },
+  {
+    "task_id": "x04",
+    "anonymous_label": "A",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "All source facts are preserved; 1275.50 is the same numeric amount as 1275.5. Required keys and numeric amount type are valid."
+  },
+  {
+    "task_id": "x04",
+    "anonymous_label": "B",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "empty/cap",
+    "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+  },
+  {
+    "task_id": "x05",
+    "anonymous_label": "A",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "Event, full date, room, access route and contact are all correct, with the required keys and types."
+  },
+  {
+    "task_id": "x05",
+    "anonymous_label": "B",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "empty/cap",
+    "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+  },
+  {
+    "task_id": "x06",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "empty/cap",
+    "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+  },
+  {
+    "task_id": "x06",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "none",
+    "evidence": "All three dated owner-deliverable milestones are correct and chronologically ordered in the requested nested structure."
+  },
+  {
+    "task_id": "x07",
+    "anonymous_label": "A",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": false,
+    "failure_category": "schema",
+    "evidence": "All substantive facts and both uncertainties are preserved; capitalization and repeated start time are harmless. Unknowns is a string rather than the array in gold. This schema failure is gold-relative: the prompt itself did not explicitly specify the unknowns type."
+  },
+  {
+    "task_id": "x07",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "harmless_surface_difference",
+    "evidence": "All facts and both uncertainties are correct. Capitalization, repeated symptom time and the order of the two unknowns do not change meaning; the prompt does not prescribe unknowns order. Gold keys and types are valid."
+  },
+  {
+    "task_id": "x08",
+    "anonymous_label": "A",
+    "semantic_content_correct": false,
+    "no_unsupported_or_contradictory_content": false,
+    "json_schema_valid": true,
+    "failure_category": "unsupported_claim",
+    "evidence": "Decision audit_decision omits retention of the current 90-day policy. Both dates add the unsupported year 2025. Required keys and string types are valid, but content is materially deficient."
+  },
+  {
+    "task_id": "x08",
+    "anonymous_label": "B",
+    "semantic_content_correct": true,
+    "no_unsupported_or_contradictory_content": true,
+    "json_schema_valid": true,
+    "failure_category": "harmless_surface_difference",
+    "evidence": "Maintain and retain express the same decision; capitalization is immaterial. The month spelling juli is an unambiguous July variant in this context, preserving the review date. All required keys and types are valid."
+  }
+]

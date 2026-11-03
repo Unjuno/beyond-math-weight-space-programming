@@ -132,7 +132,7 @@ def main() -> None:
         "max_new_tokens": args.max_new_tokens,
         "backend": "Transformers AutoModelForImageTextToText, BF16, Apple MPS; attention backend left at Transformers default",
         "limitation": "The paper's exact Experiment 8 persistent harness/backend is unreleased; this is an approximate inference reproduction.",
-        "completion_criteria": "A task succeeds only with EOS before cap plus correct typed JSON, or all four blind grounded-writing rubric factors true.",
+        "completion_criteria": "A task succeeds only with EOS before cap and correct typed JSON, or EOS before cap and all four blind grounded-writing rubric factors true.",
         "raw_output_path": str(args.out),
     }
     args.manifest.write_text(json.dumps(run_manifest, indent=2) + "\n")

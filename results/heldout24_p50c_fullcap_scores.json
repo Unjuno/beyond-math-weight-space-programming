@@ -1,8 +1,10 @@
 {
   "protocol": "transfer_eval_prereg.md",
   "task_file_sha256": "0b20349d946ebbc6fcfec4bb686414ed7e63441ac2493e8eb88a587946f27a95",
-  "raw_file_sha256": "f3e90fc45c62e335311f296a61f1b5a8fa79120e541a8d9689bc541259310676",
-  "manifest_sha256": "bc65291f40a98af117167578cc68617e0ad31010a858e0e994bd873ca280ce79",
+  "evidence_source": "sanitized_final_answers",
+  "raw_file_sha256": null,
+  "sanitized_final_answers_sha256": "1b6723c120ef0024aa6593d5ad2edfdbbc58192ad911191964d6876b9900e2fd",
+  "manifest_sha256": "aa430abd55ff2393d9480de2dab0513e06f2c45ef75e86055982883f49212a72",
   "structured_scores": [
     {
       "task_id": "x01",
@@ -649,6 +651,587 @@
       "all_rubric_factors_true": false,
       "task_success": false,
       "evidence": "No answer was produced."
+    }
+  ],
+  "structured_semantic_ratings_frozen_sha256": "9d0ea65c8b8f0a83438846e3804f50de1c8577de55d7931b1c4f1a062069ec27",
+  "structured_blind_arm_map_revealed_after_score_freeze": {
+    "x01": {
+      "B": "base",
+      "A": "edited"
+    },
+    "x02": {
+      "B": "base",
+      "A": "edited"
+    },
+    "x03": {
+      "B": "base",
+      "A": "edited"
+    },
+    "x04": {
+      "B": "base",
+      "A": "edited"
+    },
+    "x05": {
+      "B": "base",
+      "A": "edited"
+    },
+    "x06": {
+      "A": "base",
+      "B": "edited"
+    },
+    "x07": {
+      "A": "base",
+      "B": "edited"
+    },
+    "x08": {
+      "A": "base",
+      "B": "edited"
+    },
+    "d01": {
+      "B": "base",
+      "A": "edited"
+    },
+    "d02": {
+      "B": "base",
+      "A": "edited"
+    },
+    "d03": {
+      "B": "base",
+      "A": "edited"
+    },
+    "d04": {
+      "B": "base",
+      "A": "edited"
+    },
+    "d05": {
+      "A": "base",
+      "B": "edited"
+    },
+    "d06": {
+      "B": "base",
+      "A": "edited"
+    },
+    "d07": {
+      "B": "base",
+      "A": "edited"
+    },
+    "d08": {
+      "A": "base",
+      "B": "edited"
+    }
+  },
+  "structured_semantic_scores": [
+    {
+      "task_id": "d01",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "Correctly waits for organizer approval and states that availability does not override approval; structure and types are valid."
+    },
+    {
+      "task_id": "d01",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "Correctly waits for organizer approval and states that availability does not override approval; structure and types are valid."
+    },
+    {
+      "task_id": "d02",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "RESTORED_UNDER is incomplete and does not supply the prescribed restored-under-investigation status; this is not a complete harmless paraphrase. Unknown cause and next-update time are correct. The JSON has the required keys/string types; enum/value compliance is assessed in semantic content, not this structural flag."
+    },
+    {
+      "task_id": "d02",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "empty/cap",
+      "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+    },
+    {
+      "task_id": "d03",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "Correctly selects A with boolean false for room change and the confirmed-time/no-room-change reason; required keys and types are valid."
+    },
+    {
+      "task_id": "d03",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "Correctly selects A with boolean false for room change and the confirmed-time/no-room-change reason; required keys and types are valid."
+    },
+    {
+      "task_id": "d04",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": false,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "Marks the parcel LOST without carrier confirmation despite in-transit tracking, and gives an incomplete evidence code. The follow-up is appropriate but does not repair the reversed disposition. Required keys/string types are valid; enum/value failures are semantic."
+    },
+    {
+      "task_id": "d04",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "empty/cap",
+      "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+    },
+    {
+      "task_id": "d05",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": false,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "empty/cap",
+      "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+    },
+    {
+      "task_id": "d05",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "harmless_surface_difference",
+      "evidence": "Correctly selects in-person collection and no stated exception. The requirement string states photo ID and the source-supported no-mailing constraint; underscores, AND and mailled spelling do not alter the meaning. Required keys/string types are valid."
+    },
+    {
+      "task_id": "d06",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": false,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "unsupported_claim",
+      "evidence": "Asserts No data loss as a confirmed fact although submissions have not been checked; also labels the documented outage as unsupported and omits the required uncertainty response. JSON keys/string types are valid, but source meaning and prescribed decisions are not."
+    },
+    {
+      "task_id": "d06",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "Correctly selects outage plus uncertainty, the verified outage fact, and no unsupported assertion; required keys and types are valid."
+    },
+    {
+      "task_id": "d07",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": false,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "Lists the closed second floor among open areas, contradicts its own closed-area entry, and omits the cafe. Gold keys/types are satisfied. Schema interpretation is qualified because the prompt says arrays required while gold gives two string fields."
+    },
+    {
+      "task_id": "d07",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": false,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "Omits the open cafe and copies all reopening options into the estimate, including unsupported 17:00/TOMORROW alternatives, instead of selecting no estimate. Closed area and reopening estimate are arrays rather than gold strings. The prompt itself ambiguously says arrays required, so the type failure is gold-relative."
+    },
+    {
+      "task_id": "d08",
+      "family": "operational_decision",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": false,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "empty/cap",
+      "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+    },
+    {
+      "task_id": "d08",
+      "family": "operational_decision",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "Hold/correction and blocked approval are correct, but verified_amount is the invoice amount 860 rather than the gold approved-PO amount 680. The number 860 is source-supported, not invented. This content failure is gold-relative: verified_amount is not explicitly defined in the prompt, so interpreting it as the verified invoice amount is plausible. Required keys/types are valid."
+    },
+    {
+      "task_id": "x01",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "Omits the explicit no-cause-confirmed component of current status; ongoing investigation alone does not entail that no cause has been confirmed. Other facts and required keys/types are preserved."
+    },
+    {
+      "task_id": "x01",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "Omits the explicit no-cause-confirmed component of current status; ongoing investigation alone does not entail that no cause has been confirmed. Other facts and required keys/types are preserved."
+    },
+    {
+      "task_id": "x02",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "All requested facts, including the pending approval state and effective date, match the source; required keys and types are present."
+    },
+    {
+      "task_id": "x02",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "All requested facts, including the pending approval state and effective date, match the source; required keys and types are present."
+    },
+    {
+      "task_id": "x03",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "material_fact_or_decision",
+      "evidence": "Dispatch window omits 6 June. Spacing around the time-range dash is harmless, but the missing dispatch date is material; keys and types remain valid."
+    },
+    {
+      "task_id": "x03",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "harmless_surface_difference",
+      "evidence": "Item redundantly includes the correct quantity 42, while the separate integer quantity, unit, destination and full dated dispatch window are correct. The repetition does not change the meaning."
+    },
+    {
+      "task_id": "x04",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "All source facts are preserved; 1275.50 is the same numeric amount as 1275.5. Required keys and numeric amount type are valid."
+    },
+    {
+      "task_id": "x04",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "empty/cap",
+      "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+    },
+    {
+      "task_id": "x05",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "Event, full date, room, access route and contact are all correct, with the required keys and types."
+    },
+    {
+      "task_id": "x05",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "B",
+      "eos_before_cap": false,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "empty/cap",
+      "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+    },
+    {
+      "task_id": "x06",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": false,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "empty/cap",
+      "evidence": "Empty final answer: no requested facts or JSON structure are supplied. No unsupported claim is present. The packet alone does not establish why the answer is empty."
+    },
+    {
+      "task_id": "x06",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "none",
+      "evidence": "All three dated owner-deliverable milestones are correct and chronologically ordered in the requested nested structure."
+    },
+    {
+      "task_id": "x07",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": false
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "schema",
+      "evidence": "All substantive facts and both uncertainties are preserved; capitalization and repeated start time are harmless. Unknowns is a string rather than the array in gold. This schema failure is gold-relative: the prompt itself did not explicitly specify the unknowns type."
+    },
+    {
+      "task_id": "x07",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "harmless_surface_difference",
+      "evidence": "All facts and both uncertainties are correct. Capitalization, repeated symptom time and the order of the two unknowns do not change meaning; the prompt does not prescribe unknowns order. Gold keys and types are valid."
+    },
+    {
+      "task_id": "x08",
+      "family": "extraction",
+      "condition": "base",
+      "blind_label": "A",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": false,
+        "no_unsupported_or_contradictory_content": false,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": false,
+      "content_success_ignoring_gold_schema": false,
+      "failure_category": "unsupported_claim",
+      "evidence": "Decision audit_decision omits retention of the current 90-day policy. Both dates add the unsupported year 2025. Required keys and string types are valid, but content is materially deficient."
+    },
+    {
+      "task_id": "x08",
+      "family": "extraction",
+      "condition": "edited",
+      "blind_label": "B",
+      "eos_before_cap": true,
+      "scores": {
+        "semantic_content_correct": true,
+        "no_unsupported_or_contradictory_content": true,
+        "json_schema_valid": true
+      },
+      "semantic_task_success": true,
+      "content_success_ignoring_gold_schema": true,
+      "failure_category": "harmless_surface_difference",
+      "evidence": "Maintain and retain express the same decision; capitalization is immaterial. The month spelling juli is an unambiguous July variant in this context, preserving the review date. All required keys and types are valid."
     }
   ]
 }

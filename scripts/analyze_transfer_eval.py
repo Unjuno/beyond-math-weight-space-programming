@@ -23,13 +23,18 @@ def main():
     p.add_argument("--seed", type=int, default=391)
     a = p.parse_args()
     report = json.loads(a.scores.read_text())
+    writing_rows = report.get("writing_scores", [])
+    if not isinstance(writing_rows, list):
+        writing_rows = []
     families = {r["task_id"]: r["family"] for r in report["structured_scores"]}
-    families.update({r["task_id"]: "grounded_writing" for r in report["writing_scores"]})
+    families.update({r["task_id"]: "grounded_writing" for r in writing_rows})
 
     def summarize(task_scores):
         groups = {"overall": list(task_scores)}
         for family in ("extraction", "operational_decision", "grounded_writing"):
-            groups[family] = [task_id for task_id in task_scores if families[task_id] == family]
+            ids = [task_id for task_id in task_scores if families[task_id] == family]
+            if ids:
+                groups[family] = ids
         result = {}
         for group, ids in groups.items():
             delta, low, high = interval(task_scores, ids, a.draws, a.seed)
@@ -43,11 +48,14 @@ def main():
         return result
 
     luna_tasks = defaultdict(dict)
-    for r in report["structured_scores"] + report["writing_scores"]:
+    for r in report["structured_scores"] + writing_rows:
         luna_tasks[r["task_id"]][r["condition"]] = bool(r["task_success"])
-    if len(luna_tasks) != 24 or any(set(pair) != {"base", "edited"} for pair in luna_tasks.values()):
-        raise SystemExit("expected 24 complete paired task scores")
+    expected_count = 24 if len(writing_rows) == 16 else 16
+    if len(luna_tasks) != expected_count or any(set(pair) != {"base", "edited"} for pair in luna_tasks.values()):
+        raise SystemExit(f"expected {expected_count} complete paired task scores")
     result = {"draws": a.draws, "seed": a.seed, "luna_first_pass_groups": summarize(luna_tasks)}
+    if not writing_rows:
+        result["writing_review_status"] = "pending blind rating; no writing task-success composite reported"
     if a.secondary_ratings:
         mapping = report["blind_arm_map_revealed_after_score_freeze"]
         secondary = json.loads(a.secondary_ratings.read_text())
@@ -73,6 +81,26 @@ def main():
         astra_all.update({i: dict(v) for i, v in astra_tasks.items()})
         result["astra_second_blind_rater_groups"] = summarize(astra_all)
         result["writing_factor_agreement"] = {"agree": agree, "total": factor_count, "rate": agree / factor_count}
+    structured = report.get("structured_semantic_scores")
+    if isinstance(structured, list):
+        strict_semantic = defaultdict(dict)
+        content_only = defaultdict(dict)
+        for r in structured:
+            strict_semantic[r["task_id"]][r["condition"]] = bool(r["semantic_task_success"])
+            content_only[r["task_id"]][r["condition"]] = bool(r["content_success_ignoring_gold_schema"])
+        if len(strict_semantic) != 16 or any(set(pair) != {"base", "edited"} for pair in strict_semantic.values()):
+            raise SystemExit("expected complete paired semantic ratings for 16 structured tasks")
+        result["astra_structured_semantic_audit"] = {
+            "all_three_factors_and_eos": summarize(strict_semantic),
+            "content_and_no_unsupported_plus_eos_ignoring_gold_schema": summarize(content_only),
+            "content_plus_eos_ignoring_gold_schema_excluding_ambiguous_d08": summarize({i: dict(v) for i, v in content_only.items() if i != "d08"}),
+            "all_three_factors_and_eos_excluding_ambiguous_d08": summarize({i: dict(v) for i, v in strict_semantic.items() if i != "d08"}),
+        }
+    result["d08_gold_sensitivity_excluding_task"] = {
+        "luna_first_pass": summarize({i: dict(v) for i, v in luna_tasks.items() if i != "d08"})
+    }
+    if a.secondary_ratings:
+        result["d08_gold_sensitivity_excluding_task"]["astra_second_blind_rater"] = summarize({i: dict(v) for i, v in astra_all.items() if i != "d08"})
     rendered = json.dumps(result, indent=2) + "\n"
     if a.out:
         a.out.write_text(rendered)

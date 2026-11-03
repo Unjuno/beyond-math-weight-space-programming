@@ -101,9 +101,16 @@
   "max_new_tokens": 32768,
   "backend": "Transformers AutoModelForImageTextToText, BF16, Apple MPS; attention backend left at Transformers default",
   "limitation": "The paper's exact Experiment 8 persistent harness/backend is unreleased; this is an approximate inference reproduction.",
-  "completion_criteria": "A task succeeds only with EOS before cap plus correct typed JSON, or all four blind grounded-writing rubric factors true.",
+  "completion_criteria": "A task succeeds only with EOS before cap and correct typed JSON, or EOS before cap and all four blind grounded-writing rubric factors true.",
   "raw_output_path": "results/raw/heldout24_p50c_fullcap.jsonl",
   "finished_at": 1793699857.002799,
   "elapsed_seconds": 15555.98293209076,
-  "raw_output_sha256": "f3e90fc45c62e335311f296a61f1b5a8fa79120e541a8d9689bc541259310676"
+  "raw_output_sha256": "f3e90fc45c62e335311f296a61f1b5a8fa79120e541a8d9689bc541259310676",
+  "sanitized_final_answers_sha256": "1b6723c120ef0024aa6593d5ad2edfdbbc58192ad911191964d6876b9900e2fd",
+  "sanitized_answers_exclude": [
+    "generated_token_ids",
+    "input_token_ids",
+    "full_output",
+    "thinking text"
+  ]
 }
