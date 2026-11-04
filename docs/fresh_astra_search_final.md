@@ -6,6 +6,17 @@ The 2026-11-04 run executed a fresh, TRAIN-only edit search using the reconstruc
 
 No candidate was eligible for held-out evaluation: every tested edit failed its predeclared causal or paired-accuracy gate. The editor confirmation split and external held-out tasks therefore remained unopened. Evaluating a rejected edit would have changed the experiment's acceptance rule and would be reward-hacking the search outcome.
 
+## What failed, and what we learned
+
+This was not a null observation. The reconstructed search failed for identifiable reasons:
+
+1. The MLP candidate showed local TRAIN selectivity, but did not survive the matched-control causal screen. Local activation contrast was therefore not sufficient evidence for a useful edit.
+2. The attention candidate produced one apparent wrong-to-right item, but also changed a previously correct item to wrong. The apparent improvement was accompanied by cap termination and worse repetition, so it was not a reliable task or stopping improvement.
+3. The recurrent candidate was chosen from a descriptive failure-vs-success residual-drift difference, but changing its decay did not reduce that drift consistently in the two failure contexts. The observed correlation did not identify a causal editing target.
+4. The released edited checkpoint separately showed a large completion/EOS shift without an increase in strict task success. This makes stopping and capability easy to conflate and is the main diagnostic result of the broader repository.
+
+The remaining uncertainty is substantial: the exact author orchestrator, persistent editor kernel, forward backend, full 50-pass budget, and original benchmark generation protocol were unavailable. Therefore the negative result is evidence against reproduction under these reconstructed conditions, not proof that no successful edit exists.
+
 ## Search and decisions
 
 | Candidate | Evidence | Decision |
