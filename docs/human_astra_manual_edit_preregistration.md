@@ -10,7 +10,7 @@ Experiment ID: `human-astra-manual-20261105-v1`
 
 This experiment starts from the verified Qwen3.5-0.8B base checkpoint and is separate from author-log rescoring, released-p50c checkpoint evaluation, the 2026-11-04 Astra-led negative search, and the earlier alpha100/L23 attempts. It must use a new output directory and new append-only records. Do not overwrite, reuse edited checkpoints, or count any prior outcomes as observations in this study.
 
-The currently identified candidate source is the author TRAIN collection after the previous 512 pilot exclusions (11,385 IDs). The prior Astra-led editor reserved 352 further TRAIN IDs across diagnostic, tuning, and confirmation sets. Astra advised excluding all 352 conservatively, although this does not imply all 352 prompt bodies were actually read. Six IDs are explicitly present in prior successful forward-call requests/responses. A human-run read-only audit must confirm the ID hash and new deterministic partitions before any prompt body is used.
+The currently identified candidate source is the author TRAIN collection after the previous 512 pilot exclusions (11,385 IDs). The prior Astra-led editor reserved 352 further TRAIN IDs across diagnostic, tuning, and confirmation sets. Astra advised excluding all 352 conservatively, although this does not imply all 352 prompt bodies were actually read. Six IDs are explicitly present in prior successful forward-call requests/responses. The prior manifest's `practice_source_sha256` values describe the full upstream files, not these sliced TRAIN files; the new manifest therefore records hashes of the exact local TRAIN slices. A read-only audit must confirm both those slice hashes and the existing aggregate TRAIN-ID hash before any prompt body is used.
 
 ## Data boundary and task scope
 
@@ -37,6 +37,14 @@ No edit target or direction is selected yet. Astra must first state a falsifiabl
 
 The human performs the exact operation only after reading Astra's instruction back and confirming the tensor/key/dose against the registered request. Store before/after hashes and an elementwise diff summary; abort on any unregistered or collateral change. Preserve the base checkpoint read-only and write the edit to a unique experiment-specific path.
 
+## Initial discovery baseline
+
+Before proposing an edit, run the original checkpoint on four fixed discovery items, balanced two GSM8K and two MATH, once each. Astra selected their IDs by a deterministic second SHA-256 ranking inside the frozen discovery partitions; Luna independently verified the ranking, membership, and seeds using IDs only, without inspecting task text. The exact IDs, order, and seeds are frozen in the new run manifest.
+
+Use the fixed task instruction and full-cap settings in the manifest. Only original weights are loaded. Save exact prompt/token IDs, generated token IDs/text, gold and parsed last-boxed answer, math-verify outcome, EOS/think-close/cap status, length, repeat8 diagnostics, seed, timings, and environment/hash metadata. Raw traces and prompts remain local and ignored by Git. Record separate progress every 256 new tokens; interrupted generations remain infrastructure failures and are not counted as model errors.
+
+One conditional backup stage of four more fixed discovery items (two per source, already ordered and seeded in the manifest) is allowed only if the first four do not yield both (a) the same concrete failure motif on two distinct items and (b) at least one correct comparison item without that motif. No replacement items are permitted. After eight total items, if that criterion is unmet, stop with no candidate and do not extend the search. This selection is for exploratory TRAIN discovery only and cannot estimate failure prevalence or general task performance.
+
 ## Outcomes and anti-proxy rules
 
 Primary outcome: exact benchmark-defined mathematical answer accuracy on each paired item/seed, scored by the pinned `math-verify` procedure and a fixed last-boxed-answer parser. Report item-level paired transitions and uncertainty; do not use a completion threshold as a substitute for accuracy. Separately report a strict completed-task composite requiring a correct answer, requested format, and EOS before cap, so correctness and termination remain inspectable as distinct components.
@@ -59,7 +67,7 @@ Record each interaction with timestamp, experiment/turn ID, exact question, Astr
 
 ## Current gate
 
-The next action is for the human to run `python3 scripts/audit_human_astra_split.py`. It verifies both source-file hashes, the previous TRAIN ID hash, and the reservation ledger, then prints only counts and partition hashes. Expected candidate counts are GSM8K 5,594 and MATH 5,439; expected discovery counts are 3,917 and 3,810 respectively, with each of the other three partitions 559 and 543. If it exits with an error, stop and return the output. Until this gate passes and Astra supplies a candidate-specific causal plan, no prompt bodies should be exposed, no weights edited, and no forward evaluation started.
+The read-only split audit passed on 2026-11-05 after correcting a hash-scope mismatch: the prior manifest hashes the full upstream practice files, while this experiment reads their sliced editor-TRAIN subsets. The current manifest now pins both the exact local subset file hashes and the upstream hashes as separate provenance. The confirmed eligible counts are GSM8K 5,594 and MATH 5,439; discovery counts are 3,917 and 3,810; validation, confirmation, and final holdout counts are 559 and 543 per source. All split hashes are recorded in the run manifest. No discovery prompts, confirmation items, final-holdout items, or weights were accessed during the ID-only audit. The next step is to request Astra's discovery-only selection and instructions; no edit may occur until its candidate-specific causal plan, control, predictions, and stop conditions are frozen.
 
 ## Deviations and limitations
 

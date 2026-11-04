@@ -1,6 +1,6 @@
 {
   "run_id": "human-astra-manual-20261105-v1",
-  "status": "protocol_registered_pending_split_and_candidate_preregistration",
+  "status": "protocol_registered_split_audited_candidate_not_selected",
   "created_date": "2026-11-05",
   "repository_revision_at_registration": "5d955fb",
   "evidence_type": "new human-operated Astra-guided weight-space edit experiment",
@@ -20,6 +20,10 @@
   "data": {
     "source": "results/astra_reproduction_20261104/raw/train/{gsm8k_train.jsonl,math_train.jsonl}",
     "source_files_sha256_expected": {
+      "gsm8k_train.jsonl": "ca64409b0318b17b6dd58be060e09e3925194352b95ebeb85541a7edb9873b4f",
+      "math_train.jsonl": "8b56e05d5b536e8f22fa8fcb5df35813881173c5c253d11e5618b366f51ab758"
+    },
+    "upstream_full_practice_source_sha256_from_prior_manifest": {
       "gsm8k_train.jsonl": "06d0dd560a908c2c2883bfb7d27ab55a87b213ff0d625f5cd734836aeac9a3e5",
       "math_train.jsonl": "abe7982b4d8c98394fe185fb152568a2c784a4157a75fe42b9c01857e71f0c6e"
     },
@@ -28,8 +32,25 @@
     "previously_reserved_ids_to_exclude": 352,
     "explicit_prior_forward_ids": 6,
     "allocation": "per-source SHA256 order salted with run_id; discovery 70%, validation 10%, confirmation 10%, final_holdout 10%",
-    "split_audit_status": "not_run_by_human",
-    "split_counts_and_hashes": null,
+    "split_audit_status": "passed_read_only_by_luna_2026-11-05",
+    "split_counts_and_hashes": {
+      "gsm8k_train.jsonl": {
+        "eligible": 5594,
+        "discovery": {"count": 3917, "sha256": "cab2f45cd74c43913789e752d5118bf9207e75152e03e762cf3587be5056dca4"},
+        "validation": {"count": 559, "sha256": "985fc61b5a73af042c77fd676e65f8d391be36b717cb30e6efea01025a0a3b4e"},
+        "confirmation": {"count": 559, "sha256": "21eede2f0ba9309d0dfb2f7370fdad198dbe905eaca4de75b8588148cd0a46d8"},
+        "final_holdout": {"count": 559, "sha256": "e03c4a22f6b14309b0bc06a90b361f801357d9b95acfc7d2e5e86408dd55cb03"}
+      },
+      "math_train.jsonl": {
+        "eligible": 5439,
+        "discovery": {"count": 3810, "sha256": "e2f1f48d5b3b32185d80f09833311df65cc3fc69c3188a1ff6dfbcab148007de"},
+        "validation": {"count": 543, "sha256": "229779a7e2cb41f9c5040fca6809d2e86587f5d239aa7576806d709e563fc92c"},
+        "confirmation": {"count": 543, "sha256": "bf53d6c9e160062f842464bbc79bf758a2ca697d2d2e0993422da431f38f664a"},
+        "final_holdout": {"count": 543, "sha256": "c0c730578328c1b3d2605674cb4da7775eafcfa64b6e83eb1a9476bba799fcdd"}
+      },
+      "eligible_total": 11033,
+      "prior_train_ids_sha256": "c823722807b1a8154b17af80ebff8bde9e0620e6e2345ce0a4ac08538951fea5"
+    },
     "prompt_bodies_opened_for_this_run": false,
     "prior_external_heldout_opened": false,
     "pretraining_unseen_guarantee": false
@@ -42,6 +63,36 @@
     "candidate_frozen": false,
     "human_operator_required": true,
     "weights_modified": false
+  },
+  "discovery_baseline": {
+    "status": "initial_items_and_seeds_frozen_before_generation",
+    "selection_rule": "Within each source's frozen discovery set, rank IDs by SHA256(run_id|baseline-v1|source_filename|id). Use ranks 1-2 per source in the initial stage and ranks 3-4 per source only under the predeclared extension rule.",
+    "initial_stage_extension_rule": "Run the backup four only if the initial four do not contain two distinct items sharing the same concrete failure motif and at least one correct comparison item without that motif. Stop after eight if this criterion is still unmet; do not select replacement items.",
+    "seed_rule": "big-endian integer from the first four bytes of SHA256(run_id|baseline-v1|sample-0|id); set immediately before each generation.",
+    "items": [
+      {"stage": "initial", "order": 1, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_6445", "seed": 451700169},
+      {"stage": "initial", "order": 2, "source": "math_train.jsonl", "id": "math_train_counting_and_probability_141", "seed": 1554047261},
+      {"stage": "initial", "order": 3, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_5027", "seed": 3131658388},
+      {"stage": "initial", "order": 4, "source": "math_train.jsonl", "id": "math_train_algebra_542", "seed": 712824197},
+      {"stage": "conditional_backup", "order": 5, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_3185", "seed": 4219711522},
+      {"stage": "conditional_backup", "order": 6, "source": "math_train.jsonl", "id": "math_train_intermediate_algebra_840", "seed": 3291332937},
+      {"stage": "conditional_backup", "order": 7, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_7382", "seed": 3531789778},
+      {"stage": "conditional_backup", "order": 8, "source": "math_train.jsonl", "id": "math_train_counting_and_probability_683", "seed": 2101483949}
+    ],
+    "settings": {
+      "model_arm": "original checkpoint only",
+      "thinking": true,
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "max_new_tokens": 32768,
+      "instruction": "Please reason step by step, and put your final answer within \\boxed{}.",
+      "precision": "bfloat16",
+      "attention_implementation": "eager"
+    },
+    "raw_outputs_local_only": true,
+    "baseline_generation_started": false
   },
   "evaluation": {
     "primary_task_outcome": "exact benchmark-defined math answer accuracy by fixed last-boxed parser and pinned math-verify",

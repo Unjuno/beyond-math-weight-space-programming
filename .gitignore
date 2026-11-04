@@ -4,6 +4,7 @@ models/
 data/raw/
 data/processed/
 results/raw/
+results/human_astra_manual_20261105/raw/
 results/checkpoints/
 results/astra_clean_20261103/**/*.npz
 results/astra_clean_20261103/**/*.npy

@@ -48,7 +48,12 @@ def read_ids(path: Path) -> tuple[set[str], str]:
 
 
 def main() -> None:
-    manifest = json.loads((OLD / "manifest.json").read_text(encoding="utf-8"))
+    prior_manifest = json.loads((OLD / "manifest.json").read_text(encoding="utf-8"))
+    current_manifest = json.loads(
+        (ROOT / "results/human_astra_manual_20261105/manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
     partitions = json.loads(
         (OLD / "raw/editor_work/train_partitions.json").read_text(encoding="utf-8")
     )
@@ -59,7 +64,7 @@ def main() -> None:
     sources: dict[str, set[str]] = {}
     for name in EXPECTED_BY_SOURCE:
         ids, source_hash = read_ids(OLD / "raw/train" / name)
-        expected_hash = manifest["practice_source_sha256"][name]
+        expected_hash = current_manifest["data"]["source_files_sha256_expected"][name]
         if source_hash != expected_hash:
             raise ValueError(f"STOP: source file SHA-256 mismatch for {name}")
         sources[name] = ids
@@ -68,7 +73,7 @@ def main() -> None:
         raise ValueError("STOP: source ID sets overlap")
     if len(all_ids) != EXPECTED_TRAIN_IDS:
         raise ValueError(f"STOP: expected {EXPECTED_TRAIN_IDS} TRAIN IDs, got {len(all_ids)}")
-    if digest_ids(all_ids) != manifest["train_ids_sha256"]:
+    if digest_ids(all_ids) != prior_manifest["train_ids_sha256"]:
         raise ValueError("STOP: TRAIN ID hash does not match prior manifest")
     if not reserved <= all_ids:
         raise ValueError("STOP: prior reserved IDs are missing from TRAIN sources")
