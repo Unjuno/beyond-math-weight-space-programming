@@ -1,0 +1,70 @@
+{
+  "run_id": "human-astra-manual-20261105-v1",
+  "status": "protocol_registered_pending_split_and_candidate_preregistration",
+  "created_date": "2026-11-05",
+  "repository_revision_at_registration": "5d955fb",
+  "evidence_type": "new human-operated Astra-guided weight-space edit experiment",
+  "separation": {
+    "author_log_rescoring": true,
+    "released_p50c_checkpoint_evaluation": true,
+    "astra_led_20261104_search": true,
+    "alpha100_and_prior_l23_attempts": true,
+    "prior_weights_or_outputs_reused_as_observations": false
+  },
+  "base_model": {
+    "repository": "Qwen/Qwen3.5-0.8B",
+    "expected_local_checkpoint": "model-cache/Qwen3.5-0.8B/model.safetensors-00001-of-00001.safetensors",
+    "expected_sha256_from_prior_manifest": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+    "verified_for_this_run": false
+  },
+  "data": {
+    "source": "results/astra_reproduction_20261104/raw/train/{gsm8k_train.jsonl,math_train.jsonl}",
+    "source_files_sha256_expected": {
+      "gsm8k_train.jsonl": "06d0dd560a908c2c2883bfb7d27ab55a87b213ff0d625f5cd734836aeac9a3e5",
+      "math_train.jsonl": "abe7982b4d8c98394fe185fb152568a2c784a4157a75fe42b9c01857e71f0c6e"
+    },
+    "source_ids_expected": 11385,
+    "source_ids_sha256_expected": "c823722807b1a8154b17af80ebff8bde9e0620e6e2345ce0a4ac08538951fea5",
+    "previously_reserved_ids_to_exclude": 352,
+    "explicit_prior_forward_ids": 6,
+    "allocation": "per-source SHA256 order salted with run_id; discovery 70%, validation 10%, confirmation 10%, final_holdout 10%",
+    "split_audit_status": "not_run_by_human",
+    "split_counts_and_hashes": null,
+    "prompt_bodies_opened_for_this_run": false,
+    "prior_external_heldout_opened": false,
+    "pretraining_unseen_guarantee": false
+  },
+  "editing": {
+    "candidate": null,
+    "control": null,
+    "hypothesis": null,
+    "dose_and_predictions": null,
+    "candidate_frozen": false,
+    "human_operator_required": true,
+    "weights_modified": false
+  },
+  "evaluation": {
+    "primary_task_outcome": "exact benchmark-defined math answer accuracy by fixed last-boxed parser and pinned math-verify",
+    "separately_report": [
+      "strict correct-format EOS-before-cap composite",
+      "EOS and thinking closure",
+      "cap hits",
+      "generated token count",
+      "repeat-8-gram and exact-loop diagnostics",
+      "paired item-seed wins and regressions",
+      "control outcomes",
+      "failed and interrupted attempts"
+    ],
+    "confirmation_opened": false,
+    "final_holdout_opened": false,
+    "multiple_seed_paired_evaluation_frozen": false,
+    "non_math_transfer_test": "not available until a separate exposure-audited non-math set is prepared"
+  },
+  "provenance": {
+    "preregistration": "docs/human_astra_manual_edit_preregistration.md",
+    "split_audit_script": "scripts/audit_human_astra_split.py",
+    "astra_dialogue_log": "logs/luna_astra_dialogue.jsonl",
+    "raw_data_and_weights_policy": "local only; do not overwrite prior artifacts",
+    "ci": "not used"
+  }
+}
