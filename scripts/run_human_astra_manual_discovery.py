@@ -118,7 +118,7 @@ def validate_plan(manifest: dict) -> list[dict]:
 
     if len(all_source_ids) != manifest["data"]["source_ids_expected"]:
         raise ValueError("STOP: prior TRAIN source ID total differs from run manifest")
-    if digest_ids(all_source_ids) != manifest["data"]["prior_train_ids_sha256"]:
+    if digest_ids(all_source_ids) != manifest["data"]["split_counts_and_hashes"]["prior_train_ids_sha256"]:
         raise ValueError("STOP: prior TRAIN aggregate ID hash differs from run manifest")
     if not reserved <= all_source_ids:
         raise ValueError("STOP: some reserved IDs are missing from prior TRAIN source")
@@ -213,8 +213,15 @@ def main() -> None:
     import torch
     import transformers
     from transformers import AutoTokenizer, LogitsProcessor, Qwen3_5ForConditionalGeneration, StoppingCriteria
-    from math_verify import parse, verify
     from astra_clean_grading import extract_answer
+    try:
+        from math_verify import parse, verify
+        scorer_available = True
+        scorer_import_error = None
+    except ImportError as exc:
+        parse = verify = None
+        scorer_available = False
+        scorer_import_error = f"{type(exc).__name__}: {exc}"
 
     torch.set_grad_enabled(False)
     torch.set_num_threads(6)
@@ -237,6 +244,8 @@ def main() -> None:
         "eos_token_id": tokenizer.eos_token_id,
         "pad_token_id": tokenizer.pad_token_id,
         "chat_template_sha256": digest_bytes((tokenizer.chat_template or "").encode()),
+        "math_verify_scorer_available": scorer_available,
+        "math_verify_import_error": scorer_import_error,
     }
 
     class PresencePenalty(LogitsProcessor):
@@ -355,13 +364,17 @@ def main() -> None:
         generated_ids = output[0, prompt_length:].detach().cpu().tolist()
         text = tokenizer.decode(generated_ids, skip_special_tokens=False)
         prediction = extract_answer(text)
-        try:
-            correct = bool(verify(parse("\\boxed{" + str(row["answer"]) + "}"),
-                                  parse("\\boxed{" + str(prediction) + "}"))) if prediction is not None else False
-            grading_error = None
-        except Exception as exc:  # retain scorer/parser errors as explicit evidence
-            correct = False
-            grading_error = f"{type(exc).__name__}: {exc}"
+        if not scorer_available:
+            correct = None
+            grading_error = scorer_import_error
+        else:
+            try:
+                correct = bool(verify(parse("\\boxed{" + str(row["answer"]) + "}"),
+                                      parse("\\boxed{" + str(prediction) + "}"))) if prediction is not None else False
+                grading_error = None
+            except Exception as exc:  # retain scorer/parser errors as explicit evidence
+                correct = False
+                grading_error = f"{type(exc).__name__}: {exc}"
         eos_id = tokenizer.eos_token_id
         ended_with_eos = bool(generated_ids and generated_ids[-1] == eos_id)
         cap_hit = len(generated_ids) >= CAP
@@ -394,12 +407,16 @@ def main() -> None:
             "prediction_last_boxed": prediction,
             "gold": row["answer"],
             "correct_math_verify": correct,
+            "math_verify_scorer_available": scorer_available,
             "format_valid_box": prediction is not None,
             "grading_error": grading_error,
             "ended_with_eos": ended_with_eos,
             "think_closed": "</think>" in text,
             "cap_hit": cap_hit,
-            "strict_completed_success": bool(correct and prediction is not None and ended_with_eos and "</think>" in text and not cap_hit),
+            "strict_completed_success": (
+                bool(correct and prediction is not None and ended_with_eos and "</think>" in text and not cap_hit)
+                if correct is not None else None
+            ),
             "tokens": len(generated_ids),
             "repeat8_fraction": repeat8_fraction(generated_ids),
             "tail_2048_repeat8_fraction": repeat8_fraction(tail),

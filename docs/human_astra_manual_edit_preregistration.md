@@ -43,6 +43,8 @@ Before proposing an edit, run the original checkpoint on four fixed discovery it
 
 Use the fixed task instruction and full-cap settings in the manifest. Only original weights are loaded. Save exact prompt/token IDs, generated token IDs/text, gold and parsed last-boxed answer, math-verify outcome, EOS/think-close/cap status, length, repeat8 diagnostics, seed, timings, and environment/hash metadata. Raw traces and prompts remain local and ignored by Git. Record separate progress every 256 new tokens; interrupted generations remain infrastructure failures and are not counted as model errors.
 
+The existing Python 3.11/MPS environment has PyTorch and Transformers but lacks `math-verify`. A request to add that scorer to the existing environment is pending. Baseline traces may be captured while this is unresolved, but correctness and strict-composite labels stay pending; do not choose conditional backups or freeze an edit from unscored correctness.
+
 One conditional backup stage of four more fixed discovery items (two per source, already ordered and seeded in the manifest) is allowed only if the first four do not yield both (a) the same concrete failure motif on two distinct items and (b) at least one correct comparison item without that motif. No replacement items are permitted. After eight total items, if that criterion is unmet, stop with no candidate and do not extend the search. This selection is for exploratory TRAIN discovery only and cannot estimate failure prevalence or general task performance.
 
 ## Outcomes and anti-proxy rules

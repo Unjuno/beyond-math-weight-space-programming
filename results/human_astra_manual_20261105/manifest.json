@@ -89,10 +89,24 @@
       "max_new_tokens": 32768,
       "instruction": "Please reason step by step, and put your final answer within \\boxed{}.",
       "precision": "bfloat16",
-      "attention_implementation": "eager"
+      "attention_implementation": "eager",
+      "scorer": "pinned math-verify; if unavailable during discovery capture, preserve raw traces and defer correctness/strict-composite scoring"
     },
     "raw_outputs_local_only": true,
-    "baseline_generation_started": false
+    "baseline_generation_started": false,
+    "pre_generation_attempts": [
+      {
+        "attempt": "attempt_001",
+        "status": "failed_before_model_load",
+        "reason": "Default Python 3.14 environment has no PyTorch; no model was loaded and no generation occurred. Preserve empty attempt directory; next attempt uses the existing Python 3.11 MPS environment."
+      }
+    ]
+  },
+  "scorer_environment": {
+    "required": "math-verify",
+    "available_in_existing_mps_environment": false,
+    "installation_approval_requested": true,
+    "effect_until_resolved": "Raw discovery generations may be captured, but exact correctness and strict-composite scoring remain pending; do not freeze a candidate or choose conditional backups based on unscored correctness."
   },
   "evaluation": {
     "primary_task_outcome": "exact benchmark-defined math answer accuracy by fixed last-boxed parser and pinned math-verify",
