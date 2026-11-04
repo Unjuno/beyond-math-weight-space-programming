@@ -1,0 +1,256 @@
+{
+  "protocol": "p50c-extraction-followup-v1",
+  "raw_sha256": "1008a297926af58d5179038eba8bd92a75ebc9cfbed3e10d54eb4aa28f92b945",
+  "task_file_sha256": "0b20349d946ebbc6fcfec4bb686414ed7e63441ac2493e8eb88a587946f27a95",
+  "manifest_sha256": "91325a5d78551694035915822def28c14933a590cd498319d98ee9c092071c91",
+  "sanitized_answers_sha256": "1eda285e2f0f9d76f45420f97f1d80328b042d80c73f60f469009754fb969ffb",
+  "rows": [
+    {
+      "task_id": "x04",
+      "replicate": 0,
+      "seed": 20261111,
+      "base": {
+        "generated_tokens": 2701,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.07571288102261553
+      },
+      "edited": {
+        "generated_tokens": 1658,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.01966568338249754
+      }
+    },
+    {
+      "task_id": "x04",
+      "replicate": 1,
+      "seed": 20261112,
+      "base": {
+        "generated_tokens": 32768,
+        "cap_hit": true,
+        "ended_with_eos": false,
+        "strict_json_match": false,
+        "task_success": false,
+        "repeat8_prefix1024": 0.0776794493608653
+      },
+      "edited": {
+        "generated_tokens": 1953,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.01671583087512291
+      }
+    },
+    {
+      "task_id": "x04",
+      "replicate": 2,
+      "seed": 20261113,
+      "base": {
+        "generated_tokens": 2062,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.0776794493608653
+      },
+      "edited": {
+        "generated_tokens": 2293,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": false,
+        "task_success": false,
+        "repeat8_prefix1024": 0.01671583087512291
+      }
+    },
+    {
+      "task_id": "x05",
+      "replicate": 0,
+      "seed": 20261111,
+      "base": {
+        "generated_tokens": 32768,
+        "cap_hit": true,
+        "ended_with_eos": false,
+        "strict_json_match": false,
+        "task_success": false,
+        "repeat8_prefix1024": 0.1071779744346116
+      },
+      "edited": {
+        "generated_tokens": 1098,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.063913470993117
+      }
+    },
+    {
+      "task_id": "x05",
+      "replicate": 1,
+      "seed": 20261112,
+      "base": {
+        "generated_tokens": 2068,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.11701081612586037
+      },
+      "edited": {
+        "generated_tokens": 2085,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.0776794493608653
+      }
+    },
+    {
+      "task_id": "x05",
+      "replicate": 2,
+      "seed": 20261113,
+      "base": {
+        "generated_tokens": 1226,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.09636184857423795
+      },
+      "edited": {
+        "generated_tokens": 1689,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.09734513274336283
+      }
+    },
+    {
+      "task_id": "x06",
+      "replicate": 0,
+      "seed": 20261111,
+      "base": {
+        "generated_tokens": 2252,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.05604719764011799
+      },
+      "edited": {
+        "generated_tokens": 2007,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.01966568338249754
+      }
+    },
+    {
+      "task_id": "x06",
+      "replicate": 1,
+      "seed": 20261112,
+      "base": {
+        "generated_tokens": 32768,
+        "cap_hit": true,
+        "ended_with_eos": false,
+        "strict_json_match": false,
+        "task_success": false,
+        "repeat8_prefix1024": 0.11406096361848574
+      },
+      "edited": {
+        "generated_tokens": 1943,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": false,
+        "task_success": false,
+        "repeat8_prefix1024": 0.03343166175024582
+      }
+    },
+    {
+      "task_id": "x06",
+      "replicate": 2,
+      "seed": 20261113,
+      "base": {
+        "generated_tokens": 2955,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.03638151425762045
+      },
+      "edited": {
+        "generated_tokens": 2443,
+        "cap_hit": false,
+        "ended_with_eos": true,
+        "strict_json_match": true,
+        "task_success": true,
+        "repeat8_prefix1024": 0.03146509341199607
+      }
+    }
+  ],
+  "summary": {
+    "x04": {
+      "base": {
+        "eos": 2,
+        "strict_correct": 2,
+        "task_success": 2
+      },
+      "edited": {
+        "eos": 3,
+        "strict_correct": 2,
+        "task_success": 2
+      }
+    },
+    "x05": {
+      "base": {
+        "eos": 2,
+        "strict_correct": 2,
+        "task_success": 2
+      },
+      "edited": {
+        "eos": 3,
+        "strict_correct": 3,
+        "task_success": 3
+      }
+    },
+    "x06": {
+      "base": {
+        "eos": 2,
+        "strict_correct": 2,
+        "task_success": 2
+      },
+      "edited": {
+        "eos": 3,
+        "strict_correct": 2,
+        "task_success": 2
+      }
+    },
+    "all_9_pairs": {
+      "base": {
+        "ended_with_eos": 6,
+        "strict_json_match": 6,
+        "task_success": 6
+      },
+      "edited": {
+        "ended_with_eos": 9,
+        "strict_json_match": 7,
+        "task_success": 7
+      }
+    },
+    "paired_prefix1024_repeat8_delta": {
+      "n": 9,
+      "mean_edited_minus_base": -0.042390473068939144,
+      "negative_pairs": 8,
+      "positive_pairs": 1,
+      "ties": 0
+    }
+  },
+  "interpretation_rule": "The frozen absolute threshold (edited task_success >=2/3 per selected item) is descriptive; it does not require or establish improvement over base."
+}
