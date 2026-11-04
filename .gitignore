@@ -21,3 +21,7 @@ results/astra_clean_20261103/edit_kernel.log
 __pycache__/
 .DS_Store
 results/astra_clean_20261103_private/
+results/astra_reproduction_20261104/
+
+results/astra_method_continuation_20261103/
+results/astra_reproduction_20261104/raw/
