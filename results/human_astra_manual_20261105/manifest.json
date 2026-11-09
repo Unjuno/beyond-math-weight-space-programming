@@ -855,9 +855,23 @@
     "private_decision_ledger": {
       "path": "logs/luna_astra_dialogue.jsonl",
       "classification": "local_only_not_published",
-      "sha256": "ac1c0234c9467e1198a87f884d1ae3c67b706ee656ffae419b14ee65fef84c51",
-      "entries": 50,
+      "sha256": "7d329ae8cc96d3443a6e7b647d9fc02a52b0b51061968a15ef0ccd10e924df62",
+      "entries": 51,
       "public_content": "Decision summaries and evidence hashes only; full exchange ledger retained locally."
+    },
+    "manual_operation_preflight": {
+      "status": "cli_help_startup_passed_no_data_or_model_access",
+      "commands": [
+        "prepare_human_astra_l12_directional_columns.py --help",
+        "run_human_astra_directional_eval.py --help",
+        "score_human_astra_directional_eval.py --help"
+      ],
+      "environment": "existing Python 3.11.15 MPS environment",
+      "columns_generated": false,
+      "model_loaded": false,
+      "weights_modified": false,
+      "task_bodies_opened": false,
+      "raw_output_directory_exists": false
     }
   }
 }
