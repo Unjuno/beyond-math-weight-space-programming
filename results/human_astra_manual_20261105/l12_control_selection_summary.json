@@ -1,0 +1,60 @@
+{
+  "run_id": "human-astra-manual-20261105-v1",
+  "rule_version": "Astra-L12-control-v1-float64",
+  "candidate_coordinate": 1226,
+  "candidate_column_norm": 0.2513857456584484,
+  "filter_pass_counts": {
+    "column_norm": 2253,
+    "all_group_rms": 1,
+    "weight_column_direction_cosine": 3474,
+    "norm_and_rms": 1,
+    "norm_and_cosine": 2205,
+    "rms_and_cosine": 0,
+    "all_filters": 0,
+    "eligible_controls_excluding_candidate": 0
+  },
+  "groups": [
+    {
+      "id": "gsm8k_train_6445",
+      "group": "early_phrase",
+      "count": 10
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "group": "late_phrases_pooled",
+      "count": 40
+    },
+    {
+      "id": "math_train_algebra_542",
+      "group": "early_phrase",
+      "count": 11
+    },
+    {
+      "id": "math_train_algebra_542",
+      "group": "late_phrases_pooled",
+      "count": 44
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "group": "ordinary_check",
+      "count": 512
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "group": "reinterpretation",
+      "count": 512
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "group": "answer_transition",
+      "count": 512
+    }
+  ],
+  "eligible_control_count": 0,
+  "selected_control_coordinate": null,
+  "status": "matched_control_not_found",
+  "float64": true,
+  "rule_source": "Astra recommendation frozen in manifest before the valid float64 7-group capture.",
+  "diagnostics_sha256": "b0d07572aeb47a87091e8bbd831264ac3a286626660b643c7ccab803e5fb9007",
+  "all_coordinate_diagnostics_local_only": "results/human_astra_manual_20261105/raw/l12_control_feature_stats_v3/all_coordinate_diagnostics.json"
+}

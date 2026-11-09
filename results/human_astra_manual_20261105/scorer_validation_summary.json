@@ -1,0 +1,37 @@
+{
+  "run_id": "human-astra-manual-20261105-v1",
+  "intervention_id": "human-astra-manual-20261105-l12c1226-direction-v1",
+  "scorer": "math-verify==0.9.0",
+  "dependencies": {
+    "math-verify": "0.9.0",
+    "latex2sympy2-extended": "1.11.0",
+    "antlr4-python3-runtime": "4.13.2",
+    "sympy": "1.14.0",
+    "mpmath": "1.3.0"
+  },
+  "scorer_validation": "passed",
+  "checks": {
+    "correct_last_box_extraction": true,
+    "known_correct_pair": true,
+    "known_incorrect_pair": true,
+    "missing_box_is_unparsed": true
+  },
+  "math_verify_module_sha256": {
+    "__init__.py": "b98dfd79aa33cbb6ee36476a717aca4546b56704af6343b9eb790dca9960c706",
+    "errors.py": "9f2a6839452d578e13ed733c4226e31b5f5b353fb7321a0c4bde2b13d18e9fc8",
+    "few_shots.py": "5dd832b0b54f26b30d2c53190f7ac154d87e36e29325ff8d0d284bd870be1bb1",
+    "grader.py": "8a789b7a1706333039cb9e3154c651d1dab4fc5d62c16aae0792f546a42a888a",
+    "metric.py": "957a81ee8d0328e9e069b57f29454f3255adc9031028d78e8ce3c989317d9814",
+    "parser.py": "ea527a5a2403d97109a616bc92b7cc153320d6cecf4f823c070c727f5b77b5d0",
+    "tasks.py": "a1c20f3837b9e9fb1da6fce4c7f51be297927ab96d0fa5a33d2bfa98a8d96505",
+    "utils.py": "1e063890e13d78b7489b5f10808f4d345836acfeb7e74c91d3106baf32fb17e8"
+  },
+  "requirements_file": "configs/human_astra_scorer_requirements.txt",
+  "requirements_sha256": "41b97a77c9cbf65c7fdfdc1f2f13b94b9b21456e927872f2f17a4bc360940062",
+  "validation_script_sha256": "e58ec8658732199eea2137575937ca2e4f8205bce24d922962615c32fa14ea03",
+  "raw_validation_sha256": "42697dff860cebe7947408d1890c879da2be021d2f436d9db17f5e8c21c7261f",
+  "shared_environment_modified": false,
+  "task_data_opened": false,
+  "weights_modified": false,
+  "version_scope_note": "This experiment pins 0.9.0 because author artifacts name math-verify without an exact package version; this does not assert the authors used 0.9.0."
+}

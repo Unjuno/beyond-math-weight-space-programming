@@ -1,0 +1,42 @@
+{
+  "run_id": "human-astra-manual-20261105-v1",
+  "stage": "initial_discovery_original_checkpoint_only",
+  "attempt": "attempt_002",
+  "completed_items": 4,
+  "elapsed_seconds": 6923.5,
+  "settings": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "presence_penalty": 1.5,
+    "max_new_tokens": 32768,
+    "thinking": true,
+    "dtype": "bfloat16",
+    "device": "mps",
+    "attention": "eager",
+    "base_sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696"
+  },
+  "scoring_note": "math-verify is unavailable in the inference environment. All four last-boxed extractions are null, so the pinned scoring adapter returns incorrect before invoking math-verify. No boxed-answer accuracy is deferred for these four; all are 0/4 under the benchmark answer rule. Other correctness cases require math-verify.",
+  "outcomes": [
+    {"id": "gsm8k_train_6445", "seed": 451700169, "tokens": 32768, "last_boxed": null, "correct": false, "eos": false, "think_closed": false, "cap_hit": true, "repeat8": 0.892829889, "seconds": 2683.031},
+    {"id": "math_train_counting_and_probability_141", "seed": 1554047261, "tokens": 32768, "last_boxed": null, "correct": false, "eos": false, "think_closed": false, "cap_hit": true, "repeat8": 0.935563627, "seconds": 1416.975},
+    {"id": "gsm8k_train_5027", "seed": 3131658388, "tokens": 32768, "last_boxed": null, "correct": false, "eos": false, "think_closed": false, "cap_hit": true, "repeat8": 0.921949879, "seconds": 1407.779},
+    {"id": "math_train_algebra_542", "seed": 712824197, "tokens": 32768, "last_boxed": null, "correct": false, "eos": false, "think_closed": false, "cap_hit": true, "repeat8": 0.923262416, "seconds": 1415.611}
+  ],
+  "summary": {
+    "accuracy": "0/4; all last-boxed answers absent",
+    "eos": "0/4",
+    "think_close": "0/4",
+    "cap_hits": "4/4",
+    "mean_repeat8": 0.918401453,
+    "elapsed_minutes": 115.39
+  },
+  "raw_local_only": {
+    "path": "results/human_astra_manual_20261105/raw/discovery_baseline_v1/attempt_002/original.jsonl",
+    "sha256": "9adcc018de80b35569968d1564bfd73027e539c2d829417d480afe61ae59ebe9",
+    "bytes": 907268,
+    "progress_records": 512,
+    "attempt_manifest_sha256": "abb7a154531c4e06ac5ea39913226e4b26e634d607ac6fe9969d738b371b5d02"
+  },
+  "interpretation_boundary": "A common cap/no-answer/high-repeat surface pattern is observed in all four selected discovery items. It is not yet evidence of a shared internal mechanism or an effective weight edit. Astra trace review is pending."
+}

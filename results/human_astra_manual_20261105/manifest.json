@@ -1,6 +1,6 @@
 {
   "run_id": "human-astra-manual-20261105-v1",
-  "status": "protocol_registered_split_audited_candidate_not_selected",
+  "status": "matched_control_not_found; directional_intervention_v1_frozen_waiting_for_human_column_preparation",
   "created_date": "2026-11-05",
   "repository_revision_at_registration": "5d955fb",
   "evidence_type": "new human-operated Astra-guided weight-space edit experiment",
@@ -15,7 +15,8 @@
     "repository": "Qwen/Qwen3.5-0.8B",
     "expected_local_checkpoint": "model-cache/Qwen3.5-0.8B/model.safetensors-00001-of-00001.safetensors",
     "expected_sha256_from_prior_manifest": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
-    "verified_for_this_run": false
+    "verified_for_this_run": true,
+    "verified_sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696"
   },
   "data": {
     "source": "results/astra_reproduction_20261104/raw/train/{gsm8k_train.jsonl,math_train.jsonl}",
@@ -36,48 +37,128 @@
     "split_counts_and_hashes": {
       "gsm8k_train.jsonl": {
         "eligible": 5594,
-        "discovery": {"count": 3917, "sha256": "cab2f45cd74c43913789e752d5118bf9207e75152e03e762cf3587be5056dca4"},
-        "validation": {"count": 559, "sha256": "985fc61b5a73af042c77fd676e65f8d391be36b717cb30e6efea01025a0a3b4e"},
-        "confirmation": {"count": 559, "sha256": "21eede2f0ba9309d0dfb2f7370fdad198dbe905eaca4de75b8588148cd0a46d8"},
-        "final_holdout": {"count": 559, "sha256": "e03c4a22f6b14309b0bc06a90b361f801357d9b95acfc7d2e5e86408dd55cb03"}
+        "discovery": {
+          "count": 3917,
+          "sha256": "cab2f45cd74c43913789e752d5118bf9207e75152e03e762cf3587be5056dca4"
+        },
+        "validation": {
+          "count": 559,
+          "sha256": "985fc61b5a73af042c77fd676e65f8d391be36b717cb30e6efea01025a0a3b4e"
+        },
+        "confirmation": {
+          "count": 559,
+          "sha256": "21eede2f0ba9309d0dfb2f7370fdad198dbe905eaca4de75b8588148cd0a46d8"
+        },
+        "final_holdout": {
+          "count": 559,
+          "sha256": "e03c4a22f6b14309b0bc06a90b361f801357d9b95acfc7d2e5e86408dd55cb03"
+        }
       },
       "math_train.jsonl": {
         "eligible": 5439,
-        "discovery": {"count": 3810, "sha256": "e2f1f48d5b3b32185d80f09833311df65cc3fc69c3188a1ff6dfbcab148007de"},
-        "validation": {"count": 543, "sha256": "229779a7e2cb41f9c5040fca6809d2e86587f5d239aa7576806d709e563fc92c"},
-        "confirmation": {"count": 543, "sha256": "bf53d6c9e160062f842464bbc79bf758a2ca697d2d2e0993422da431f38f664a"},
-        "final_holdout": {"count": 543, "sha256": "c0c730578328c1b3d2605674cb4da7775eafcfa64b6e83eb1a9476bba799fcdd"}
+        "discovery": {
+          "count": 3810,
+          "sha256": "e2f1f48d5b3b32185d80f09833311df65cc3fc69c3188a1ff6dfbcab148007de"
+        },
+        "validation": {
+          "count": 543,
+          "sha256": "229779a7e2cb41f9c5040fca6809d2e86587f5d239aa7576806d709e563fc92c"
+        },
+        "confirmation": {
+          "count": 543,
+          "sha256": "bf53d6c9e160062f842464bbc79bf758a2ca697d2d2e0993422da431f38f664a"
+        },
+        "final_holdout": {
+          "count": 543,
+          "sha256": "c0c730578328c1b3d2605674cb4da7775eafcfa64b6e83eb1a9476bba799fcdd"
+        }
       },
       "eligible_total": 11033,
       "prior_train_ids_sha256": "c823722807b1a8154b17af80ebff8bde9e0620e6e2345ce0a4ac08538951fea5"
     },
-    "prompt_bodies_opened_for_this_run": false,
+    "prompt_bodies_opened_for_this_run": true,
     "prior_external_heldout_opened": false,
     "pretraining_unseen_guarantee": false
   },
   "editing": {
-    "candidate": null,
-    "control": null,
-    "hypothesis": null,
+    "candidate": {
+      "status": "observational_only",
+      "layer": 12,
+      "module": "mlp.down_proj input coordinate 1226",
+      "weight_column": "model.language_model.layers.12.mlp.down_proj.weight[:,1226]",
+      "evidence": "posthoc discovery-only activation localization; same-token phase gate passed exploratorily"
+    },
+    "control": {
+      "status": "matched_control_not_found_under_frozen_rule"
+    },
+    "hypothesis": "Down-projection input coordinate 1226 activity increases on the same repeated arithmetic token phrases in two discovery failure traces; weakening its outgoing weight column could alter repeated-cycle continuation. Direction and causal effect unknown.",
     "dose_and_predictions": null,
     "candidate_frozen": false,
     "human_operator_required": true,
     "weights_modified": false
   },
   "discovery_baseline": {
-    "status": "initial_items_and_seeds_frozen_before_generation",
+    "status": "eight_discovery_items_completed_Astra_review_pending",
     "selection_rule": "Within each source's frozen discovery set, rank IDs by SHA256(run_id|baseline-v1|source_filename|id). Use ranks 1-2 per source in the initial stage and ranks 3-4 per source only under the predeclared extension rule.",
     "initial_stage_extension_rule": "Run the backup four only if the initial four do not contain two distinct items sharing the same concrete failure motif and at least one correct comparison item without that motif. Stop after eight if this criterion is still unmet; do not select replacement items.",
     "seed_rule": "big-endian integer from the first four bytes of SHA256(run_id|baseline-v1|sample-0|id); set immediately before each generation.",
     "items": [
-      {"stage": "initial", "order": 1, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_6445", "seed": 451700169},
-      {"stage": "initial", "order": 2, "source": "math_train.jsonl", "id": "math_train_counting_and_probability_141", "seed": 1554047261},
-      {"stage": "initial", "order": 3, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_5027", "seed": 3131658388},
-      {"stage": "initial", "order": 4, "source": "math_train.jsonl", "id": "math_train_algebra_542", "seed": 712824197},
-      {"stage": "conditional_backup", "order": 5, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_3185", "seed": 4219711522},
-      {"stage": "conditional_backup", "order": 6, "source": "math_train.jsonl", "id": "math_train_intermediate_algebra_840", "seed": 3291332937},
-      {"stage": "conditional_backup", "order": 7, "source": "gsm8k_train.jsonl", "id": "gsm8k_train_7382", "seed": 3531789778},
-      {"stage": "conditional_backup", "order": 8, "source": "math_train.jsonl", "id": "math_train_counting_and_probability_683", "seed": 2101483949}
+      {
+        "stage": "initial",
+        "order": 1,
+        "source": "gsm8k_train.jsonl",
+        "id": "gsm8k_train_6445",
+        "seed": 451700169
+      },
+      {
+        "stage": "initial",
+        "order": 2,
+        "source": "math_train.jsonl",
+        "id": "math_train_counting_and_probability_141",
+        "seed": 1554047261
+      },
+      {
+        "stage": "initial",
+        "order": 3,
+        "source": "gsm8k_train.jsonl",
+        "id": "gsm8k_train_5027",
+        "seed": 3131658388
+      },
+      {
+        "stage": "initial",
+        "order": 4,
+        "source": "math_train.jsonl",
+        "id": "math_train_algebra_542",
+        "seed": 712824197
+      },
+      {
+        "stage": "conditional_backup",
+        "order": 5,
+        "source": "gsm8k_train.jsonl",
+        "id": "gsm8k_train_3185",
+        "seed": 4219711522
+      },
+      {
+        "stage": "conditional_backup",
+        "order": 6,
+        "source": "math_train.jsonl",
+        "id": "math_train_intermediate_algebra_840",
+        "seed": 3291332937
+      },
+      {
+        "stage": "conditional_backup",
+        "order": 7,
+        "source": "gsm8k_train.jsonl",
+        "id": "gsm8k_train_7382",
+        "seed": 3531789778
+      },
+      {
+        "stage": "conditional_backup",
+        "order": 8,
+        "source": "math_train.jsonl",
+        "id": "math_train_counting_and_probability_683",
+        "seed": 2101483949
+      }
     ],
     "settings": {
       "model_arm": "original checkpoint only",
@@ -93,20 +174,142 @@
       "scorer": "pinned math-verify; if unavailable during discovery capture, preserve raw traces and defer correctness/strict-composite scoring"
     },
     "raw_outputs_local_only": true,
-    "baseline_generation_started": false,
+    "baseline_generation_started": true,
+    "baseline_generation_completed": true,
+    "completed_item_count": 8,
+    "baseline_summary": "results/human_astra_manual_20261105/discovery_baseline_summary.json",
+    "raw_attempts": [
+      {
+        "attempt": "attempt_001",
+        "status": "failed_before_model_load",
+        "outputs": 0
+      },
+      {
+        "attempt": "attempt_002",
+        "status": "completed",
+        "items": 4,
+        "elapsed_seconds": 6923.5,
+        "raw_sha256": "9adcc018de80b35569968d1564bfd73027e539c2d829417d480afe61ae59ebe9"
+      },
+      {
+        "attempt": "attempt_003",
+        "status": "completed_conditional_backup",
+        "items": 4,
+        "elapsed_seconds": 5462.1,
+        "raw_sha256": "6bbfd351926090da3bac763b0674fd8cdf2cd84c0fb9b0c2a6cfb45306354733",
+        "progress_records": 397
+      }
+    ],
+    "correct_comparison_available": false,
     "pre_generation_attempts": [
       {
         "attempt": "attempt_001",
         "status": "failed_before_model_load",
         "reason": "Default Python 3.14 environment has no PyTorch; no model was loaded and no generation occurred. Preserve empty attempt directory; next attempt uses the existing Python 3.11 MPS environment."
       }
-    ]
+    ],
+    "prompt_suffix_audit": {
+      "status": "passed_by_astra_character_count",
+      "finding": "Every saved prompt and rendered_prompt contains exactly one literal backslash before boxed, matching the preregistered instruction; apparent extra slash was representation escaping.",
+      "protocol_defect_established": false
+    },
+    "backup_stage_decision": {
+      "trigger_met": true,
+      "decision": "run_fixed_backup_four_original_checkpoint_only",
+      "reason": "Astra and Luna independently identified a concrete output motif shared by gsm8k_train_6445 and math_train_algebra_542: after task-relevant arithmetic, repeated local checking drifts into long exact-period arithmetic fragments; however there is no correct non-motif comparator in the initial four. This meets the preregistered extension condition.",
+      "motif_is_internal_mechanism_evidence": false,
+      "fixed_items": [
+        {
+          "stage": "conditional_backup",
+          "order": 5,
+          "source": "gsm8k_train.jsonl",
+          "id": "gsm8k_train_3185",
+          "seed": 4219711522
+        },
+        {
+          "stage": "conditional_backup",
+          "order": 6,
+          "source": "math_train.jsonl",
+          "id": "math_train_intermediate_algebra_840",
+          "seed": 3291332937
+        },
+        {
+          "stage": "conditional_backup",
+          "order": 7,
+          "source": "gsm8k_train.jsonl",
+          "id": "gsm8k_train_7382",
+          "seed": 3531789778
+        },
+        {
+          "stage": "conditional_backup",
+          "order": 8,
+          "source": "math_train.jsonl",
+          "id": "math_train_counting_and_probability_683",
+          "seed": 2101483949
+        }
+      ],
+      "stop_rule": "Stop baseline discovery at eight items regardless of outcome; no replacements or further extension."
+    },
+    "failure_motif_audit": {
+      "reviewer": "Astra; Luna independently checked saved raw outputs and generated token IDs",
+      "common_items": [
+        "gsm8k_train_6445",
+        "math_train_algebra_542"
+      ],
+      "description": "After task-relevant arithmetic, repeated local checking drifts into off-task arithmetic fragments prefixed by Wait and then exact-period repetition.",
+      "exact_generated_token_intervals_zero_based_half_open": {
+        "gsm8k_train_6445": {
+          "interval": [
+            4513,
+            32768
+          ],
+          "period": 30,
+          "motif": "alternating Me=15, You=10 and Me-You=5 fragments"
+        },
+        "math_train_algebra_542": {
+          "interval": [
+            3216,
+            32768
+          ],
+          "period": 13,
+          "motif": "Wait, 15+1=16."
+        }
+      },
+      "comparison_cases": {
+        "math_train_counting_and_probability_141": "also reaches the correct binomial answer early, then repeats wording/interpretation checks with period 161; different observable motif",
+        "gsm8k_train_5027": "calculates 86 then repeatedly considers 125 for the savings target, with period 188; task-target confusion, not the common motif above"
+      },
+      "correct_nonmotif_comparison_count": 0,
+      "internal_mechanism_claim": false,
+      "scorer_note": "math-verify unavailable; all four lack a last-boxed answer, so do not claim math-verify was run."
+    },
+    "backup_summary": "results/human_astra_manual_20261105/discovery_backup_summary.json",
+    "discovery_stop_enforced": true,
+    "discovery_stop_note": "The only preregistered conditional backup stage is complete; no further discovery items or replacements are allowed.",
+    "editing_candidate_status": "not_yet_selected_pending_Astra_review_of_all_eight_discovery_traces",
+    "runner_revision_audit": {
+      "attempt_002_runner_sha256": "e5df8fb9bd66458162d14d2c1b2258983f65a899885972bcfeeed74ccf71c00c",
+      "attempt_003_runner_sha256": "007f4bbbadeb95badfed52b9c173a12b636210d3b17f1d6b0081c83f85a7c451",
+      "diff_checked": true,
+      "difference_scope": "Only parameterized initial versus conditional_backup stage handling, validation of the recorded backup trigger and exactly four prior initial outputs, selection ranks 1-2 versus 3-4, and recording/printing stage. Model loading, tokenizer, prompt rendering, seed setting, sampling, presence penalty, token cap, progress logging, decoding, and scoring code are unchanged.",
+      "effect_on_baseline_generation": "No model-output algorithm or inference setting change identified; the new code only enables the predeclared backup IDs after trigger."
+    },
+    "candidate_selection_status": "Astra_review_says_no_specific_coordinate_control_yet; a new limited internal measurement is needed before deciding edit",
+    "stop_discovery_enforced": true
   },
   "scorer_environment": {
     "required": "math-verify",
     "available_in_existing_mps_environment": false,
     "installation_approval_requested": true,
-    "effect_until_resolved": "Raw discovery generations may be captured, but exact correctness and strict-composite scoring remain pending; do not freeze a candidate or choose conditional backups based on unscored correctness."
+    "effect_until_resolved": "Raw discovery generations may be captured, but exact correctness and strict-composite scoring remain pending; do not freeze a candidate or choose conditional backups based on unscored correctness.",
+    "isolated_study_pin": {
+      "package": "math-verify==0.9.0",
+      "vendor_path": "results/human_astra_manual_20261105/raw/scorer_vendor/math_verify_0_9_0/",
+      "shared_environment_modified": false,
+      "validation": "passed_correct_incorrect_missing_box",
+      "summary": "results/human_astra_manual_20261105/scorer_validation_summary.json",
+      "note": "Author source names math-verify without an exact package-version pin; 0.9.0 is the local study pin, not an asserted author version."
+    }
   },
   "evaluation": {
     "primary_task_outcome": "exact benchmark-defined math answer accuracy by fixed last-boxed parser and pinned math-verify",
@@ -131,5 +334,530 @@
     "astra_dialogue_log": "logs/luna_astra_dialogue.jsonl",
     "raw_data_and_weights_policy": "local only; do not overwrite prior artifacts",
     "ci": "not used"
+  },
+  "activation_localization": {
+    "status": "completed_discovery_observation; coordinate_1226_phase_gate_passed; matched_control_not_found_under_frozen_rule",
+    "protocol": "teacher-force exact full prompt plus every saved preceding generated token through the frozen windows; observe layer residual, MLP down-projection input/output, and log probability of the actually generated next token",
+    "script": "scripts/measure_human_astra_discovery_activations.py",
+    "public_compact_summary": "results/human_astra_manual_20261105/activation_localization_summary.json",
+    "raw_vectors_local_only": "results/human_astra_manual_20261105/raw/activation_localization_v1/",
+    "raw_manifest_sha256": "e5d830ad1c3bfa7438e0f46b03ced55aac652c3cb88853c488c2e854e0280f50",
+    "items": [
+      "gsm8k_train_6445",
+      "math_train_algebra_542",
+      "gsm8k_train_3185"
+    ],
+    "measured_windows": {
+      "gsm8k_train_6445": {
+        "transition": [
+          4096,
+          4608
+        ],
+        "cycle": [
+          4608,
+          5120
+        ]
+      },
+      "math_train_algebra_542": {
+        "transition": [
+          2816,
+          3328
+        ],
+        "cycle": [
+          3328,
+          3840
+        ]
+      },
+      "gsm8k_train_3185": {
+        "ordinary_check": [
+          384,
+          896
+        ],
+        "reinterpretation": [
+          1152,
+          1664
+        ],
+        "answer_transition": [
+          2944,
+          3456
+        ]
+      }
+    },
+    "initial_observation": "Cycle-minus-transition mean-vector cosine between the two failures was high at residual layers 9-13 (.819-.842) and MLP down-projection inputs layers 10-14 (.783-.835). Success ordinary-check-to-answer-transition contrast was near orthogonal to these residual and MLP-input deltas; MLP down-projection output had other high similarities, including L23 and requires Astra review.",
+    "decision_boundary": "Associational and content/position-confounded. No tensor coordinate, matched control, or causal hypothesis frozen yet. Do not edit weights based on this alone.",
+    "coordinate_followup": {
+      "candidate_observation_only": {
+        "layer": 12,
+        "down_proj_input_coordinate": 1226,
+        "tensor_column": "model.language_model.layers.12.mlp.down_proj.weight[:,1226]"
+      },
+      "same_token_phase_gate": {
+        "source": "Astra exploratory recommendation; supplied after full-prefix activations were captured but before same-token phase values were analyzed",
+        "not_preregistered_independent_criterion": true,
+        "pass_rule": "For each failure trace, median of four late-minus-early phrase mean absolute activations >=0.25, at least 3/4 positive; after dropping first two Wait tokens, same >=0.25 and >=3/4 positive; success trace max mean absolute activity in three fixed windows <= half the smaller failure late-phrase mean absolute activity.",
+        "threshold_will_not_be_tuned_after_observing_results": true
+      },
+      "previous_control_rule_superseded_not_executed": {
+        "candidate_layer": 12,
+        "candidate_coordinate": 1226,
+        "candidate_coordinates_excluded": true,
+        "column_norm_relative_tolerance": 0.02,
+        "ordinary_activity_match": "L12 down_proj-input RMS in gsm8k_train_3185 ordinary_check [384,896) must be within 20% relative to candidate coordinate.",
+        "cycle_selectivity_score": "For each feature, compute relative RMS change late exact-phrase cycle versus early exact-phrase occurrence separately on 6445 and algebra_542; rank eligible features by the smaller of the two absolute relative changes (lower is preferred).",
+        "tie_break": "SHA256(run_id|l12-control-v1|coordinate); lexical ascending.",
+        "no_control_rule": "If no feature meets both matching tolerances, report that no matched control was available; do not relax thresholds."
+      },
+      "matched_control_selection_rule_frozen_before_7_group_capture": {
+        "advisor": "Astra",
+        "candidate": {
+          "layer": 12,
+          "coordinate": 1226,
+          "weight": "model.language_model.layers.12.mlp.down_proj.weight",
+          "weight_shape": [
+            1024,
+            3584
+          ]
+        },
+        "candidate_excluded_from_control": true,
+        "groups": [
+          {
+            "name": "6445_early",
+            "id": "gsm8k_train_6445",
+            "spans": [
+              [
+                4341,
+                4351
+              ]
+            ],
+            "count": 10
+          },
+          {
+            "name": "6445_late_pooled",
+            "id": "gsm8k_train_6445",
+            "spans": [
+              [
+                4635,
+                4645
+              ],
+              [
+                4665,
+                4675
+              ],
+              [
+                4695,
+                4705
+              ],
+              [
+                4725,
+                4735
+              ]
+            ],
+            "count": 40
+          },
+          {
+            "name": "algebra542_early",
+            "id": "math_train_algebra_542",
+            "spans": [
+              [
+                3031,
+                3042
+              ]
+            ],
+            "count": 11
+          },
+          {
+            "name": "algebra542_late_pooled",
+            "id": "math_train_algebra_542",
+            "spans": [
+              [
+                3338,
+                3349
+              ],
+              [
+                3351,
+                3362
+              ],
+              [
+                3364,
+                3375
+              ],
+              [
+                3377,
+                3388
+              ]
+            ],
+            "count": 44
+          },
+          {
+            "name": "3185_ordinary",
+            "id": "gsm8k_train_3185",
+            "spans": [
+              [
+                384,
+                896
+              ]
+            ],
+            "count": 512
+          },
+          {
+            "name": "3185_reinterpretation",
+            "id": "gsm8k_train_3185",
+            "spans": [
+              [
+                1152,
+                1664
+              ]
+            ],
+            "count": 512
+          },
+          {
+            "name": "3185_answer_transition",
+            "id": "gsm8k_train_3185",
+            "spans": [
+              [
+                2944,
+                3456
+              ]
+            ],
+            "count": 512
+          }
+        ],
+        "precision": "Accumulate and calculate in float64; ascending coordinate/element order; no epsilon; raw unrounded comparisons.",
+        "candidate_feature_norm": "r_gj=sqrt(sumsq_gj/count_g), pooled phrases use total sumsq divided by pooled token count.",
+        "hard_filters": {
+          "column_norm_ratio": [
+            0.9,
+            1.1
+          ],
+          "each_group_rms_ratio": [
+            0.5,
+            2.0
+          ],
+          "absolute_weight_column_direction_cosine_max": 0.1
+        },
+        "distance": "ln(column_norm_ratio)^2 + mean over 7 equally weighted groups of ln(group_RMS_ratio)^2",
+        "selection": "Choose lexicographic minimum (unrounded_distance, coordinate_index).",
+        "eligibility_and_failure": "All filters inclusive; nonfinite values, zero column norms, count mismatch are errors. Candidate RMS zero in any group stops selection. Control RMS zero makes that coordinate ineligible. If no eligible coordinates, record matched_control_not_found; do not relax filters.",
+        "all_coordinate_diagnostics": "Save ratios, cosine, individual filter decisions, exclusion reasons, and unrounded distance for every coordinate.",
+        "interpretation": "Exploratory matched-control construction from discovery only; does not establish the control is inert."
+      },
+      "same_token_phase_summary": "results/human_astra_manual_20261105/l12_coordinate_phase_summary.json",
+      "candidate_observation_status": "exploratory_same_token_phase_gate_passed; matched_control_not_found_under_frozen_rule; no edit authorized",
+      "control_feature_capture": {
+        "script": "scripts/measure_human_astra_l12_control_features.py",
+        "valid_attempt": "results/human_astra_manual_20261105/raw/l12_control_feature_stats_v3/manifest.json",
+        "dtype_accumulation": "float64 CPU accumulation from BF16 activations and weights",
+        "attempt_001_invalid": "l12_control_feature_stats_v1 used float32 accumulation and pooling-loop indentation omitted three late spans; not used",
+        "attempt_002_invalid": "l12_control_feature_stats_v2 fixed float64 conversion but retained the pooling-loop indentation error; not used",
+        "valid_expected_counts_verified": true,
+        "all_coordinate_diagnostics_local_sha256": "b0d07572aeb47a87091e8bbd831264ac3a286626660b643c7ccab803e5fb9007",
+        "public_summary": "results/human_astra_manual_20261105/l12_control_selection_summary.json",
+        "status": "matched_control_not_found",
+        "filter_pass_counts": {
+          "column_norm": 2253,
+          "all_group_rms": 1,
+          "weight_column_direction_cosine": 3474,
+          "norm_and_rms": 1,
+          "norm_and_cosine": 2205,
+          "rms_and_cosine": 0,
+          "all_filters": 0,
+          "eligible_controls_excluding_candidate": 0
+        },
+        "eligible_control_count": 0
+      }
+    },
+    "activation_raw_manifest_sha256": "e5d830ad1c3bfa7438e0f46b03ced55aac652c3cb88853c488c2e854e0280f50",
+    "phase_summary": "results/human_astra_manual_20261105/l12_coordinate_phase_summary.json",
+    "control_summary": "results/human_astra_manual_20261105/l12_control_selection_summary.json",
+    "valid_control_capture_manifest_sha256": "79c82d8a7302ba0eed6ac599203d3a6891fe7a981e218831e18ad2e8799638d6",
+    "candidate_control_gate": "No same-layer coordinate control met predeclared norm/RMS/direction filters; do not relax. No weight edit has occurred."
+  },
+  "directional_intervention_v1": {
+    "intervention_id": "human-astra-manual-20261105-l12c1226-direction-v1",
+    "protocol_revision": 2,
+    "status": "protocol_and_code_frozen_waiting_for_human_column_preparation",
+    "separate_from_prior_matched_control": "The earlier frozen same-coordinate selector remains matched_control_not_found; no criteria were relaxed. This is a new, narrower same-column signed-direction comparison.",
+    "preregistration_document": "docs/human_astra_l12_directional_preregistration.md",
+    "candidate": {
+      "tensor": "model.language_model.layers.12.mlp.down_proj.weight[:,1226]",
+      "shape": [
+        1024
+      ],
+      "dtype": "bfloat16",
+      "base_sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+      "status": "observational_candidate_only"
+    },
+    "conditions": [
+      "B_original",
+      "T_target_10_percent_attenuation",
+      "Cplus_signed_direction",
+      "Cminus_signed_direction"
+    ],
+    "target_alpha_exact": "1/10",
+    "control_rule": "deterministic SHA256 sign mask; first trial 0..1023 passing abs cosine(v,w)<=0.1 and abs cosine(v,d)<=0.1; exact per-component BF16 absolute change equality required",
+    "confirmation": {
+      "selection_rule": "sort by SHA256(intervention_id|confirmation-selection-v1|source_filename|id), tie by ID; first 2 IDs per source; IDs only; item bodies unopened",
+      "items": [
+        {
+          "source": "gsm8k_train.jsonl",
+          "id": "gsm8k_train_5341",
+          "seeds": [
+            2517555310,
+            2890724130
+          ]
+        },
+        {
+          "source": "gsm8k_train.jsonl",
+          "id": "gsm8k_train_1178",
+          "seeds": [
+            8746557,
+            3600332144
+          ]
+        },
+        {
+          "source": "math_train.jsonl",
+          "id": "math_train_precalculus_207",
+          "seeds": [
+            864367089,
+            2034957992
+          ]
+        },
+        {
+          "source": "math_train.jsonl",
+          "id": "math_train_intermediate_algebra_231",
+          "seeds": [
+            4152760572,
+            3381638749
+          ]
+        }
+      ],
+      "samples_per_item": 2,
+      "arms": 4,
+      "generation_count": 32,
+      "max_new_tokens": 32768,
+      "status": "not_frozen_scorer_missing_and_focused_gate_incomplete",
+      "scorer": "pinned math-verify plus fixed last-boxed parser; currently unavailable; no substitute allowed",
+      "acceptance_rule": "T exceeds B, C+, C- by >=2 correct item-seed pairs each; at least one item has both seeds B-wrong/T-correct; zero B-correct/T-wrong; zero B-correct-completed/T-incomplete; all T-correct include correct boxed answer, think-close, EOS; no unscorable or incomplete pair",
+      "arm_order_by_id_sample": {
+        "gsm8k_train_5341": {
+          "sample0": [
+            "B",
+            "T",
+            "Cplus",
+            "Cminus"
+          ],
+          "sample1": [
+            "T",
+            "Cplus",
+            "Cminus",
+            "B"
+          ]
+        },
+        "gsm8k_train_1178": {
+          "sample0": [
+            "Cplus",
+            "Cminus",
+            "B",
+            "T"
+          ],
+          "sample1": [
+            "Cminus",
+            "B",
+            "T",
+            "Cplus"
+          ]
+        },
+        "math_train_precalculus_207": {
+          "sample0": [
+            "B",
+            "T",
+            "Cplus",
+            "Cminus"
+          ],
+          "sample1": [
+            "T",
+            "Cplus",
+            "Cminus",
+            "B"
+          ]
+        },
+        "math_train_intermediate_algebra_231": {
+          "sample0": [
+            "Cplus",
+            "Cminus",
+            "B",
+            "T"
+          ],
+          "sample1": [
+            "Cminus",
+            "B",
+            "T",
+            "Cplus"
+          ]
+        }
+      },
+      "each_arm_position_occurs_twice": true,
+      "fresh_model_per_arm": true,
+      "source_body_policy": "After focused gate passes, scan TRAIN sources with an ID-only anchored first-key reader to verify split and selection; decode/retain only the four selected rows."
+    },
+    "focused_train_screen": {
+      "items": [
+        "gsm8k_train_6445",
+        "math_train_algebra_542",
+        "gsm8k_train_3185"
+      ],
+      "samples": [
+        0,
+        1
+      ],
+      "arms": 4,
+      "generation_count": 24,
+      "max_new_tokens": 4096,
+      "status": "scorer_validated_design_frozen_not_started_column_execution_path_incomplete",
+      "seeds": {
+        "gsm8k_train_6445": [
+          1084327040,
+          3346301434
+        ],
+        "math_train_algebra_542": [
+          1677174321,
+          3447544442
+        ],
+        "gsm8k_train_3185": [
+          37864219,
+          2080160158
+        ]
+      },
+      "arm_order_by_sample_and_id": {
+        "sample0_gsm8k_train_6445": [
+          "B",
+          "T",
+          "Cplus",
+          "Cminus"
+        ],
+        "sample0_math_train_algebra_542": [
+          "T",
+          "Cplus",
+          "Cminus",
+          "B"
+        ],
+        "sample0_gsm8k_train_3185": [
+          "Cplus",
+          "Cminus",
+          "B",
+          "T"
+        ],
+        "sample1_gsm8k_train_6445": [
+          "Cminus",
+          "B",
+          "T",
+          "Cplus"
+        ],
+        "sample1_math_train_algebra_542": [
+          "B",
+          "T",
+          "Cplus",
+          "Cminus"
+        ],
+        "sample1_gsm8k_train_3185": [
+          "T",
+          "Cplus",
+          "Cminus",
+          "B"
+        ]
+      },
+      "independent_checkpoint_and_full_prefix_reprocess_per_arm": true,
+      "required_scorer_before_generation": true,
+      "advancement_gate": {
+        "evaluated_per_sample_separately": true,
+        "target_all_3_prefixes_formally_correct_think_closed_eos": true,
+        "base_both_failure_prefixes_formally_incorrect": true,
+        "base_success_prefix_formally_correct_think_closed_eos": true,
+        "each_control_success_prefix_formally_correct_think_closed_eos": true,
+        "each_control_at_least_one_failure_prefix_formally_incorrect": true,
+        "uncompleted_but_formally_correct_control_counts_as_accuracy_win": false,
+        "both_samples_must_pass": true,
+        "complete_all_24_generations_unless_infrastructure_scorer_or_time_stop": true
+      },
+      "execution_order_rationale": "Rotate arm order across rows to reduce systematic order effects; frozen before intervention outputs.",
+      "runtime_projection_24_focused_caps_seconds": {
+        "min": 4184.853,
+        "median": 4246.8330000000005,
+        "mean": 5247.525,
+        "max": 8049.093,
+        "basis": "linear projection from seven prior 32768-token outputs; excludes model reload/setup overhead"
+      },
+      "runtime_projection_total_focused_plus_confirmation_caps_seconds": {
+        "min": 48823.285,
+        "median": 49546.385,
+        "mean": 61221.125,
+        "max": 93906.08499999999
+      },
+      "presence_penalty_history": "Start at original prompt boundary; saved generated prefix remains part of frequency-penalty history. The prompt+prefix boundary is used only for progress/output slicing.",
+      "input_reprocessing": "Each arm reloads the immutable base model and processes the original full prompt plus the saved exact generated prefix; no cache/state carries across arms."
+    },
+    "runtime_projection_seconds_for_32_confirmation_caps": {
+      "basis": "7 measured prior 32768-token outputs",
+      "min": 44638.432,
+      "median": 45299.552,
+      "mean": 55973.6,
+      "max": 85856.992,
+      "interpretation": "12.40-23.85 hours; excludes focused screen and setup; projection only"
+    },
+    "non_math_transfer": "not tested; this experiment uses math TRAIN only",
+    "weights_modified": false,
+    "confirmation_bodies_opened": false,
+    "final_holdout_opened": false,
+    "next_gates": [
+      "freeze focused per-seed advancement rule and arm execution order",
+      "implement and inspect deterministic BF16 variant preparation/verifier",
+      "resolve pinned scorer availability",
+      "human performs only a concrete verified operation after receiving instruction"
+    ],
+    "preregistration_document_sha256": "568380a5a6f78a901a4e6009984e8fe3788508b9bd9980f2e5e352bdecd2323f",
+    "scorer": {
+      "status": "isolated_pin_validated",
+      "package": "math-verify==0.9.0",
+      "requirements_file": "configs/human_astra_scorer_requirements.txt",
+      "requirements_sha256": "41b97a77c9cbf65c7fdfdc1f2f13b94b9b21456e927872f2f17a4bc360940062",
+      "isolated_path": "results/human_astra_manual_20261105/raw/scorer_vendor/math_verify_0_9_0/",
+      "shared_environment_modified": false,
+      "validation_script": "scripts/validate_human_astra_scorer.py",
+      "validation_script_sha256": "e58ec8658732199eea2137575937ca2e4f8205bce24d922962615c32fa14ea03",
+      "raw_validation_path": "results/human_astra_manual_20261105/raw/scorer_validation_v1/validation.json",
+      "raw_validation_sha256": "42697dff860cebe7947408d1890c879da2be021d2f436d9db17f5e8c21c7261f",
+      "summary": "results/human_astra_manual_20261105/scorer_validation_summary.json",
+      "summary_sha256": "a56a79799a83d683fe82bc32ca61c8322ba929737ebdc8145eb5d5a5a375be99",
+      "known_correct": true,
+      "known_incorrect": true,
+      "missing_box_unparsed": true,
+      "author_version_identity": "unknown; source artifacts name math-verify without pinning a version"
+    },
+    "execution_code": {
+      "prepare_columns_script": "scripts/prepare_human_astra_l12_directional_columns.py",
+      "prepare_columns_script_sha256": "6cec32da45059bcc40f4f69052775c82fd3ebd7829d29294e9cc7262c338478a",
+      "paired_evaluator": "scripts/run_human_astra_directional_eval.py",
+      "paired_evaluator_sha256": "dfdc9b0ac8f896a2986091199c90a64b405946c8fad9af0839881167c2c834e8",
+      "gate_scorer": "scripts/score_human_astra_directional_eval.py",
+      "gate_scorer_sha256": "47f2bf24ab25defdd7adbc24f9b0328da8a0e499810f7601768a3f743bb88743",
+      "scorer_validator": "scripts/validate_human_astra_scorer.py",
+      "scorer_validator_sha256": "e58ec8658732199eea2137575937ca2e4f8205bce24d922962615c32fa14ea03",
+      "astra_static_review": {
+        "status": "reviewed_current_hashes_no_remaining_must_fix_static_issues",
+        "reviewed_prepare_sha256": "6cec32da45059bcc40f4f69052775c82fd3ebd7829d29294e9cc7262c338478a",
+        "reviewed_runner_sha256": "dfdc9b0ac8f896a2986091199c90a64b405946c8fad9af0839881167c2c834e8",
+        "reviewed_gate_scorer_sha256": "47f2bf24ab25defdd7adbc24f9b0328da8a0e499810f7601768a3f743bb88743",
+        "review_scope": "source code, BF16 procedure, IDs, seeds, gate logic and body-read boundaries; no model inference, weight edit, column generation or confirmation-body access"
+      },
+      "weight_application": "Each scheduled arm starts from a fresh immutable base model load; apply exactly one column in memory; verify entire target parameter outside column unchanged; never write full model checkpoint.",
+      "confirmation_source_access": "ID-only source scan verifies split and deterministic top-2 choice; only selected 4 rows are decoded after focused gate has passed."
+    },
+    "private_decision_ledger": {
+      "path": "logs/luna_astra_dialogue.jsonl",
+      "classification": "local_only_not_published",
+      "sha256": "ac1c0234c9467e1198a87f884d1ae3c67b706ee656ffae419b14ee65fef84c51",
+      "entries": 50,
+      "public_content": "Decision summaries and evidence hashes only; full exchange ledger retained locally."
+    }
   }
 }

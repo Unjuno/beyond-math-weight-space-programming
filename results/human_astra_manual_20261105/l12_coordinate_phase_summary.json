@@ -1,0 +1,175 @@
+{
+  "run_id": "human-astra-manual-20261105-v1",
+  "coordinate": {
+    "layer": 12,
+    "down_proj_input_coordinate": 1226,
+    "tensor": "model.language_model.layers.12.mlp.down_proj.weight",
+    "weight_shape": [
+      1024,
+      3584
+    ],
+    "column_l2_norm": 0.25138574838638306,
+    "column_norm_percentile": 0.45479910714285715
+  },
+  "posthoc_threshold_source": "Astra supplied an exploratory retention gate after trace capture but before analysis of same-token phrase activations; this is not preregistration and no independent inference claim is made.",
+  "phrases": {
+    "gsm8k_train_6445": {
+      "early": {
+        "start": 4341,
+        "end": 4351,
+        "mean_abs": 0.1132080078125,
+        "phrase_mean": 0.0732177734375,
+        "after_first_two_mean_abs": 0.092926025390625,
+        "after_first_two_mean": 0.042938232421875
+      },
+      "late_repetitions": [
+        {
+          "start": 4635,
+          "end": 4645,
+          "mean_abs": 0.761328125,
+          "phrase_mean": 0.761328125,
+          "after_first_two_mean_abs": 0.728515625,
+          "after_first_two_mean": 0.728515625
+        },
+        {
+          "start": 4665,
+          "end": 4675,
+          "mean_abs": 0.833203125,
+          "phrase_mean": 0.833203125,
+          "after_first_two_mean_abs": 0.80078125,
+          "after_first_two_mean": 0.80078125
+        },
+        {
+          "start": 4695,
+          "end": 4705,
+          "mean_abs": 0.8880859375,
+          "phrase_mean": 0.8880859375,
+          "after_first_two_mean_abs": 0.855224609375,
+          "after_first_two_mean": 0.855224609375
+        },
+        {
+          "start": 4725,
+          "end": 4735,
+          "mean_abs": 0.9375,
+          "phrase_mean": 0.9375,
+          "after_first_two_mean_abs": 0.90673828125,
+          "after_first_two_mean": 0.90673828125
+        }
+      ],
+      "late_minus_early_abs_deltas": [
+        0.6481201171875001,
+        0.7199951171875001,
+        0.7748779296875,
+        0.8242919921875
+      ],
+      "late_minus_early_abs_delta_median": 0.7474365234375,
+      "positive_late_count": 4,
+      "excluding_first_two_token_delta_median": 0.735076904296875,
+      "excluding_first_two_positive_count": 4,
+      "exact_token_ids_match_all_occurrences": true,
+      "threshold_pass": true,
+      "signed_late_minus_early_deltas": [
+        0.6881103515625,
+        0.7599853873252869,
+        0.8148682117462158,
+        0.8642822504043579
+      ],
+      "signed_delta_median": 0.7874267995357513,
+      "signed_positive_late_count": 4,
+      "signed_delta_excluding_first_two_tokens": [
+        0.685577392578125,
+        0.757843017578125,
+        0.812286376953125,
+        0.863800048828125
+      ],
+      "signed_delta_excluding_first_two_median": 0.785064697265625,
+      "signed_excluding_first_two_positive_count": 4
+    },
+    "math_train_algebra_542": {
+      "early": {
+        "start": 3031,
+        "end": 3042,
+        "mean_abs": 0.0582275390625,
+        "phrase_mean": 0.05332253196022727,
+        "after_first_two_mean_abs": 0.05662706163194445,
+        "after_first_two_mean": 0.05063205295138889
+      },
+      "late_repetitions": [
+        {
+          "start": 3338,
+          "end": 3349,
+          "mean_abs": 0.9758522727272727,
+          "phrase_mean": 0.9758522727272727,
+          "after_first_two_mean_abs": 0.9496527777777778,
+          "after_first_two_mean": 0.9496527777777778
+        },
+        {
+          "start": 3351,
+          "end": 3362,
+          "mean_abs": 1.0095880681818181,
+          "phrase_mean": 1.0095880681818181,
+          "after_first_two_mean_abs": 0.9856770833333334,
+          "after_first_two_mean": 0.9856770833333334
+        },
+        {
+          "start": 3364,
+          "end": 3375,
+          "mean_abs": 1.0303622159090908,
+          "phrase_mean": 1.0303622159090908,
+          "after_first_two_mean_abs": 1.0067274305555556,
+          "after_first_two_mean": 1.0067274305555556
+        },
+        {
+          "start": 3377,
+          "end": 3388,
+          "mean_abs": 1.041015625,
+          "phrase_mean": 1.041015625,
+          "after_first_two_mean_abs": 1.0162760416666667,
+          "after_first_two_mean": 1.0162760416666667
+        }
+      ],
+      "late_minus_early_abs_deltas": [
+        0.9176247336647727,
+        0.9513605291193181,
+        0.9721346768465908,
+        0.9827880859375
+      ],
+      "late_minus_early_abs_delta_median": 0.9617476029829545,
+      "positive_late_count": 4,
+      "excluding_first_two_token_delta_median": 0.9395751953125,
+      "excluding_first_two_positive_count": 4,
+      "exact_token_ids_match_all_occurrences": true,
+      "threshold_pass": true,
+      "signed_late_minus_early_deltas": [
+        0.9225296974182129,
+        0.9562655687332153,
+        0.9770396947860718,
+        0.9876930713653564
+      ],
+      "signed_delta_median": 0.9666526317596436,
+      "signed_positive_late_count": 4,
+      "signed_delta_excluding_first_two_tokens": [
+        0.8990207314491272,
+        0.9350450038909912,
+        0.9560953974723816,
+        0.9656439423561096
+      ],
+      "signed_delta_excluding_first_two_median": 0.9455702006816864,
+      "signed_excluding_first_two_positive_count": 4
+    }
+  },
+  "decision": "Assess only whether the observational coordinate merits a next-stage matched-control design; not an edit decision.",
+  "successful_trace_mean_abs_by_window": {
+    "ordinary_check": 0.022998159751296043,
+    "reinterpretation": 0.06312015652656555,
+    "answer_transition": 0.032468102872371674
+  },
+  "success_max_vs_half_min_failure_late_mean_abs": {
+    "success_max": 0.06312015652656555,
+    "half_min_failure_late": 0.3806640625,
+    "pass": true
+  },
+  "all_exploratory_gates_pass": true,
+  "timecourse_raw_manifest_sha256": "7615d1625adb9d2c6770004b77b571fe78252c608e64ab1140d38250e021a987",
+  "phase_measurement_is_discovery_only": true
+}

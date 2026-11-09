@@ -74,3 +74,11 @@ The read-only split audit passed on 2026-11-05 after correcting a hash-scope mis
 ## Deviations and limitations
 
 The prior local TRAIN source and model were involved in earlier math studies; reserving IDs reduces item overlap but does not remove model pretraining exposure or all conceptual contamination. Existing p50c and applied-task outcomes cannot be counted as evidence for this experiment. A completely fresh non-math editing study is not yet operationally specified because a clean non-math discovery/training source has not been identified.
+
+## 2026-11-09 discovery and localization status
+
+The split-audited run completed its eight fixed discovery generations (four initial plus the one permitted backup stage) and stopped item discovery. Astra and Luna identified an output-level repeated arithmetic-check motif on two initial examples, then ran a bounded full-prefix activation observation on those two and one successful comparison. L12 MLP `down_proj` input coordinate 1226 rose during the same exact repeated phrase tokens in both failure traces; this is post-hoc discovery evidence and does not show causality. The activation summary and raw hashes are in the run manifest.
+
+Astra's pre-capture float64 matched-coordinate control rule was applied to seven frozen token groups across all 3,584 L12 input coordinates. No coordinate other than 1226 met the combined column norm, all-window activity RMS, and weight-column direction filters. Record the outcome as `matched_control_not_found`; do not relax the rule. No candidate dose, control, confirmation evaluation, weight edit, or held-out access is frozen or completed. Astra has been asked whether a separately labeled same-coordinate directional comparison can support a different, narrower causal question. Any such route must be preregistered as a new exploratory intervention design and retain this failed matched-coordinate result.
+
+The captured GSM8K backup answer `770` matches its stored gold string and arithmetic, but the pinned `math-verify` package was unavailable. Its formal scorer field remains null. No claim that the fixed scorer ran is permitted.

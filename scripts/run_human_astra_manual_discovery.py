@@ -57,10 +57,10 @@ def expected_seed(run_id: str, ident: str) -> int:
     return int.from_bytes(hashlib.sha256(material).digest()[:4], "big")
 
 
-def validate_plan(manifest: dict) -> list[dict]:
+def validate_plan(manifest: dict, stage: str = "initial") -> list[dict]:
     if manifest["data"]["split_audit_status"] != "passed_read_only_by_luna_2026-11-05":
         raise ValueError("STOP: split audit is not marked passed")
-    if manifest["data"]["prompt_bodies_opened_for_this_run"]:
+    if manifest["data"]["prompt_bodies_opened_for_this_run"] and stage != "conditional_backup":
         raise ValueError("STOP: discovery baseline was already opened; use a new preregistered attempt")
     if manifest["editing"]["weights_modified"]:
         raise ValueError("STOP: baseline runner must not be used after any weight edit")
@@ -78,9 +78,17 @@ def validate_plan(manifest: dict) -> list[dict]:
     reserved = set().union(*(set(values) for values in partitions.values()))
     if len(reserved) != manifest["data"]["previously_reserved_ids_to_exclude"]:
         raise ValueError("STOP: reserved-ID count differs from run manifest")
-    planned = [item for item in manifest["discovery_baseline"]["items"] if item["stage"] == "initial"]
+    planned = [item for item in manifest["discovery_baseline"]["items"] if item["stage"] == stage]
     if len(planned) != 4:
-        raise ValueError("STOP: exactly four initial baseline items must be frozen")
+        raise ValueError(f"STOP: exactly four {stage} baseline items must be frozen")
+    if stage == "conditional_backup":
+        decision = manifest["discovery_baseline"].get("backup_stage_decision", {})
+        if decision.get("trigger_met") is not True or decision.get("decision") != "run_fixed_backup_four_original_checkpoint_only":
+            raise ValueError("STOP: conditional backup trigger has not been recorded")
+        prior_outputs = list((RUN / "raw/discovery_baseline_v1").glob("attempt_*/original.jsonl"))
+        prior_count = sum(1 for path in prior_outputs for _ in read_jsonl(path))
+        if prior_count != 4:
+            raise ValueError("STOP: conditional backup requires exactly four completed initial outputs")
 
     rows: dict[str, dict] = {}
     all_source_ids: set[str] = set()
@@ -108,8 +116,9 @@ def validate_plan(manifest: dict) -> list[dict]:
             ).digest(),
         )
         source_planned = [item["id"] for item in planned if item["source"] == source]
-        if source_planned != baseline_ranked[:2]:
-            raise ValueError(f"STOP: frozen initial IDs do not match baseline-v1 selection rule for {source}")
+        offset = 0 if stage == "initial" else 2
+        if source_planned != baseline_ranked[offset : offset + 2]:
+            raise ValueError(f"STOP: frozen {stage} IDs do not match baseline-v1 selection rule for {source}")
         for item in source_rows:
             if item["id"] in source_planned:
                 if item["id"] in reserved:
@@ -179,11 +188,13 @@ def append_jsonl(path: Path, record: dict) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--attempt", type=int, default=1, help="append-only attempt number")
+    ap.add_argument("--stage", choices=("initial", "conditional_backup"), default="initial",
+                    help="frozen discovery stage to run")
     args = ap.parse_args()
     if args.attempt < 1:
         raise ValueError("attempt must be >= 1")
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-    plan = validate_plan(manifest)
+    plan = validate_plan(manifest, args.stage)
     if not TENSOR_FILE.is_file():
         raise FileNotFoundError(f"Base checkpoint is missing: {TENSOR_FILE}")
 
@@ -302,6 +313,7 @@ def main() -> None:
     append_jsonl(outdir / "attempt_manifest.jsonl", {
         "run_id": manifest["run_id"],
         "attempt": attempt_name,
+        "stage": args.stage,
         "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "items": [{"id": x["id"], "seed": x["seed"], "stage": x["stage"]} for x in todo],
         "sampling": SAMPLING,
@@ -313,6 +325,7 @@ def main() -> None:
     prior_measured_seconds = 4692.3
     print(json.dumps({
         "run_id": manifest["run_id"],
+        "stage": args.stage,
         "items": [x["id"] for x in plan],
         "historical_four_item_reference_seconds": prior_measured_seconds,
         "historical_all_four_capped_reference_seconds": 4 * 2677.3,
