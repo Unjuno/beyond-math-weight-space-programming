@@ -1,0 +1,388 @@
+{
+  "run_id": "human-astra-manual-20261105-v1",
+  "intervention_id": "human-astra-manual-20261105-l12c1226-direction-v1",
+  "stage": "focused_train_screen",
+  "status": "complete_preregistered_gate_failed_no_confirmation_run",
+  "date_completed": "2026-11-10",
+  "design": {
+    "items": 3,
+    "seeds_per_item": 2,
+    "arms": [
+      "B",
+      "T",
+      "Cplus",
+      "Cminus"
+    ],
+    "generations_expected": 24,
+    "generations_observed": 24,
+    "max_new_tokens": 4096,
+    "sampling": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "presence_penalty": 1.5
+    }
+  },
+  "outcomes_by_arm": {
+    "B": {
+      "correct_count": 1,
+      "completed_correct_count": 1,
+      "eos_count": 1,
+      "cap_hit_count": 5,
+      "mean_tokens": 4009.6666666666665,
+      "mean_repeat8_fraction": 0.7224942431259193
+    },
+    "T": {
+      "correct_count": 0,
+      "completed_correct_count": 0,
+      "eos_count": 0,
+      "cap_hit_count": 6,
+      "mean_tokens": 4096.0,
+      "mean_repeat8_fraction": 0.7235265346050378
+    },
+    "Cplus": {
+      "correct_count": 1,
+      "completed_correct_count": 1,
+      "eos_count": 1,
+      "cap_hit_count": 5,
+      "mean_tokens": 3862.5,
+      "mean_repeat8_fraction": 0.6417347027157648
+    },
+    "Cminus": {
+      "correct_count": 2,
+      "completed_correct_count": 2,
+      "eos_count": 2,
+      "cap_hit_count": 4,
+      "mean_tokens": 3411.6666666666665,
+      "mean_repeat8_fraction": 0.5486239761049649
+    }
+  },
+  "per_sample_gate": {
+    "0": {
+      "status": "fail",
+      "target_completed_correct_all_three": false,
+      "base_failure_prefixes_formally_incorrect": true,
+      "base_3185_completed_correct": false,
+      "both_controls_3185_completed_correct": false,
+      "each_control_formally_incorrect_on_at_least_one_failure": true
+    },
+    "1": {
+      "status": "fail",
+      "target_completed_correct_all_three": false,
+      "base_failure_prefixes_formally_incorrect": true,
+      "base_3185_completed_correct": true,
+      "both_controls_3185_completed_correct": false,
+      "each_control_formally_incorrect_on_at_least_one_failure": true
+    }
+  },
+  "formal_gate_status": "fail_candidate_stopped_or_incomplete",
+  "failure_reasons": [
+    "preregistered_focused_gate_failed"
+  ],
+  "key_findings": [
+    "T produced 0/6 formally correct completed answers; all 6 T generations reached the 4096-token cap without EOS.",
+    "B produced 1/6, Cplus 1/6, and Cminus 2/6 formally correct completed answers.",
+    "Neither preregistered sample gate passed: T did not complete all three prefixes correctly for either seed; sample 0 also lacked a completed-correct B result on comparator item 3185; neither sample had both signed controls complete 3185 correctly.",
+    "The directional attenuation did not reproduce the predicted loop-rescue/completion effect under this focused protocol. This is a narrow failed screen, not evidence of universal absence.",
+    "Cminus had descriptively lower mean repeat-8 fraction (0.549) and more completed-correct outcomes (2/6) than T (0.724; 0/6); this small, selected TRAIN screen is exploratory and is not confirmation of a control effect.",
+    "Across all 24 generations, repeat-8 fractions were high in the two preselected failure prefixes; none triggered the frozen exact-final-32-token-loop flag. No correctness/format exploit was detected: all four formally correct outcomes also had EOS and a closed think segment."
+  ],
+  "interpretation_limits": [
+    "Only 3 preselected TRAIN prefixes and 2 seeds each.",
+    "Continuation from saved prefixes only; this does not test initial problem solving, general math ability, non-math transfer, or broader model capability.",
+    "The earlier matched-coordinate control remained unavailable; this registered comparison varies signed direction in the same column and cannot establish coordinate specificity.",
+    "A failed advancement gate means no confirmation split was opened; it does not establish the effect is impossible."
+  ],
+  "reward_hacking_audit": {
+    "outcome_dependent_rule_changes": false,
+    "replacement_items_or_seeds": false,
+    "all_expected_generations_preserved": true,
+    "all_rows_scorable": true,
+    "scoring_errors": 0,
+    "success_requires_formal_math_verify_and_eos_and_generated_think_close": true,
+    "success_count_without_completion": 0,
+    "formal_correct_but_incomplete_count": 0,
+    "exact_final_32_token_loop_flags": 0,
+    "repeat8_metric_used_as_gate": false,
+    "finding": "No direct evidence of reward hacking in this run. The repeat-8 metric is descriptive and was not used to advance the gate. Cap/loop-like traces remain observable failures, not successes."
+  },
+  "provenance": {
+    "base_checkpoint_sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+    "column_manifest_sha256": "463fee393ad9b62eb8a55f53a20ce77912eac4ffce2ed9930ba6592212b340d2",
+    "runner_sha256": "dfdc9b0ac8f896a2986091199c90a64b405946c8fad9af0839881167c2c834e8",
+    "gate_scorer_sha256": "47f2bf24ab25defdd7adbc24f9b0328da8a0e499810f7601768a3f743bb88743",
+    "results_jsonl_sha256": "f122d46f4eae6989657169cac7580e2cccceeeba0e76c178309776ff1bab23e6",
+    "gate_report_sha256": "3df81a9fc01102e9e86f689ab7371dd7b94e91324d3cac738111389278c38a42",
+    "gate_report_internal_sha256": "6a8fd768ed3819ff11756c33763ef21d368520d4de98ced7677e164f1677460a",
+    "confirmation_bodies_opened": false,
+    "final_holdout_opened": false,
+    "elapsed_seconds": 4451.5,
+    "raw_outputs_local_only": true
+  },
+  "outcome_rows": [
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 0,
+      "seed": 37864219,
+      "arm": "B",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.40963560772805085,
+      "tail_2048_repeat8_fraction": 0.7070063694267515
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 0,
+      "seed": 37864219,
+      "arm": "Cminus",
+      "completed_correct": true,
+      "tokens": 2832,
+      "cap_hit": false,
+      "repeat8_fraction": 0.11292035398230088,
+      "tail_2048_repeat8_fraction": 0.09652131308182263
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 0,
+      "seed": 37864219,
+      "arm": "Cplus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.1389092687698704,
+      "tail_2048_repeat8_fraction": 0.11807937285644292
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 0,
+      "seed": 37864219,
+      "arm": "T",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.4986549278552213,
+      "tail_2048_repeat8_fraction": 0.871141597256247
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 1,
+      "seed": 2080160158,
+      "arm": "B",
+      "completed_correct": true,
+      "tokens": 3578,
+      "cap_hit": false,
+      "repeat8_fraction": 0.14029683562027442,
+      "tail_2048_repeat8_fraction": 0.12052915237628613
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 1,
+      "seed": 2080160158,
+      "arm": "Cminus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.2677916360968452,
+      "tail_2048_repeat8_fraction": 0.38510534051935325
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 1,
+      "seed": 2080160158,
+      "arm": "Cplus",
+      "completed_correct": true,
+      "tokens": 2695,
+      "cap_hit": false,
+      "repeat8_fraction": 0.11086309523809523,
+      "tail_2048_repeat8_fraction": 0.11317981381675649
+    },
+    {
+      "id": "gsm8k_train_3185",
+      "sample": 1,
+      "seed": 2080160158,
+      "arm": "T",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.13988750305698214,
+      "tail_2048_repeat8_fraction": 0.07300342969132778
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 0,
+      "seed": 1084327040,
+      "arm": "B",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9432624113475178,
+      "tail_2048_repeat8_fraction": 0.9710926016658501
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 0,
+      "seed": 1084327040,
+      "arm": "Cminus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9789679628270971,
+      "tail_2048_repeat8_fraction": 0.979421852033317
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 0,
+      "seed": 1084327040,
+      "arm": "Cplus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9789679628270971,
+      "tail_2048_repeat8_fraction": 0.979421852033317
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 0,
+      "seed": 1084327040,
+      "arm": "T",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9789679628270971,
+      "tail_2048_repeat8_fraction": 0.979421852033317
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 1,
+      "seed": 3346301434,
+      "arm": "B",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9718757642455368,
+      "tail_2048_repeat8_fraction": 0.9941205291523763
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 1,
+      "seed": 3346301434,
+      "arm": "Cminus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9718757642455368,
+      "tail_2048_repeat8_fraction": 0.9779519843214111
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 1,
+      "seed": 3346301434,
+      "arm": "Cplus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9718757642455368,
+      "tail_2048_repeat8_fraction": 0.9941205291523763
+    },
+    {
+      "id": "gsm8k_train_6445",
+      "sample": 1,
+      "seed": 3346301434,
+      "arm": "T",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9718757642455368,
+      "tail_2048_repeat8_fraction": 0.9941205291523763
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 0,
+      "seed": 1677174321,
+      "arm": "B",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9618488628026413,
+      "tail_2048_repeat8_fraction": 0.9941205291523763
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 0,
+      "seed": 1677174321,
+      "arm": "Cminus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.8302763511861091,
+      "tail_2048_repeat8_fraction": 0.9897109260166586
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 0,
+      "seed": 1677174321,
+      "arm": "Cplus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.8425042797750061,
+      "tail_2048_repeat8_fraction": 0.9887310142087212
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 0,
+      "seed": 1677174321,
+      "arm": "T",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9606260699437515,
+      "tail_2048_repeat8_fraction": 0.9941205291523763
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 1,
+      "seed": 3447544442,
+      "arm": "B",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.9080459770114943,
+      "tail_2048_repeat8_fraction": 0.9941205291523763
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 1,
+      "seed": 3447544442,
+      "arm": "Cminus",
+      "completed_correct": true,
+      "tokens": 1254,
+      "cap_hit": false,
+      "repeat8_fraction": 0.12991178829190056,
+      "tail_2048_repeat8_fraction": 0.12991178829190056
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 1,
+      "seed": 3447544442,
+      "arm": "Cplus",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.8072878454389827,
+      "tail_2048_repeat8_fraction": 0.9897109260166586
+    },
+    {
+      "id": "math_train_algebra_542",
+      "sample": 1,
+      "seed": 3447544442,
+      "arm": "T",
+      "completed_correct": false,
+      "tokens": 4096,
+      "cap_hit": true,
+      "repeat8_fraction": 0.7911469797016385,
+      "tail_2048_repeat8_fraction": 0.972562469377756
+    }
+  ]
+}

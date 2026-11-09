@@ -1,6 +1,6 @@
 {
   "run_id": "human-astra-manual-20261105-v1",
-  "status": "matched_control_not_found; directional_intervention_v1_frozen_waiting_for_human_column_preparation",
+  "status": "matched_control_not_found; directional_intervention_v1_focused_gate_failed_confirmation_not_run",
   "created_date": "2026-11-05",
   "repository_revision_at_registration": "5d955fb",
   "evidence_type": "new human-operated Astra-guided weight-space edit experiment",
@@ -575,7 +575,7 @@
   "directional_intervention_v1": {
     "intervention_id": "human-astra-manual-20261105-l12c1226-direction-v1",
     "protocol_revision": 2,
-    "status": "protocol_and_code_frozen_waiting_for_human_column_preparation",
+    "status": "focused_screen_complete_preregistered_gate_failed_confirmation_not_run",
     "separate_from_prior_matched_control": "The earlier frozen same-coordinate selector remains matched_control_not_found; no criteria were relaxed. This is a new, narrower same-column signed-direction comparison.",
     "preregistration_document": "docs/human_astra_l12_directional_preregistration.md",
     "candidate": {
@@ -635,7 +635,7 @@
       "arms": 4,
       "generation_count": 32,
       "max_new_tokens": 32768,
-      "status": "not_frozen_scorer_missing_and_focused_gate_incomplete",
+      "status": "not_run_focused_gate_failed",
       "scorer": "pinned math-verify plus fixed last-boxed parser; currently unavailable; no substitute allowed",
       "acceptance_rule": "T exceeds B, C+, C- by >=2 correct item-seed pairs each; at least one item has both seeds B-wrong/T-correct; zero B-correct/T-wrong; zero B-correct-completed/T-incomplete; all T-correct include correct boxed answer, think-close, EOS; no unscorable or incomplete pair",
       "arm_order_by_id_sample": {
@@ -713,7 +713,7 @@
       "arms": 4,
       "generation_count": 24,
       "max_new_tokens": 4096,
-      "status": "scorer_validated_design_frozen_not_started_column_execution_path_incomplete",
+      "status": "complete_all_24_scored_preregistered_gate_failed",
       "seeds": {
         "gsm8k_train_6445": [
           1084327040,
@@ -794,7 +794,65 @@
         "max": 93906.08499999999
       },
       "presence_penalty_history": "Start at original prompt boundary; saved generated prefix remains part of frequency-penalty history. The prompt+prefix boundary is used only for progress/output slicing.",
-      "input_reprocessing": "Each arm reloads the immutable base model and processes the original full prompt plus the saved exact generated prefix; no cache/state carries across arms."
+      "input_reprocessing": "Each arm reloads the immutable base model and processes the original full prompt plus the saved exact generated prefix; no cache/state carries across arms.",
+      "attempt": 1,
+      "raw_results_sha256": "f122d46f4eae6989657169cac7580e2cccceeeba0e76c178309776ff1bab23e6",
+      "gate_report": "results/human_astra_manual_20261105/raw/directional_control_v1/focused_gate_v1.json",
+      "gate_report_internal_sha256": "6a8fd768ed3819ff11756c33763ef21d368520d4de98ced7677e164f1677460a",
+      "observed_summary": {
+        "B": {
+          "correct_count": 1,
+          "completed_correct_count": 1,
+          "eos_count": 1,
+          "cap_hit_count": 5,
+          "mean_tokens": 4009.6666666666665,
+          "mean_repeat8_fraction": 0.7224942431259193
+        },
+        "T": {
+          "correct_count": 0,
+          "completed_correct_count": 0,
+          "eos_count": 0,
+          "cap_hit_count": 6,
+          "mean_tokens": 4096.0,
+          "mean_repeat8_fraction": 0.7235265346050378
+        },
+        "Cplus": {
+          "correct_count": 1,
+          "completed_correct_count": 1,
+          "eos_count": 1,
+          "cap_hit_count": 5,
+          "mean_tokens": 3862.5,
+          "mean_repeat8_fraction": 0.6417347027157648
+        },
+        "Cminus": {
+          "correct_count": 2,
+          "completed_correct_count": 2,
+          "eos_count": 2,
+          "cap_hit_count": 4,
+          "mean_tokens": 3411.6666666666665,
+          "mean_repeat8_fraction": 0.5486239761049649
+        }
+      },
+      "per_sample_gate_observed": {
+        "0": {
+          "status": "fail",
+          "target_completed_correct_all_three": false,
+          "base_failure_prefixes_formally_incorrect": true,
+          "base_3185_completed_correct": false,
+          "both_controls_3185_completed_correct": false,
+          "each_control_formally_incorrect_on_at_least_one_failure": true
+        },
+        "1": {
+          "status": "fail",
+          "target_completed_correct_all_three": false,
+          "base_failure_prefixes_formally_incorrect": true,
+          "base_3185_completed_correct": true,
+          "both_controls_3185_completed_correct": false,
+          "each_control_formally_incorrect_on_at_least_one_failure": true
+        }
+      },
+      "public_summary": "results/human_astra_manual_20261105/directional_focused_screen_summary.json",
+      "public_summary_sha256": "dbacce1abf1bb98a54f3196950289b73f97575c52308dc6d4500dceef5c5192b"
     },
     "runtime_projection_seconds_for_32_confirmation_caps": {
       "basis": "7 measured prior 32768-token outputs",
@@ -809,10 +867,9 @@
     "confirmation_bodies_opened": false,
     "final_holdout_opened": false,
     "next_gates": [
-      "freeze focused per-seed advancement rule and arm execution order",
-      "implement and inspect deterministic BF16 variant preparation/verifier",
-      "resolve pinned scorer availability",
-      "human performs only a concrete verified operation after receiving instruction"
+      "Do not inspect confirmation bodies or run confirmation because the frozen advancement gate failed.",
+      "Preserve all 24 raw generations and gate report locally; publish only sanitized aggregate summary and hashes.",
+      "Analyze Luna decision/action log, scorer integrity and reward-hacking risks; formulate observed decision traits with explicit limits."
     ],
     "preregistration_document_sha256": "568380a5a6f78a901a4e6009984e8fe3788508b9bd9980f2e5e352bdecd2323f",
     "scorer": {
@@ -855,8 +912,8 @@
     "private_decision_ledger": {
       "path": "logs/luna_astra_dialogue.jsonl",
       "classification": "local_only_not_published",
-      "sha256": "7d329ae8cc96d3443a6e7b647d9fc02a52b0b51061968a15ef0ccd10e924df62",
-      "entries": 51,
+      "sha256": "482b55cb700aaff3708701fda7ea9099b6cc47cc7bcd4108544a98d4a2fbbe54",
+      "entries": 53,
       "public_content": "Decision summaries and evidence hashes only; full exchange ledger retained locally."
     },
     "manual_operation_preflight": {
@@ -872,6 +929,36 @@
       "weights_modified": false,
       "task_bodies_opened": false,
       "raw_output_directory_exists": false
-    }
+    },
+    "column_manifest_sha256": "463fee393ad9b62eb8a55f53a20ce77912eac4ffce2ed9930ba6592212b340d2",
+    "column_artifact_status": "prepared_columns_only_not_applied_to_model",
+    "column_artifact_files": {
+      "T": {
+        "file_sha256": "6a5da884dd77df684fc9a7e4d7689bf6d0e43cf0ae3019d93cd8c461d137faa2",
+        "column_bitpattern_sha256": "aa411dbe70a8a8fd88452c6a3b4c8a321487f8afcc9c9c1faf69465b7d1914c7",
+        "changed_elements": 1024
+      },
+      "Cplus": {
+        "file_sha256": "6506107d27bdf1e96de760518e507d38b1714ca6f918401038f7f5ae5d8cd215",
+        "column_bitpattern_sha256": "4721d746558e4e78be2a7702eb694843991086b27cc5a872479549d07f3868e7",
+        "changed_elements": 1024
+      },
+      "Cminus": {
+        "file_sha256": "33612fea427d1066338cf8bd45abc1b4d2406c9a0ada4929f6d56e9cb4819a11",
+        "column_bitpattern_sha256": "2b082ca3b8e9207932e8972623b590e45e80bd526665f66bddcd1ade0e15c48a",
+        "changed_elements": 1024
+      }
+    },
+    "column_preparation_decision": {
+      "operator": "Luna",
+      "authorized_by_user_instruction": true,
+      "reason": "The user reset the goal to have Luna perform the registered work and preserve why each judgment/action was taken; this superseded the earlier manual-operation wait gate.",
+      "scope": "Generate three signed-direction BF16 column artifacts only; no full checkpoint write and no inference during preparation.",
+      "verification": "Pinned Python 3.11 independently reopened each safetensors artifact and checked file hash, 1024-element shape, BF16 dtype, and registered changed-element count; preparer manifest states exact component-change magnitudes and Frobenius norms match.",
+      "raw_output_ignored_by_git": true
+    },
+    "base_checkpoint_modified": false,
+    "in_memory_weight_variants_applied": true,
+    "weights_modified_semantics": "No checkpoint file or persistent model weights were modified; each arm variant was applied to a fresh in-memory model instance only."
   }
 }
