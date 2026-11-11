@@ -15,9 +15,9 @@ import traceback
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RUN = ROOT / "results/astra_reproduction_20261104/raw/editor_work"
-TRAIN = ROOT / "results/astra_reproduction_20261104/raw/train"
-BASE = ROOT / "model-cache/Qwen3.5-0.8B"
+RUN = Path(os.environ.get("WSP_RUN_DIR", ROOT / "results/astra_reproduction_20261104/raw/editor_work")).resolve()
+TRAIN = Path(os.environ.get("WSP_TRAIN_DIR", ROOT / "results/astra_reproduction_20261104/raw/train")).resolve()
+BASE = Path(os.environ.get("WSP_BASE_DIR", ROOT / "model-cache/Qwen3.5-0.8B")).resolve()
 TENSOR_FILE = BASE / "model.safetensors-00001-of-00001.safetensors"
 OUT = RUN / "forward"
 REQUESTS = OUT / "requests"
@@ -44,7 +44,9 @@ def digest(path: Path):
 
 def train_rows():
     rows = {}
-    for name in ("gsm8k_train.jsonl", "math_train.jsonl"):
+    for name in ("gsm8k_train.jsonl", "math_train.jsonl", "aime.jsonl"):
+        if not (TRAIN / name).exists():
+            continue
         with (TRAIN / name).open() as f:
             for line in f:
                 row = json.loads(line)
@@ -62,6 +64,42 @@ def grade(pred, gold):
         return False
     from math_verify import parse, verify
     return bool(verify(parse("\\boxed{" + str(gold) + "}"), parse("\\boxed{" + str(pred) + "}")))
+
+
+def paired_accuracy_summary(original, edited, item_ids, np):
+    def keyed(records):
+        result = {}
+        for record in records:
+            key = (record["id"], record["sample"])
+            if key in result:
+                raise ValueError(f"Duplicate paired generation key: {key}")
+            result[key] = record
+        return result
+
+    original_by_key, edited_by_key = keyed(original), keyed(edited)
+    if original_by_key.keys() != edited_by_key.keys():
+        raise ValueError("Original and edited outputs do not have matching item/sample keys")
+    differences_by_item = collections.defaultdict(list)
+    observation_diffs = []
+    for key in sorted(original_by_key):
+        left, right = original_by_key[key], edited_by_key[key]
+        if left["seed"] != right["seed"]:
+            raise ValueError(f"Paired seed mismatch for {key}")
+        delta = int(right["correct"]) - int(left["correct"])
+        differences_by_item[key[0]].append(delta)
+        observation_diffs.append(delta)
+    if set(differences_by_item) != set(item_ids):
+        raise ValueError("Paired outputs do not cover exactly the requested item IDs")
+    item_deltas = [float(np.mean(differences_by_item[ident])) for ident in item_ids]
+    return {
+        "delta": float(np.mean(item_deltas)),
+        "se": float(np.std(item_deltas, ddof=1) / np.sqrt(len(item_deltas))) if len(item_deltas) > 1 else None,
+        "wrong_to_right": sum(d == 1 for d in observation_diffs),
+        "right_to_wrong": sum(d == -1 for d in observation_diffs),
+        "n_items": len(item_deltas),
+        "n_paired_generations": len(observation_diffs),
+        "item_mean_differences": dict(zip(item_ids, item_deltas)),
+    }
 
 
 def main():
@@ -205,6 +243,15 @@ def main():
         ids = req.get("problems", [])
         if not ids or any(i not in rows for i in ids):
             raise ValueError("Only IDs in the editor's disjoint TRAIN partition are available")
+        if len(ids) != len(set(ids)):
+            raise ValueError("A generation request may not repeat problem IDs")
+        custom_prompts = req.get("prompts")
+        if custom_prompts is not None and (
+            not isinstance(custom_prompts, list)
+            or len(custom_prompts) != len(ids)
+            or any(not isinstance(prompt, str) or not prompt for prompt in custom_prompts)
+        ):
+            raise ValueError("prompts must contain one non-empty user message per problem ID")
         n = int(req.get("n", 1))
         model_choice = req["model"]
         variants = ["original", "edited"] if model_choice == "both" else [model_choice]
@@ -227,9 +274,10 @@ def main():
             target = outdir / (variant + ".jsonl")
             if target.exists():
                 raise RuntimeError("Refuse to overwrite a generation artifact")
-            for ident in ids:
+            for problem_index, ident in enumerate(ids):
                 row = rows[ident]
-                prompt, input_ids = template(row["problem"])
+                question = custom_prompts[problem_index] if custom_prompts is not None else row["problem"]
+                prompt, input_ids = template(question)
                 input_ids = input_ids.to("mps")
                 prompt_len = input_ids.shape[1]
                 for sample in range(n):
@@ -272,11 +320,9 @@ def main():
                        "failure_counts": dict(collections.Counter(r["failure"] for r in rs))} for v, rs in arms.items()}
         response = {"summary": summary}
         if len(variants) == 2:
-            a, b = arms["original"], arms["edited"]
-            diffs = [int(y["correct"]) - int(x["correct"]) for x, y in zip(a, b)]
-            response["paired"] = {"delta": float(np.mean(diffs)), "se": float(np.std(diffs, ddof=1) / np.sqrt(len(diffs))) if len(diffs) > 1 else None,
-                                   "wrong_to_right": sum(d == 1 for d in diffs), "right_to_wrong": sum(d == -1 for d in diffs),
-                                   "n_items": len(ids)}
+            response["paired"] = paired_accuracy_summary(
+                arms["original"], arms["edited"], ids, np
+            )
         response["short_texts"] = [{"id": r["id"], "model": r["model"], "text_excerpt": r["text"][:300]} for rs in arms.values() for r in rs]
         return response
 
@@ -292,8 +338,15 @@ def main():
         if not 0 < len(items) <= 1024:
             raise ValueError("teacher_forced accepts 1..1024 texts")
         ret = req.get("return", {}) or {}
+        topk = int(ret.get("topk", 0) or 0)
+        if not 0 <= topk <= 50:
+            raise ValueError("teacher_forced topk must be between 0 and 50")
+        attn_layers = ret.get("attn_layers", []) or []
+        hidden_layers = ret.get("hidden_states", []) or []
+        mlp_layers = ret.get("mlp_act", []) or []
         total = 0
         metrics = []
+        prepared = []
         for ix, item in enumerate(items):
             if chats is not None:
                 messages = item
@@ -310,11 +363,30 @@ def main():
             total += length
             if length > 32768 or total > 524288:
                 raise ValueError("Teacher-forced token limit exceeded")
-            attn_layers = ret.get("attn_layers", [])
             if attn_layers and (ix >= 2 or length > 2048 or any(i not in {3, 7, 11, 15, 19, 23} for i in attn_layers)):
                 raise ValueError("Attention probabilities: max 2 texts, 2048 tokens, full-attention layers only")
-            hidden_layers = ret.get("hidden_states", [])
-            mlp_layers = ret.get("mlp_act", [])
+            prepared.append((item, text, inputs, length))
+
+        if any(not isinstance(i, int) or i < 0 or i > 24 for i in hidden_layers):
+            raise ValueError("hidden_states layers must be integers in 0..24")
+        if any(not isinstance(i, int) or i < 0 or i >= len(layers) for i in mlp_layers):
+            raise ValueError("mlp_act layers must be integers in 0..23")
+        hidden_width = int(model.config.text_config.hidden_size)
+        mlp_width = int(model.config.text_config.intermediate_size)
+        attention_heads = int(model.config.text_config.num_attention_heads)
+        estimated_output_bytes = 0
+        for _, _, _, length in prepared:
+            estimated_output_bytes += length * (12 + 12 * topk)
+            estimated_output_bytes += length * hidden_width * 4 * len(hidden_layers)
+            estimated_output_bytes += length * mlp_width * 4 * len(mlp_layers)
+            estimated_output_bytes += sum(attention_heads * length * length * 4 for _ in attn_layers)
+            estimated_output_bytes += 4096
+        if estimated_output_bytes > 6 * 1024**3:
+            raise ValueError(
+                f"Estimated uncompressed teacher-forced outputs exceed 6 GiB: {estimated_output_bytes} bytes"
+            )
+
+        for ix, (item, text, inputs, length) in enumerate(prepared):
             capture = Capture(hidden_layers, mlp_layers=mlp_layers,
                               hidden=bool(hidden_layers), teacher=True)
             with torch.inference_mode():
@@ -323,7 +395,6 @@ def main():
             logprobs = torch.log_softmax(out.logits[0, :-1].float(), dim=-1)
             target = inputs[0, 1:]
             arrays = {"token_ids": inputs[0].cpu().numpy(), "logprobs": logprobs.gather(1, target[:, None]).squeeze(1).cpu().numpy()}
-            topk = int(ret.get("topk", 0) or 0)
             if topk:
                 vals, idxs = torch.topk(logprobs, k=min(topk, logprobs.shape[-1]), dim=-1)
                 arrays["topk_ids"] = idxs.cpu().numpy(); arrays["topk_logprobs"] = vals.cpu().numpy()

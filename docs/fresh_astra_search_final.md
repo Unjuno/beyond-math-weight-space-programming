@@ -15,7 +15,7 @@ This was not a null observation. The reconstructed search failed for identifiabl
 3. The recurrent candidate was chosen from a descriptive failure-vs-success residual-drift difference, but changing its decay did not reduce that drift consistently in the two failure contexts. The observed correlation did not identify a causal editing target.
 4. The released edited checkpoint separately showed a large completion/EOS shift without an increase in strict task success. This makes stopping and capability easy to conflate and is the main diagnostic result of the broader repository.
 
-The remaining uncertainty is substantial: the exact author orchestrator, persistent editor kernel, forward backend, full 50-pass budget, and original benchmark generation protocol were unavailable. Therefore the negative result is evidence against reproduction under these reconstructed conditions, not proof that no successful edit exists.
+The remaining uncertainty is substantial: the exact author orchestrator, persistent editor kernel, forward backend, full 50-pass budget, and original benchmark generation protocol were unavailable. Therefore the negative result is evidence about this reconstructed 18-pass run, not proof that no successful edit exists.
 
 ## Search and decisions
 
@@ -31,8 +31,10 @@ The attention wrong→right item was graded correct because an early boxed answe
 ## Reconstructed-protocol deviations
 
 - The authors' persistent editor kernel and original forward server were unavailable; this run used the local CPU editor kernel and MPS/BF16 Transformers forward adapter documented in the manifest.
-- The author 50-pass budget was not exhausted; the search stopped under a predeclared futility rule after 18 successful passes.
+- The author 50-pass budget was not exhausted; the search stopped after 18 successful passes and left 32 unused.
 - The exact author orchestration and backend are therefore not reproduced. The run is the closest executable Astra-led procedure available from the released artifacts, with deviations and raw hashes retained locally.
+
+**Correction (2026-11-11):** the initial task prompt explicitly says the editor session continues until all 50 forward passes are used. The 18-pass futility stop was therefore a deviation from that prompt, despite the local run's stopping rule. This file's earlier wording that early stopping was "permitted" was inaccurate. The search is a completed negative 18-pass approximation, not a completed execution of the specified 50-pass procedure. See [`reproduction_fidelity_correction_2026-11-11.md`](reproduction_fidelity_correction_2026-11-11.md).
 
 ## Boundary of the claim
 
