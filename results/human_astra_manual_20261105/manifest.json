@@ -852,7 +852,8 @@
         }
       },
       "public_summary": "results/human_astra_manual_20261105/directional_focused_screen_summary.json",
-      "public_summary_sha256": "dbacce1abf1bb98a54f3196950289b73f97575c52308dc6d4500dceef5c5192b"
+      "public_summary_sha256": "81110371209fc2996824e6008a927322c7dcf4748bb81a4f8d494372c7a9dc37",
+      "interpretation_scope": "Distinct local L12 variant screen; not a faithful reproduction or refutation of author p50c method/results."
     },
     "runtime_projection_seconds_for_32_confirmation_caps": {
       "basis": "7 measured prior 32768-token outputs",
@@ -912,8 +913,8 @@
     "private_decision_ledger": {
       "path": "logs/luna_astra_dialogue.jsonl",
       "classification": "local_only_not_published",
-      "sha256": "482b55cb700aaff3708701fda7ea9099b6cc47cc7bcd4108544a98d4a2fbbe54",
-      "entries": 53,
+      "sha256": "ee9bccf581f9bee75ac6c88ba95f7a988b87e9a58c552424bc3bdc76df344219",
+      "entries": 54,
       "public_content": "Decision summaries and evidence hashes only; full exchange ledger retained locally."
     },
     "manual_operation_preflight": {
@@ -959,6 +960,17 @@
     },
     "base_checkpoint_modified": false,
     "in_memory_weight_variants_applied": true,
-    "weights_modified_semantics": "No checkpoint file or persistent model weights were modified; each arm variant was applied to a fresh in-memory model instance only."
+    "weights_modified_semantics": "No checkpoint file or persistent model weights were modified; each arm variant was applied to a fresh in-memory model instance only.",
+    "paper_method_fidelity_audit": {
+      "status": "l12_directional_screen_is_not_paper_method_reproduction",
+      "audit_date": "2026-11-11",
+      "authors_method": "GPT-6 Astra max in persistent CPU Python/forward-pass harness; 50 forward passes; shared repetition direction subtracted from 64 mlp.down_proj output columns in each of layers 15 and 19; matched productive/repetitive contexts, dose response, layer isolation, norm-matched random control; 1152 paired practice confirmations; evaluation up to 32768 tokens.",
+      "this_study": "Luna-run L12 coordinate 1226 one-column 10% attenuation with signed-direction controls; three selected saved TRAIN prefixes, two seeds each, cap 4096; focused gate only.",
+      "base_model_revision_matches_author_named_revision": true,
+      "base_model_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "finding": "The L12 screen result T=0/6 applies only to this local variant and does not reproduce or refute the authors p50c edit or benchmark result.",
+      "public_audit": "docs/method_fidelity_audit_2026-11-11.md",
+      "source_protocol": "https://github.com/RikiyaT/lm_understand-logs/tree/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math"
+    }
   }
 }

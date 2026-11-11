@@ -1,5 +1,7 @@
 # Luna decision and outcome analysis — 2026-11-10
 
+> **Method-fidelity correction (2026-11-11):** This report's focused result is not a reproduction of the authors' p50c method. It is the result of a distinct L12 coordinate-1226, 10%-attenuation continuation screen. See [`method_fidelity_audit_2026-11-11.md`](method_fidelity_audit_2026-11-11.md) for the exact differences. T=0/6 must not be described as a failure to reproduce the paper.
+
 ## What Luna saw and did
 
 Luna inspected the registered experiment manifest, the pinned checkpoint identity, the frozen scripts and gates, prior local dialogue records, and the raw artifacts generated in this run. The new user instruction explicitly changed the operator from the human to Luna. Luna therefore ran the already registered column preparer, then independently checked each saved artifact's SHA-256, shape, BF16 dtype, and changed-element count. The full base checkpoint was not written or changed.

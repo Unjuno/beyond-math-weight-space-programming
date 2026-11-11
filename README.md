@@ -1,6 +1,6 @@
 # Beyond Math: audit and checkpoint evaluation of a weight-space edit
 
-Can direct weight editing improve **non-mathematical tasks** in Qwen3.5-0.8B, and where does that effect stop? This repository audits benchmark records from Takehi et al.'s 2026 research blog and evaluates the released base/edited checkpoints on separate local probes. It does not regenerate the authors' benchmark outputs or reproduce their fresh Astra edit search.
+Can direct weight editing improve **non-mathematical tasks** in Qwen3.5-0.8B, and where does that effect stop? This repository audits benchmark records from Takehi et al.'s 2026 research blog and evaluates the released base/edited checkpoints on local probes, including a small paired MATH-500 pilot. It does not regenerate the authors' full benchmark outputs or reproduce their fresh Astra edit search.
 
 ## Why this study
 
@@ -18,6 +18,10 @@ The authors' [research blog report](https://rikiyat.github.io/blog/weight-space-
 
 The re-score reproduces aggregate values from the authors' published records, not the original inference run. The fresh local 24-task suite below uses different, hand-authored tasks and is not a benchmark replication. See [`docs/author_results_nonmath.md`](docs/author_results_nonmath.md) for paired per-item intervals and [`docs/heldout24_p50c_results.md`](docs/heldout24_p50c_results.md) for the local evaluation.
 
+## Fresh paired math checkpoint pilot
+
+On 2026-11-11, the exact published p50c edit was hash-verified and freshly compared with base on two randomly selected MATH-500 problems, four matched seeds per item, using the paper's thinking-on sampling and 32,768-token cap. Base was correct 0/8 and cap-hit 8/8; p50c was correct 5/8, cap-hit 1/8, with a terminal verbatim loop in 1/8. The first easy item was 4/4 edited-correct; the second was 1/4. This is a small, sequential checkpoint pilot that supports a loop-termination shift while showing mixed task correctness. It does not reproduce the paper's 48.1% full MATH-500 result or the fresh 50-pass Astra editing search. See the [method-fidelity audit](docs/method_fidelity_audit_2026-11-11.md) and [sanitized run summary](results/p50c_math500_pilot_summary_20261111.json); raw generations remain local.
+
 ## What we can and cannot establish
 
 - **Completed here:** audit the released Astra prompts, responses, code, forward-pass summaries, final tensor edit and author per-problem records; independently re-score paired records; compare the public base and edited checkpoints on short probes and a separate 24-task thinking-on applied suite covering extraction, operational decisions and grounded writing; measure typed answer correctness, rubric scores, EOS, cap and task success separately.
@@ -26,6 +30,8 @@ The re-score reproduces aggregate values from the authors' published records, no
 - **Cannot infer from artifact audit alone:** that Astra's stated rationale is its full internal reasoning; that an edit adds general capability rather than exposing existing capability by stopping loops; that performance transfers to models outside Qwen3.5-0.8B; that quality or safety is preserved on unmeasured tasks.
 - **Fresh editing procedure not reproduced:** the authors' 50-pass search was not rerun under equivalent conditions. Their actual Astra prompts, turn-by-turn Python code/outputs, forward requests/summaries, and evaluation protocol are released and pinned; the orchestration, persistent Qwen editing kernel, and forward-pass server implementations are absent. Our earlier local search also replaced Astra's edit decisions with manual heuristics and used a materially smaller forward workload. See the [fidelity audit](docs/author_artifacts.md) and [fresh search report](docs/fresh_edit_search_results.md).
 - **Approximate fresh search attempted:** after the initial alpha100 diagnostic, a separate training-only search compared attenuation/amplification doses, selected layer 23 column 137, froze a candidate, and evaluated it against base and a matched control on four untouched confirmation items. All three arms scored 0/4 strict correct and all 12 generations hit the 8,192-token cap without EOS. The candidate's mean repeated 8-gram fraction was 0.4777 versus 0.4557 for base; it showed no confirmed benefit. This is an incomplete pilot, not a successful reproduction. The full procedure, deviations, and results are in the [fresh search report](docs/fresh_edit_search_results.md). The initial alpha100 attempt remains a distinct, earlier experiment; see its [paired audit](results/astra_clean_20261103/pass_07/paired_generation_audit.json).
+
+- **Correction on the 2026-11-10 L12 screen:** it was not a reproduction of the authors’ p50c method. It tested one locally selected L12 column at 10% attenuation on three saved prefixes with a 4,096-token cap. The authors edited 64 output columns in each of layers 15 and 19 along measured repetition directions and evaluated with up to 32,768 tokens after a 50-pass search. Therefore T=0/6 in the L12 screen does not test or refute their reported result. See the [method-fidelity audit](docs/method_fidelity_audit_2026-11-11.md).
 
 See [`docs/feasibility.md`](docs/feasibility.md), [`docs/experiment_protocol.md`](docs/experiment_protocol.md), and [`research_log.md`](research_log.md).
 

@@ -384,5 +384,14 @@
       "repeat8_fraction": 0.7911469797016385,
       "tail_2048_repeat8_fraction": 0.972562469377756
     }
-  ]
+  ],
+  "method_fidelity_correction": {
+    "recorded_on": "2026-11-11",
+    "status": "not_a_reproduction_of_authors_p50c_method_or_benchmark_result",
+    "correction": "The 2026-11-10 L12 screen tested a distinct local one-column 10% attenuation on saved-prefix continuations. The authors' p50c edit subtracts measured repetition directions from 64 MLP down_proj output columns each in layers 15 and 19 after a 50-forward-pass Astra search, then evaluates with up to 32768 tokens and larger paired practice/benchmark sets.",
+    "valid_inference": "T=0/6 describes only this local L12 variant on these three selected prefixes and two seeds. It does not reproduce or refute the author p50c result.",
+    "source_protocol": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/README.md",
+    "source_prompt": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d7a6e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/turns/t001/prompt.txt",
+    "source_final_report": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/final_answer.md"
+  }
 }
