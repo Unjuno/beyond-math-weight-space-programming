@@ -33,23 +33,36 @@ def sha256_tensor(tensor: torch.Tensor) -> str:
 
 
 def last_boxed(text: str) -> str | None:
-    # Match the authors' last-boxed extraction for closed, brace-balanced boxes.
-    starts = [i for i in (text.rfind(r"\boxed"), text.rfind(r"\fbox")) if i >= 0]
-    if not starts:
+    # Port of the pinned author's mathqa.last_boxed: the last boxed takes
+    # precedence over fbox; an unbraced "\boxed 5" is also accepted.
+    start = text.rfind(r"\boxed")
+    key = r"\boxed"
+    if start < 0:
+        start = text.rfind(r"\fbox")
+        key = r"\fbox"
+    if start < 0:
         return None
-    start = max(starts)
-    open_brace = text.find("{", start)
-    if open_brace < 0:
+    rest = text[start + len(key):]
+    candidate = rest.lstrip()
+    if not candidate.startswith("{"):
+        if key == r"\boxed" and rest.startswith(" "):
+            return rest.strip().split("$")[0].split("\n")[0].strip() or None
         return None
     depth = 0
-    for i in range(open_brace, len(text)):
-        if text[i] == "{":
+    for i, char in enumerate(candidate):
+        if char == "{":
             depth += 1
-        elif text[i] == "}":
+        elif char == "}":
             depth -= 1
             if depth == 0:
-                return text[open_brace + 1:i] or None
+                return candidate[1:i].strip() or None
     return None
+
+
+def author_answer_text(text: str) -> str:
+    # The pinned scorer uses the final answer after </think> when available;
+    # if generation hits the cap before </think>, it scores the entire output.
+    return text.split("</think>")[-1].strip() if "</think>" in text else text
 
 
 def main():
@@ -123,7 +136,7 @@ def main():
                 )[0, prompt_len:].detach().cpu().tolist()
             text = tok.decode(generated, skip_special_tokens=False)
             thinking_closed = "</think>" in text
-            answer_text = text.rsplit("</think>", 1)[1].strip() if thinking_closed else ""
+            answer_text = author_answer_text(text)
             record = {
                 "id": item["id"], "arm": arm, "sample_index": sample_idx,
                 "seed": seed, "thinking": True, "prompt_token_count": prompt_len,
