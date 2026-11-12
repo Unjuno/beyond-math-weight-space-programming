@@ -18,13 +18,40 @@ from transformers import AutoModelForImageTextToText, AutoTokenizer, LogitsProce
 class PresencePenalty(LogitsProcessor):
     def __init__(self, prompt_len: int, penalty: float):
         self.prompt_len, self.penalty = prompt_len, penalty
+        self.cursor = int(prompt_len)
+        self.seen_token_ids = set()
 
     def __call__(self, input_ids, scores):
-        generated = input_ids[:, self.prompt_len:]
-        if generated.numel():
-            for row in range(scores.shape[0]):
-                scores[row, torch.unique(generated[row])] -= self.penalty
-        return scores
+        if input_ids.ndim != 2 or input_ids.shape[0] != 1:
+            raise ValueError("PresencePenalty requires one un-reordered sequence")
+        if scores.ndim != 2 or scores.shape[0] != 1:
+            raise ValueError("Unexpected score shape")
+        if scores.dtype != torch.float32:
+            raise ValueError(f"Expected FP32 logits before penalty, got {scores.dtype}")
+
+        length = input_ids.shape[1]
+        if length < self.cursor:
+            raise ValueError("Sequence shortened or penalty processor reused")
+        # Transfer only newly emitted IDs to CPU; never index an MPS tensor by them.
+        new_ids = input_ids[0, self.cursor:length].detach().cpu().tolist()
+        vocab_size = scores.shape[-1]
+        if any(type(token_id) is not int or not 0 <= token_id < vocab_size for token_id in new_ids):
+            raise ValueError("Generated token ID outside the logits vocabulary")
+
+        # Do the presence-penalty index update on CPU to avoid MPS advanced indexing.
+        host_scores = scores.detach().cpu().clone()
+        if torch.isnan(host_scores).any().item() or torch.isposinf(host_scores).any().item():
+            raise FloatingPointError("NaN or +inf in logits before presence penalty")
+        if not torch.isfinite(host_scores).any(dim=-1).all().item():
+            raise FloatingPointError("No finite candidate logit before presence penalty")
+        self.seen_token_ids.update(new_ids)
+        if self.seen_token_ids:
+            ids = torch.tensor(sorted(self.seen_token_ids), dtype=torch.long)
+            host_scores[0, ids] -= self.penalty
+        if torch.isnan(host_scores).any().item() or torch.isposinf(host_scores).any().item():
+            raise FloatingPointError("NaN or +inf in logits after presence penalty")
+        self.cursor = length
+        return host_scores.to(device=scores.device)
 
 
 def sha256_tensor(tensor: torch.Tensor) -> str:
