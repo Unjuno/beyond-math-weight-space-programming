@@ -65,3 +65,9 @@ The author's p50c run changed the BF16 values of 130,188 of 131,072 targeted wei
 - [Author-edited Qwen3.5-0.8B checkpoint](https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming)
 - [Base Qwen3.5-0.8B checkpoint](https://huggingface.co/Qwen/Qwen3.5-0.8B)
 - [Hugging Face live demo](https://huggingface.co/spaces/akhaliq/weight-space-programming-demo)
+
+## Fresh original-weight diagnostic, passes 8–9 (2026-11-12)
+
+A later fixed TRAIN diagnostic completed 12 original-weight generations at the 32,768-token cap; all 12 were incorrect cap hits. A preregistered follow-up exactly replayed 59,657 saved tokens across 17 success/failure streams and captured 2,028 selected positions, comparing token-matched thinking phrases across all residual layers 0–24 and MLP outputs 0–23. Cross-group activation direction consistency was weak and similar to the fixed-offset background comparison; within-failure repeat alignment was more variable but involved only six items. No candidate edit was made. These are outcome-conditioned exploratory observations, not a causal result or reproduction of the authors' retained edit.
+
+The public aggregate reports are [pass 8](docs/fresh_astra_pass08_train12_2026-11-12.md), [pass 9 preregistration](docs/pass09_activation_pair_preregistration_2026-11-12.md), and [pass 9 analysis](docs/pass09_matched_activation_analysis_2026-11-12.md). Detailed traces and activation vectors remain local. **The paper is still not reproduced:** the authors' exact 50-pass Astra search and paired benchmark evaluation have not been recreated. The previous p50c checkpoint pilot and prior 18-pass reconstructed search are separate experiments; do not combine them with these passes.
