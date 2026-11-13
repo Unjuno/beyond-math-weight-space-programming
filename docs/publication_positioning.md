@@ -2,10 +2,15 @@
 
 ## Recommended description
 
-An exploratory, paired fixed-checkpoint evaluation of a released Qwen3.5-0.8B weight edit on 24 hand-authored non-math tasks, accompanied by a re-score of the benchmark records from Takehi et al.'s 2026 research blog report. The local study observes substantially more EOS-before-cap completions and lower repeated 8-gram fractions under the edited checkpoint. Task correctness is mixed and sensitive to the writing grader and three imperfect structured-task specifications.
+An evidence audit of weight-space editing in Qwen3.5-0.8B. It checks published benchmark records, exactly reconstructs the released p50c tensors, and evaluates that fixed edit locally on small paired math and hand-authored non-math samples. A fresh local search and a new external WSP preprint are reported separately. The evidence supports behavioral changes and possible task-specific gains from localized edits, while leaving the full p50c MATH-500 score and original Astra search unreproduced.
+
+For point-in-time results and the pause state of the newer 50-request-budget run, see the [reproduction status report](reproduction_status_2026-11-13.md). Hu et al.'s preprint is summarized separately in the [external-study note](external_wsp_followup_2026-11.md); those scores are not our experiment.
 
 ## Claims supported by the current evidence
 
+- The released p50c edit is reconstructable with exact L15/L19 tensor hashes. Across two sequential local MATH-500 tranches (four selected questions, four samples per arm per question), scores were base 0/16 and p50c 11/16 correct; cap hits were 16/16 and 3/16. This supports a promising sample-specific effect, not a full benchmark estimate.
+- On a separate 24-item applied suite, EOS-before-cap rose 11/24→24/24, while task success was mixed and grader-sensitive. This supports an output-termination shift under this setup, not general non-math capability.
+- A separate arXiv preprint by Hu et al. reports other successful WSP trajectories, including a +29.45-point MATH-500 change from a different layer-23 edit. This adds externally reported evidence, but is not an independent rerun by this repository.
 - We reproduced the author's reported aggregate benchmark scores from released per-item records; this verifies those records and scoring, not the original generations.
 - The reported benchmark values are IFEval 21.0%→62.3%, GPQA Diamond 22.7%→36.6%, and fixed-slice MMLU-Pro 40.3%→45.5%. Our local verification re-scores author records; it is not fresh inference on those benchmarks.
 - On this specific paired 24-item suite, EOS-before-cap rose from 11/24 to 24/24, while strict exact structured matches rose from 4/16 to 6/16.
@@ -17,6 +22,8 @@ An exploratory, paired fixed-checkpoint evaluation of a released Qwen3.5-0.8B we
 - A robust or general improvement in non-mathematical capability, safety, factual calibration, coding, or user-facing quality.
 - A causal mechanism that the weight edit suppresses reasoning loops. Repeat statistics and EOS are descriptive and do not isolate mechanism.
 - A fresh reproduction of the paper's 50-pass Astra editing procedure or its IFEval, GPQA Diamond, or MMLU-Pro generations.
+- A causal result from the newest local TRAIN-only candidate: its preregistered pass12 paired comparison was interrupted before any edited-arm outputs were recorded.
+- Independent raw-log verification of the Hu et al. preprint; we have not rerun that study.
 - A claim that all outcomes are correct because the answer terminated, parsed, or was shorter.
 
 ## Limitations that belong beside any headline
@@ -29,4 +36,4 @@ The repository preserves two distinct approximate local editing attempts on trai
 
 ## Short headline
 
-**The released edit greatly increased normal termination on a small applied-task suite, but evidence that it improved non-math task correctness remains mixed and inconclusive.**
+**Localized weight edits can change model behavior and sometimes improve measured outcomes; the full p50c search and benchmark claims remain unreproduced here, and general task gains are not established.**

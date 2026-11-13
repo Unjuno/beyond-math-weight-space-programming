@@ -1,77 +1,46 @@
-# Beyond Math: audit and checkpoint evaluation of a weight-space edit
+# Beyond Math: an evidence audit of weight-space editing
 
-Can direct weight editing improve **non-mathematical tasks** in Qwen3.5-0.8B, and where does that effect stop? This repository audits benchmark records from Takehi et al.'s 2026 research blog and evaluates the released base/edited checkpoints on local probes, including a small paired MATH-500 pilot. It does not regenerate the authors' full benchmark outputs or reproduce their fresh Astra edit search.
+This repository separates four things that were easy to conflate: published benchmark records, reconstruction of the released p50c edit, our local evaluation of that fixed edit, and our own attempts to discover an edit. **The exact released edit is reconstructable and its tensor hashes match; small local runs show a promising completion/correctness signal. The full 500-item benchmark and the authors' 50-pass Astra search are not reproduced.**
 
-## Why this study
+## Current result at a glance
 
-The author report claims that the 50-pass edit improved non-math results: IFEval 21.0→62.3, GPQA Diamond 22.7→36.6, and MMLU-Pro (fixed 1,000 questions) 40.3→45.5. We re-scored its released per-problem records and ran paired probes on released checkpoints. In a separate 24-task full-cap applied probe, EOS-before-cap rose 11/24→24/24, while strict exact structured matches rose 4/16→6/16. The overall composite was 4/24→12/24 under Luna's frozen first-pass writing rubric and 5/24→9/24 under Astra's second blind rating; the latter paired interval spans zero. A later blind semantic audit found task/gold ambiguities and rated operational semantic success 3/8 in both arms. This is a completion/repetition signal with mixed, grader- and rubric-sensitive correctness, not established general non-math capability. Local probes do not regenerate the author's benchmark results. See [publication positioning](docs/publication_positioning.md) and the [full-cap report](docs/heldout24_p50c_results.md).
+| Evidence | Result | What it supports |
+| --- | --- | --- |
+| Public p50c edit reconstruction | Rebuilt L15/L19 tensors match the released hashes; only those two tensors differ from base | The released edit artifact can be reconstructed exactly. This does not reproduce how Astra found it. |
+| Local paired MATH-500 checkpoint evaluation | Across four selected items and 16 generations per arm: base 0/16 correct and 16/16 cap hits; p50c 11/16 correct and 3/16 cap hits | A promising descriptive signal on this small selected sample that the released edit can change termination and answers. It is not an estimate of the 500-item score. |
+| Local non-math applied suite | On 24 hand-authored tasks, EOS-before-cap rose 11/24→24/24; correctness was mixed and grader-sensitive | Evidence for changed completion behavior; not a general non-math capability result. |
+| Our fresh editing attempts | An earlier reconstructed search used 18 successful calls and retained no edit. A separate later run used 11/50 successful forward calls, then paused during pass 12 before a paired intervention result | We have not reproduced the authors' full editing trajectory or demonstrated a new causal edit. |
+| New external WSP study | A separate-group arXiv preprint reports three Qwen3.5-0.8B MATH searches with held-out changes of +29.45, +5.00, and +27.30 points | Additional evidence that WSP-like editing can sometimes work. These are the preprint authors' results, not our independent rerun. |
 
-## Paper results and what we independently checked
+The 16-generation MATH result pools two separately run tranches. The second was registered before its own inference but followed the first tranche, so the combined result is exploratory and descriptive. Both used local Transformers/PyTorch on Apple MPS; the paper reports vLLM. Separate local seed initialization also does not recreate the authors' RNG stream. See the [current evidence and reproduction status](docs/reproduction_status_2026-11-13.md).
 
-The authors' [research blog report](https://rikiyat.github.io/blog/weight-space-programming/) and this repository's checks are different evidence types:
+## What was and was not reproduced
 
-| Benchmark | Author-reported base → p50c | Sampling in author report | Local check in this repository |
-|---|---:|---:|---|
-| IFEval strict instruction following | 21.0% → 62.3% | 2 samples per prompt | Re-scored the released per-problem records; no new generations |
-| GPQA Diamond science QA | 22.7% → 36.6% | 4 samples per question | Re-scored the released per-problem records; no new generations |
-| MMLU-Pro fixed 1,000-question subset | 40.3% → 45.5% | 1 sample per question | Re-scored the released per-problem records; no new generations |
+- **Reproduced:** arithmetic on the released author per-item benchmark records; reconstruction and hash check of the released p50c tensors.
+- **Independently evaluated locally:** the released p50c checkpoint on four selected MATH-500 items, plus custom non-math probes. These are new local generations, not the full benchmark protocols.
+- **Not reproduced:** the reported 48.1% MATH-500 result, fresh IFEval/GPQA/MMLU-Pro generations, or the complete original 50-pass Astra edit search under its original runtime.
+- **Not established:** broad capability gain, a general loop-repair mechanism, or that shorter output alone means a task was solved.
 
-The re-score reproduces aggregate values from the authors' published records, not the original inference run. The fresh local 24-task suite below uses different, hand-authored tasks and is not a benchmark replication. See [`docs/author_results_nonmath.md`](docs/author_results_nonmath.md) for paired per-item intervals and [`docs/heldout24_p50c_results.md`](docs/heldout24_p50c_results.md) for the local evaluation.
+The L12 coordinate-1226 screen is a separate local variant. Its 0/6 completed-correct result does not test or refute the published p50c edit. The older 18-call reconstructed search and the later 11/50-call run are separate experiments and are not pooled.
 
-## Fresh paired math checkpoint pilot
+## Reports
 
-On 2026-11-11, the exact published p50c edit was hash-verified and freshly compared with base on two randomly selected MATH-500 problems, four matched seeds per item, using the paper's thinking-on sampling and 32,768-token cap. Base was correct 0/8 and cap-hit 8/8; p50c was correct 5/8, cap-hit 1/8, with a terminal verbatim loop in 1/8. The first easy item was 4/4 edited-correct; the second was 1/4. This is a small, sequential checkpoint pilot that supports a loop-termination shift while showing mixed task correctness. It does not reproduce the paper's 48.1% full MATH-500 result or the fresh 50-pass Astra editing search. See the [method-fidelity audit](docs/method_fidelity_audit_2026-11-11.md) and [sanitized run summary](results/p50c_math500_pilot_summary_20261111.json); raw generations remain local.
+- [Current evidence, limits, and pause point](docs/reproduction_status_2026-11-13.md)
+- [Evidence ledger](docs/evidence_ledger.md)
+- [Published p50c method-fidelity audit and local MATH runs](docs/method_fidelity_audit_2026-11-11.md)
+- [Second preregistered MATH tranche](docs/p50c_math500_followup_2026-11-12.md)
+- [Non-math author-record re-score](docs/author_results_nonmath.md)
+- [24-task full-cap applied suite](docs/heldout24_p50c_results.md)
+- [Publication claim boundary](docs/publication_positioning.md)
+- [Earlier reconstructed edit-search result](docs/fresh_edit_search_results.md)
+- [Earlier 18-call fidelity correction](docs/reproduction_fidelity_correction_2026-11-11.md)
+- [New external WSP preprint assessment](docs/external_wsp_followup_2026-11.md)
 
-On 2026-11-12, an additional hash-selected, preregistered-before-generation pair of previously unused MATH-500 items scored base 0/8 and p50c 6/8, with cap hits 8/8 and 2/8, respectively. This second small tranche is compatible with an edit benefit on these examples, but does not estimate full benchmark accuracy. It used Transformers/MPS rather than the authors' vLLM backend. Across both fresh tranches, the descriptive total is base 0/16 versus p50c 11/16; the 500-item score and fresh 50-pass Astra search remain unreproduced. See the [2026-11-12 follow-up report](docs/p50c_math500_followup_2026-11-12.md); raw generations remain local.
+## Data and reproduction
 
-## What we can and cannot establish
-
-- **Completed here:** audit the released Astra prompts, responses, code, forward-pass summaries, final tensor edit and author per-problem records; independently re-score paired records; compare the public base and edited checkpoints on short probes and a separate 24-task thinking-on applied suite covering extraction, operational decisions and grounded writing; measure typed answer correctness, rubric scores, EOS, cap and task success separately.
-- **Can be done with the released artifacts:** rebuild/check the edited BF16 tensors from the pinned base revision and rerun the local probe with matching hardware/software. This is checkpoint evaluation, not a fresh editing search.
-- **Not tested here:** coding, broad factual calibration, safety/refusal, paraphrase robustness, human-rated semantic quality, and general non-math work. The narrow extraction and grounded-writing checks do not establish those abilities.
-- **Cannot infer from artifact audit alone:** that Astra's stated rationale is its full internal reasoning; that an edit adds general capability rather than exposing existing capability by stopping loops; that performance transfers to models outside Qwen3.5-0.8B; that quality or safety is preserved on unmeasured tasks.
-- **Fresh editing procedure not reproduced:** the authors' 50-pass search was not rerun under equivalent conditions. Their actual Astra prompts, turn-by-turn Python code/outputs, forward requests/summaries, and evaluation protocol are released and pinned; the orchestration, persistent Qwen editing kernel, and forward-pass server implementations are absent. Our earlier local search also replaced Astra's edit decisions with manual heuristics and used a materially smaller forward workload. See the [fidelity audit](docs/author_artifacts.md) and [fresh search report](docs/fresh_edit_search_results.md).
-- **Approximate fresh search attempted:** after the initial alpha100 diagnostic, a separate training-only search compared attenuation/amplification doses, selected layer 23 column 137, froze a candidate, and evaluated it against base and a matched control on four untouched confirmation items. All three arms scored 0/4 strict correct and all 12 generations hit the 8,192-token cap without EOS. The candidate's mean repeated 8-gram fraction was 0.4777 versus 0.4557 for base; it showed no confirmed benefit. This is an incomplete pilot, not a successful reproduction. The full procedure, deviations, and results are in the [fresh search report](docs/fresh_edit_search_results.md). The initial alpha100 attempt remains a distinct, earlier experiment; see its [paired audit](results/astra_clean_20261103/pass_07/paired_generation_audit.json).
-
-- **Correction on the 2026-11-10 L12 screen:** it was not a reproduction of the authors’ p50c method. It tested one locally selected L12 column at 10% attenuation on three saved prefixes with a 4,096-token cap. The authors edited 64 output columns in each of layers 15 and 19 along measured repetition directions and evaluated with up to 32,768 tokens after a 50-pass search. Therefore T=0/6 in the L12 screen does not test or refute their reported result. See the [method-fidelity audit](docs/method_fidelity_audit_2026-11-11.md).
-
-See [`docs/feasibility.md`](docs/feasibility.md), [`docs/experiment_protocol.md`](docs/experiment_protocol.md), and [`research_log.md`](research_log.md).
-
-For a compact map of which study answers which question, including the distinction between author-record re-scoring, released-checkpoint tests, self-edited pilots, and the fresh Astra search, see the [evidence ledger](docs/evidence_ledger.md). The Astra decision trail and the targeted extraction follow-up are documented in [`docs/astra_search_decision_audit.md`](docs/astra_search_decision_audit.md) and the [full-cap report](docs/heldout24_p50c_results.md).
-
-The later Astra-led fresh search is reported in [`docs/fresh_astra_search_final.md`](docs/fresh_astra_search_final.md). It used 18 successful TRAIN-only forward passes, rejected all tested edits under predeclared gates, restored every modified tensor exactly to the original checkpoint, and consequently did not open the untouched confirmation or external held-out split. This is a negative reconstructed-procedure result, not a reproduction of the authors' retained edit or benchmark gains.
-
-Our local paired probes and their limits are in [`docs/local_probe_results.md`](docs/local_probe_results.md) and the new full-cap applied-task report is [`docs/heldout24_p50c_results.md`](docs/heldout24_p50c_results.md). Neither is a rerun of the paper's IFEval, GPQA Diamond or MMLU-Pro protocol. Reproduction commands, pinned dependencies/checkpoints and hashes are in [`docs/local_setup.md`](docs/local_setup.md) and [`results/experiment_manifest.json`](results/experiment_manifest.json). Run `REPRO_PYTHON=.venv/bin/python scripts/reproduce_summaries.sh /path/to/pinned/lm_understand-logs` to verify the author-record analyses and regenerate the original summary tables.
-
-In the full-cap applied suite, EOS-before-cap completion was 11/24 base and 24/24 edited. Strict typed-JSON task success was mixed by family: extraction 1/8→4/8, operational decisions 3/8→2/8. A blinded semantic audit found 3/8→3/8 operational success and exposed three task/gold specification ambiguities; exact scores remain frozen and unchanged. Grounded-writing task success ranged from 0/8→6/8 under Luna's first pass to 1/8→3/8 under Astra's second blind ratings; 57/64 rubric factors agreed, with two clear Luna reading errors noted in the report. Writing was judged by two model graders, not humans. The tasks are hand-authored, one sample per task, and some facts were exposed to the separate editor after its candidate freeze. The fixed public p50c patch was not selected or retuned on these tasks. See the report for hashes, scoring, and limits.
-
-In a 24-item thinking-on probe (2,048-token cap), final-answer arrival increased from 6/24 to 13/24, but completed tasks (final answer, EOS, no cap hit, and every deterministic check passing) remained 5/24 in both arms. In the separate thinking-disabled probe (512-token cap), checks passed 11/24 base versus 10/24 edited. These small custom probes indicate an output-termination shift in the thinking-on condition, without a measured increase in task success.
-
-A separate post-hoc two-prompt check at the author's 32,768-token cap passed under both checkpoints and did not approach the cap; it is too small to establish a loop-rescue effect.
-
-## Published conditions and results
-
-The author's p50c run changed the BF16 values of 130,188 of 131,072 targeted weights in MLP output columns at layers 15 and 19. Reported 50-pass scores: IFEval 62.3%, GPQA Diamond 36.6%, MMLU-Pro 45.5%. Corresponding base scores: 21.0%, 22.7%, 40.3%. These are author-produced results, available for independent audit in the linked raw logs; they are not this repository's independent rerun.
-
-## Working rules
-
-- Keep raw upstream traces, edited weights, model caches and Luna's working memory intact. Do not rewrite original logs; append our own dated notes and preserve hashes.
-- Record each Luna question to Astra, Astra's answer, proposed change, tool/code invocation, observed result and Luna's interpretation as separate fields. Label explanations as reported rationale, not access to hidden cognition.
-- Public repository; no CI workflows. Full raw token-level generations and model weights stay local/ignored. Sanitized final answers, aggregate scores, small audit records and provenance may be published when identified clearly.
-- Every conclusion names the task, checkpoint, evaluation split, sample count, generation settings and remaining uncertainty.
+Full model weights, token-level generations, activation arrays, local raw logs, and Luna–Astra dialogue records stay outside Git. The repository contains sanitized aggregate results, method descriptions, hashes, and scripts. No CI workflow is used. Setup and summary reproduction instructions are in [local setup](docs/local_setup.md); the tracked [experiment manifest](results/experiment_manifest.json) records pinned inputs.
 
 ## Sources
 
-- [Takehi et al., Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/)
-- [Pinned author logs and published Experiment 8 evaluation/edit code](https://github.com/RikiyaT/lm_understand-logs/tree/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math)
-- [Author-edited Qwen3.5-0.8B checkpoint](https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming)
-- [Base Qwen3.5-0.8B checkpoint](https://huggingface.co/Qwen/Qwen3.5-0.8B)
-- [Hugging Face live demo](https://huggingface.co/spaces/akhaliq/weight-space-programming-demo)
-
-## Fresh original-weight diagnostic, passes 8–9 (2026-11-12)
-
-A later fixed TRAIN diagnostic completed 12 original-weight generations at the 32,768-token cap; all 12 were incorrect cap hits. A preregistered follow-up exactly replayed 59,657 saved tokens across 17 success/failure streams and captured 2,028 selected positions, comparing token-matched thinking phrases across all residual layers 0–24 and MLP outputs 0–23. Cross-group activation direction consistency was weak and similar to the fixed-offset background comparison; within-failure repeat alignment was more variable but involved only six items. No candidate edit was made. These are outcome-conditioned exploratory observations, not a causal result or reproduction of the authors' retained edit.
-
-The public aggregate reports are [pass 8](docs/fresh_astra_pass08_train12_2026-11-12.md), [pass 9 preregistration](docs/pass09_activation_pair_preregistration_2026-11-12.md), and [pass 9 analysis](docs/pass09_matched_activation_analysis_2026-11-12.md). Detailed traces and activation vectors remain local. **The paper is still not reproduced:** the authors' exact 50-pass Astra search and paired benchmark evaluation have not been recreated. The previous p50c checkpoint pilot and prior 18-pass reconstructed search are separate experiments; do not combine them with these passes.
-
-On 2026-11-12, the pinned author `apply_edit.py` was freshly rerun against the pinned p50c edit archive; both rebuilt tensor hashes matched and the arrays matched the existing local patch exactly. An Astra review also found and corrected a local answer-extraction mismatch; re-scoring the 16 saved MATH-500 pilot outputs with the pinned author scorer left the results unchanged at base 0/8 and edited 5/8. The local pilot still differs from the published evaluation in backend and per-sample RNG setup. See the [method-fidelity audit](docs/method_fidelity_audit_2026-11-11.md).
+- Takehi et al., [Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/) and [pinned Experiment 8 artifacts](https://github.com/RikiyaT/lm_understand-logs/tree/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math).
+- Hu et al., [Exploring Weight-Space Programming: Capabilities, Generalization, and Limitations](https://arxiv.org/abs/2611.09382), arXiv preprint submitted 2026-11-06.

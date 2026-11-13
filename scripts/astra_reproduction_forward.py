@@ -488,15 +488,20 @@ def main():
             raise ValueError("replay requires a non-empty sequences list")
         acts = req.get("activations", {}) or {}
         requested_layers = acts.get("layers", [])
+        mlp_selected_layers = acts.get("mlp_layers", [])
         mlp_output_layers = acts.get("mlp_outputs", [])
         mlp_input_bins = acts.get("mlp", False)
         bin_size = acts.get("bin_size")
         if any(type(i) is not int or i < 0 or i > 24 for i in requested_layers):
             raise ValueError("Replay residual layers must be 0..24")
+        if any(type(i) is not int or i < 0 or i >= len(layers) for i in mlp_selected_layers):
+            raise ValueError("Replay selected-position MLP input layers must be 0..23")
         if any(type(i) is not int or i < 0 or i >= len(layers) for i in mlp_output_layers):
             raise ValueError("Replay MLP output layers must be 0..23")
         if type(mlp_input_bins) is not bool:
             raise ValueError("Replay activations.mlp must be boolean")
+        if mlp_selected_layers and bin_size is not None:
+            raise ValueError("Replay selected-position MLP inputs cannot be combined with activation bins")
         if bin_size is not None:
             if type(bin_size) is not int or bin_size != 1024:
                 raise ValueError("Replay activation bin_size must be 1024")
@@ -580,6 +585,27 @@ def main():
                         source.get("prefix_generated_token_ids") != context_prefix or
                         source.get("suffix_token_ids") != expected):
                     raise ValueError(f"Replay branch token IDs do not match saved source for {ident}/{source_sample}")
+            source_generation = item.get("source_generation")
+            if source_generation is not None:
+                if (not isinstance(source_generation, dict) or
+                        type(source_generation.get("attempt")) is not int or
+                        type(source_sample) is not int):
+                    raise ValueError("Generation source requires integer attempt and source_sample")
+                source_path = PASSES / f"attempt_{source_generation['attempt']:04d}" / "original.jsonl"
+                if not source_path.is_file():
+                    raise ValueError(f"Replay generation source is missing: {source_path}")
+                source_hash = hashlib.sha256(source_path.read_bytes()).hexdigest()
+                if source_hash != source_generation.get("output_sha256"):
+                    raise ValueError("Replay generation source file hash mismatch")
+                source = next((json.loads(line) for line in source_path.read_text().splitlines()
+                               if line.strip() and
+                               json.loads(line).get("id") == ident and
+                               json.loads(line).get("sample") == source_sample), None)
+                if (source is None or source.get("prompt_token_ids") != prompt_ids or
+                        source.get("token_ids", [])[:len(expected)] != expected or
+                        source_generation.get("token_count") != len(source.get("token_ids", [])) or
+                        source_generation.get("seed") != source.get("seed")):
+                    raise ValueError(f"Replay token IDs do not match saved generation source for {ident}/{source_sample}")
             full_context = prompt_ids + context_prefix
             if len(full_context) + replay_count > 65536:
                 raise ValueError("Replay context plus suffix exceeds supported sequence length")
@@ -592,7 +618,8 @@ def main():
                                   max_generated_tokens=replay_count,
                                   mlp_output_layers=mlp_output_layers)
             else:
-                capture = Capture(requested_layers, hidden=bool(requested_layers),
+                capture = Capture(requested_layers, mlp_layers=mlp_selected_layers,
+                                  hidden=bool(requested_layers),
                                   capture_ranges=ranges, mlp_output_layers=mlp_output_layers)
             start = time.time()
             try:
