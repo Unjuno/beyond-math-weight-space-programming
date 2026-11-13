@@ -183,3 +183,8 @@ The YouTube walkthrough and authors' pinned Experiment 8 logs exposed a conseque
 - Across the two items, strict correctness was base 0/8 vs p50c 5/8. Cap hits were 8/8 vs 1/8. A word-level terminal repeated-block diagnostic found 8/8 base vs 1/8 p50c; coarse repeated-4-gram excess fraction averaged .932 vs .651. This is a limited checkpoint-level loop-termination signal with mixed task accuracy, not a reproduction of the paper's 48.1% full MATH-500 score.
 - Reward-hacking audit: no benchmark-driven edit or score feedback was used; the easy first item was all correct, while the second mixed correct/wrong/unboxed/cap outcomes. One exact terminal loop remained in the edited arm. No direct reward-hacking signal found in this small run; absence cannot be generalized.
 - Full 500-item MATH-500 and fresh 50-pass Astra editing trajectory remain un-reproduced. Raw outputs stay local/ignored. Sanitized summary: `results/p50c_math500_pilot_summary_20261111.json`; details and decision criteria: `docs/method_fidelity_audit_2026-11-11.md`.
+
+
+## 2026-11-13 — Public-tree cleanup
+
+The current public tree is being narrowed to the sanitized audit trail. The local `LUNA_MEMORY.md`, encrypted held-back transfer tasks, and JSON/JSONL artifacts containing model-generated excerpts or detailed local rationale are excluded from the Git index and ignored; the original files remain in this workspace unchanged. Aggregate outcome summaries and reports remain public. No history rewrite was performed, so prior public commits may still contain these removed files.

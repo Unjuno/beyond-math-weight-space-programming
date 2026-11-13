@@ -38,7 +38,7 @@ The L12 coordinate-1226 screen is a separate local variant. Its 0/6 completed-co
 
 ## Data and reproduction
 
-Full model weights, token-level generations, activation arrays, local raw logs, and Luna–Astra dialogue records stay outside Git. The repository contains sanitized aggregate results, method descriptions, hashes, and scripts. No CI workflow is used. Setup and summary reproduction instructions are in [local setup](docs/local_setup.md); the tracked [experiment manifest](results/experiment_manifest.json) records pinned inputs.
+Full model weights, token-level generations, activation arrays, the full Luna–Astra conversation record, and the local `LUNA_MEMORY.md` stay outside Git. Selected sanitized event/decision records, aggregate results, method descriptions, hashes, and scripts are tracked for audit. No CI workflow is used. Setup and summary reproduction instructions are in [local setup](docs/local_setup.md); the tracked [experiment manifest](results/experiment_manifest.json) records pinned inputs.
 
 ## Sources
 

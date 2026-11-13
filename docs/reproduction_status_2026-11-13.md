@@ -50,4 +50,4 @@ Not supported: a full reproduction of p50c's 48.1% MATH-500 score; a fresh repro
 
 ## Data handling
 
-This public summary contains aggregate scores, methods, and status only. Full generations, activation arrays, model weights, local worker logs, and Luna–Astra conversation records remain outside Git. No CI workflow was added.
+This public summary contains aggregate scores, methods, and status only. Full generations, activation arrays, model weights, local worker logs, the full Luna–Astra conversation, and the local `LUNA_MEMORY.md` remain outside Git. Selected sanitized event and decision records are tracked. No CI workflow was added.

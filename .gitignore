@@ -28,3 +28,12 @@ results/astra_method_continuation_20261103/
 results/astra_reproduction_20261104/raw/
 results/astra_reproduction_20261111_fresh50/raw/
 logs/luna_astra_dialogue.jsonl
+# Local operator memory, sealed tasks, and excerpt-bearing trace artifacts.
+LUNA_MEMORY.md
+results/astra_clean_20261103/transfer_eval_tasks.fernet
+results/astra_clean_20261103/dose_token_distribution.json
+results/astra_clean_20261103/luna_notes.jsonl
+results/astra_clean_20261103/pass_01/item1_audit.json
+results/astra_clean_20261103/pass_07/interpretation.json
+results/astra_clean_20261103/rationale.jsonl
+results/astra_clean_20261103/tf_request_002_review.json
